@@ -1,0 +1,4 @@
+node  /root/work/tstest/js/Crontab.js
+node  /root/work/tstest/js/Proxy.js
+node  /root/work/tstest/js/PriceGen.js
+node  /root/work/tstest/js/Main.js
