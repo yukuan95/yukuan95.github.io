@@ -122,7 +122,10 @@
                     </el-table-column>
                     <el-table-column prop="leverage" label="leverage" width="117" align="center">
                     </el-table-column>
-                    <el-table-column prop="monthRate" label="rate" width="117" align="center">
+                    <el-table-column prop="monthRate" width="117" align="center">
+                        <template #header>
+                            <div @dblclick="method.dblclickKB()">rate</div>
+                        </template>
                         <template #default="scope">
                             <el-popover effect="light" trigger="hover" placement="left" width="auto">
                                 <template #default>
