@@ -216,7 +216,7 @@
                     </el-table-column>
                 </el-table>
             </div>
-            <div style="width: 351px;margin-top: 20px;display: flex;flex-direction: column;align-items: center;">
+            <div v-if="state.tableAllFlag" style="width: 351px;margin-top: 20px;display: flex;flex-direction: column;align-items: center;">
                 <el-table
                         border
                         :data="state.lastNMonthData"
@@ -242,7 +242,7 @@
                     </el-table-column>
                 </el-table>
             </div>
-            <div style="width: 351px;margin-top: 20px;display: flex;flex-direction: column;align-items: center;">
+            <div v-if="state.tableAllFlag" style="width: 351px;margin-top: 20px;display: flex;flex-direction: column;align-items: center;">
                 <el-table
                         border
                         :data="state.yearData"
