@@ -1,1 +1,2 @@
 
+Rej 2023-05-26 22:36:00 Main TypeError: danData.set is not a function at handleTrade (file:///root/work/tstest/js/Main.js:201:21)
