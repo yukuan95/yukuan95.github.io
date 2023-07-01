@@ -1,564 +1,538 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>yukuan95.github.io</title>
-    <link rel="shortcut icon" href="./favicon.svg">
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/antd@5.4.0/dist/reset.css"/>
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/element-plus@2.2.28/dist/index.css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <style>
-        .btn {
-            cursor: pointer;
-            width: 40px;
-            height: 35px;
-            flex-shrink: 0;
-            user-select: none;
-            border-radius: 4px;
-            border: 1px solid #dcdfe6;
-            display: flex;
-            justify-content: center;
-            align-items: center
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>yukuan95.github.io</title>
+  <link rel="shortcut icon" href="./favicon.svg">
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/antd@5.4.0/dist/reset.css" />
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/element-plus@2.2.28/dist/index.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <style>
+    .btn {
+      cursor: pointer;
+      width: 40px;
+      height: 35px;
+      flex-shrink: 0;
+      user-select: none;
+      border-radius: 4px;
+      border: 1px solid #dcdfe6;
+      display: flex;
+      justify-content: center;
+      align-items: center
+    }
 
-        .btn:active {
-            background-color: #ecf5ff;
-        }
+    .btn:active {
+      background-color: #ecf5ff;
+    }
 
-        .loader {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border-top: 4px solid #e2e2e2;
-            border-right: 4px solid #e2e2e2;
-            border-bottom: 4px solid #e2e2e2;
-            border-left: 4px solid #409eff;
-            animation: load8 1.1s infinite linear;
-        }
+    .loader {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border-top: 4px solid #e2e2e2;
+      border-right: 4px solid #e2e2e2;
+      border-bottom: 4px solid #e2e2e2;
+      border-left: 4px solid #409eff;
+      animation: load8 1.1s infinite linear;
+    }
 
-        @keyframes load8 {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
+    @keyframes load8 {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
 </head>
+
 <body style="visibility: hidden;background-color: white;height: 100%">
-<div id="app" style="height: 100%">
+  <div id="app" style="height: 100%">
     <el-config-provider :locale="state.locale">
-        <div v-if="!state.show" style="height: 100%;display: flex;justify-content: center;align-items: center;">
-            <div class="loader"></div>
+      <div v-if="!state.show" style="height: 100%;display: flex;justify-content: center;align-items: center;">
+        <div class="loader"></div>
+      </div>
+      <div v-if="state.show" style="min-width: 351px;display: flex;flex-direction: column;align-items: center;">
+        <div style="width: 351px;margin-top: 20px;display: flex;justify-content: flex-start">
+          <div style="padding-left: 10px;flex-grow: 0;">
+            <span style="margin-left: 4px">twitter : </span>
+            <el-link type="primary" target="_blank" href="https://twitter.com/yukuan_z">
+              <span v-if="state.serverStatus === false" style="color: #f23645">@</span>
+              <span v-if="state.serverStatus === true" style="color: #089981">@</span>
+              <span v-if="state.serverStatus === null">@</span>
+              yukuan_z
+            </el-link>
+          </div>
+          <div @click="method.change()"
+            style="cursor: pointer;user-select:none;padding-right: 10px;flex-grow: 1;display: flex;justify-content: flex-end">
+            <div v-if="state.showBtcOrServer===0">
+              <div v-if="state.price!==null && state.arrowState!==null">
+                <span>BTC : </span>
+                <span v-if="state.arrowState===1" style="color: #f23645">{{method.toFixed(state.price,
+                  1)}}</span>
+                <span v-if="state.arrowState===0" style="color: #089981">{{method.toFixed(state.price,
+                  1)}}</span>
+                <i v-if="state.arrowState===1" class="bi bi-arrow-down-right" style="color: #f23645"></i>
+                <i v-if="state.arrowState===0" class="bi bi-arrow-up-right" style="color: #089981"></i>
+              </div>
+            </div>
+            <div v-if="state.showBtcOrServer===1">
+              <div v-if="state.serverTime">
+                <span style="margin-left: 4px">{{state.serverTime.slice(0, 16)}}</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div v-if="state.show"
-             style="min-width: 351px;display: flex;flex-direction: column;align-items: center;">
-            <div style="width: 351px;margin-top: 20px;display: flex;justify-content: flex-start">
-                <div style="padding-left: 10px;flex-grow: 0;">
-                    <span style="margin-left: 4px">twitter : </span>
-                    <el-link type="primary" target="_blank" href="https://twitter.com/yukuan_z">
-                        <span v-if="state.serverStatus === false" style="color: #f23645">@</span>
-                        <span v-if="state.serverStatus === true" style="color: #089981">@</span>
-                        <span v-if="state.serverStatus === null">@</span>
-                        yukuan_z
-                    </el-link>
-                </div>
-                <div @click="method.change()"
-                     style="cursor: pointer;user-select:none;padding-right: 10px;flex-grow: 1;display: flex;justify-content: flex-end">
-                    <div v-if="state.showBtcOrServer===0">
-                        <div v-if="state.price!==null && state.arrowState!==null">
-                            <span>BTC : </span>
-                            <span v-if="state.arrowState===1"
-                                  style="color: #f23645">{{method.toFixed(state.price, 1)}}</span>
-                            <span v-if="state.arrowState===0"
-                                  style="color: #089981">{{method.toFixed(state.price, 1)}}</span>
-                            <i v-if="state.arrowState===1" class="bi bi-arrow-down-right" style="color: #f23645"></i>
-                            <i v-if="state.arrowState===0" class="bi bi-arrow-up-right" style="color: #089981"></i>
-                        </div>
-                    </div>
-                    <div v-if="state.showBtcOrServer===1">
-                        <div v-if="state.serverTime">
-                            <span style="margin-left: 4px">{{state.serverTime.slice(0, 16)}}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div style="width: 351px;margin-top: 20px;display: flex;justify-content: center;">
-                <div style="flex-shrink: 0;">
-                    <el-date-picker
-                            @change="method.monthChange($event)"
-                            v-model="state.month"
-                            type="month"
-                            placeholder="选择结束月份"
-                            :editable="false"
-                            :clearable="false"
-                    ></el-date-picker>
-                </div>
-                <div @click="method.m1()"
-                     class="btn"
-                     style="margin-left: 20px">
-                    <i class="bi bi-caret-left"></i>
-                </div>
-                <div @click="method.m2()"
-                     class="btn"
-                     style="margin-left: 15px">
-                    <i class="bi bi-caret-right"></i>
-                </div>
-            </div>
-            <div style="width: 351px;margin-top: 20px;display: flex;flex-direction: column;align-items: center;">
-                <el-table
-                        border
-                        :data="state.monthRateData"
-                        :row-style="{height:'30px'}"
-                        :header-row-style="{height:'30px'}"
-                        :cell-style="{padding:'0px'}"
-                        :header-cell-style="{padding:'0px'}"
-                >
-                    <el-table-column prop="month" label="month" width="117" align="center">
-                    </el-table-column>
-                    <el-table-column prop="leverage" label="leverage" width="117" align="center">
-                    </el-table-column>
-                    <el-table-column prop="monthRate" width="117" align="center">
-                        <template #header>
-                            <div @dblclick="method.dblclickKB()">rate</div>
-                        </template>
-                        <template #default="scope">
-                            <el-popover effect="light" trigger="hover" placement="left" width="auto">
-                                <template #default>
-                                    <div style="display: flex;justify-content: center;">
-                                        rare2 : {{method.toFixed(scope.row.monthRate2, 3) }}
-                                    </div>
-                                </template>
-                                <template #reference>
-                                    <div>{{method.toFixed(scope.row.monthRate, 3) }}</div>
-                                </template>
-                            </el-popover>
-                        </template>
-                    </el-table-column>
-                </el-table>
-            </div>
-            <div style="width: 351px;margin-top: 20px;display: flex;flex-direction: column;align-items: center;">
-                <el-table
-                        :data="state.tableData"
-                        :row-style="{height:'30px'}"
-                        :header-row-style="{height:'30px'}"
-                        :cell-style="{padding:'0px'}"
-                        :header-cell-style="{padding:'0px'}"
-                >
-                    <el-table-column prop="time" label="time(+8)" width="143">
-                        <template #default="scope">
-                            <div v-if="!scope.row.showStartTime">
-                                <div>{{scope.row.time.slice(0, 16)}}</div>
-                            </div>
-                            <div v-if="scope.row.showStartTime">
-                                <el-popover effect="light" trigger="hover" placement="top" width="auto">
-                                    <template #default>
-                                        <div style="display: flex;justify-content: center;" v-if="state.startTime">
-                                            {{state.startTime.slice(0, 16)}}
-                                        </div>
-                                    </template>
-                                    <template #reference>
-                                        <div>{{scope.row.time.slice(0, 16)}}</div>
-                                    </template>
-                                </el-popover>
-                            </div>
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="price" label="price" width="77" align="center">
-                        <template #default="scope">
-                            <el-popover effect="light" trigger="hover" placement="left" width="auto">
-                                <template #default>
-                                    <div style="display: flex;justify-content: center;">
-                                        <div>
-                                            <div>
-                                                <span>avg : {{method.toFixed(scope.row.avg, 1)}}</span>
-                                            </div>
-                                            <div>
-                                                <span v-if="scope.row.avgChg===0">avgChg : 0%</span>
-                                                <span v-if="scope.row.avgChg>0">avgChg : +{{method.toFixed(scope.row.avgChg, 2)}}%</span>
-                                                <span v-if="scope.row.avgChg<0">avgChg : {{method.toFixed(scope.row.avgChg, 2)}}%</span>
-                                            </div>
-                                            <div v-if="scope.row.status!==scope.row.status2">
-                                                <div v-if="scope.row.status2 === '多'">status2 : Buy</div>
-                                                <div v-if="scope.row.status2 === '空'">status2 : Sell</div>
-                                                <div v-if="scope.row.status2 === '无'">status2 : None</div>
-                                            </div>
-                                            <div v-if="scope.row.s!==scope.row.s2">
-                                                <div>rate2 : {{method.toFixed(scope.row.s2, 3)}}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </template>
-                                <template #reference>
-                                    <div>{{method.toFixed(scope.row.price, 1)}}</div>
-                                </template>
-                            </el-popover>
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="status" label="status" width="67" align="center">
-                        <template #default="scope">
-                            <div v-if="scope.row.status === '多'">Buy</div>
-                            <div v-if="scope.row.status === '空'">Sell</div>
-                            <div v-if="scope.row.status === '无'">None</div>
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="s" width="64" align="center">
-                        <template #header>
-                            <div @dblclick="method.dblclickKB()">rate</div>
-                        </template>
-                        <template #default="scope">
-                            <div>{{method.toFixed(scope.row.s, 3)}}</div>
-                        </template>
-                    </el-table-column>
-                </el-table>
-            </div>
-            <div v-if="state.tableAllFlag" style="width: 351px;margin-top: 20px;display: flex;flex-direction: column;align-items: center;">
-                <el-table
-                        border
-                        :data="state.lastNMonthData"
-                        :row-style="{height:'30px'}"
-                        :header-row-style="{height:'30px'}"
-                        :cell-style="{padding:'0px'}"
-                        :header-cell-style="{padding:'0px'}"
-                >
-                    <el-table-column prop="monthN" label="lastNMonth" width="117" align="center">
-                    </el-table-column>
-                    <el-table-column prop="lastNMonthS" width="117" align="center">
-                        <template #header>
-                            <div @dblclick="method.dblclickKB()">rate</div>
-                        </template>
-                        <template #default="scope">
-                            <div>{{method.toFixed(scope.row.lastNMonthS, 1)}}</div>
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="lastNMonthSAvgMonth" label="avgMonth" width="117" align="center">
-                        <template #default="scope">
-                            <div>{{method.toFixed(scope.row.lastNMonthSAvgMonth, 3)}}</div>
-                        </template>
-                    </el-table-column>
-                </el-table>
-            </div>
-            <div v-if="state.tableAllFlag" style="width: 351px;margin-top: 20px;display: flex;flex-direction: column;align-items: center;">
-                <el-table
-                        border
-                        :data="state.yearData"
-                        :row-style="{height:'30px'}"
-                        :header-row-style="{height:'30px'}"
-                        :cell-style="{padding:'0px'}"
-                        :header-cell-style="{padding:'0px'}"
-                >
-                    <el-table-column prop="year" label="year" width="117" align="center">
-                    </el-table-column>
-                    <el-table-column prop="yearS" width="117" align="center">
-                        <template #header>
-                            <div @dblclick="method.dblclickKB()">rate</div>
-                        </template>
-                        <template #default="scope">
-                            <div>{{method.toFixed(scope.row.yearS, 2)}}</div>
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="yearSAvgMonth" label="avgMonth" width="117" align="center">
-                        <template #default="scope">
-                            <div>{{method.toFixed(scope.row.yearSAvgMonth, 3)}}</div>
-                        </template>
-                    </el-table-column>
-                </el-table>
-            </div>
-            <div style="width: 351px;height: 500px;"></div>
+        <div style="width: 351px;margin-top: 20px;display: flex;justify-content: center;">
+          <div style="flex-shrink: 0;">
+            <el-date-picker @change="method.monthChange($event)" v-model="state.month" type="month" placeholder="选择结束月份"
+              :editable="false" :clearable="false"></el-date-picker>
+          </div>
+          <div @click="method.m1()" class="btn" style="margin-left: 20px">
+            <i class="bi bi-caret-left"></i>
+          </div>
+          <div @click="method.m2()" class="btn" style="margin-left: 15px">
+            <i class="bi bi-caret-right"></i>
+          </div>
         </div>
+        <div style="width: 351px;margin-top: 20px;display: flex;flex-direction: column;align-items: center;">
+          <el-table border :data="state.monthRateData" :row-style="{height:'30px'}" :header-row-style="{height:'30px'}"
+            :cell-style="{padding:'0px'}" :header-cell-style="{padding:'0px'}">
+            <el-table-column prop="month" label="month" width="117" align="center">
+            </el-table-column>
+            <el-table-column prop="leverage" label="leverage" width="117" align="center">
+            </el-table-column>
+            <el-table-column prop="monthRate" width="117" align="center">
+              <template #header>
+                <div @dblclick="method.dblclickKB()">rate</div>
+              </template>
+              <template #default="scope">
+                <el-popover effect="light" trigger="hover" placement="left" width="auto">
+                  <template #default>
+                    <div style="display: flex;justify-content: center;">
+                      rare2 : {{method.toFixed(scope.row.monthRate2, 3) }}
+                    </div>
+                  </template>
+                  <template #reference>
+                    <div>{{method.toFixed(scope.row.monthRate, 3) }}</div>
+                  </template>
+                </el-popover>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+        <div style="width: 351px;margin-top: 20px;display: flex;flex-direction: column;align-items: center;">
+          <el-table :data="state.tableData" :row-style="{height:'30px'}" :header-row-style="{height:'30px'}"
+            :cell-style="{padding:'0px'}" :header-cell-style="{padding:'0px'}">
+            <el-table-column prop="time" label="time(+8)" width="143">
+              <template #default="scope">
+                <div v-if="!scope.row.showStartTime">
+                  <div>{{scope.row.time.slice(0, 16)}}</div>
+                </div>
+                <div v-if="scope.row.showStartTime">
+                  <el-popover effect="light" trigger="hover" placement="top" width="auto">
+                    <template #default>
+                      <div style="display: flex;justify-content: center;" v-if="state.startTime">
+                        {{state.startTime.slice(0, 16)}}
+                      </div>
+                    </template>
+                    <template #reference>
+                      <div>{{scope.row.time.slice(0, 16)}}</div>
+                    </template>
+                  </el-popover>
+                </div>
+              </template>
+            </el-table-column>
+            <el-table-column prop="price" label="price" width="77" align="center">
+              <template #default="scope">
+                <el-popover effect="light" trigger="hover" placement="left" width="auto">
+                  <template #default>
+                    <div style="display: flex;justify-content: center;">
+                      <div>
+                        <div>
+                          <span>avg : {{method.toFixed(scope.row.avg, 1)}}</span>
+                        </div>
+                        <div>
+                          <span v-if="scope.row.avgChg===0">avgChg : 0%</span>
+                          <span v-if="scope.row.avgChg>0">avgChg :
+                            +{{method.toFixed(scope.row.avgChg, 2)}}%</span>
+                          <span v-if="scope.row.avgChg<0">avgChg :
+                            {{method.toFixed(scope.row.avgChg, 2)}}%</span>
+                        </div>
+                        <div v-if="scope.row.status!==scope.row.status2">
+                          <div v-if="scope.row.status2 === '多'">status2 : Buy</div>
+                          <div v-if="scope.row.status2 === '空'">status2 : Sell</div>
+                          <div v-if="scope.row.status2 === '无'">status2 : None</div>
+                        </div>
+                        <div v-if="scope.row.s!==scope.row.s2">
+                          <div>rate2 : {{method.toFixed(scope.row.s2, 3)}}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                  <template #reference>
+                    <div>{{method.toFixed(scope.row.price, 1)}}</div>
+                  </template>
+                </el-popover>
+              </template>
+            </el-table-column>
+            <el-table-column prop="status" label="status" width="67" align="center">
+              <template #default="scope">
+                <div v-if="scope.row.status === '多'">Buy</div>
+                <div v-if="scope.row.status === '空'">Sell</div>
+                <div v-if="scope.row.status === '无'">None</div>
+              </template>
+            </el-table-column>
+            <el-table-column prop="s" width="64" align="center">
+              <template #header>
+                <div @dblclick="method.dblclickKB()">rate</div>
+              </template>
+              <template #default="scope">
+                <div>{{method.toFixed(scope.row.s, 3)}}</div>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+        <div v-if="state.tableAllFlag"
+          style="width: 351px;margin-top: 20px;display: flex;flex-direction: column;align-items: center;">
+          <el-table border :data="state.lastNMonthData" :row-style="{height:'30px'}" :header-row-style="{height:'30px'}"
+            :cell-style="{padding:'0px'}" :header-cell-style="{padding:'0px'}">
+            <el-table-column prop="monthN" label="lastNMonth" width="117" align="center">
+            </el-table-column>
+            <el-table-column prop="lastNMonthS" width="117" align="center">
+              <template #header>
+                <div @dblclick="method.dblclickKB()">rate</div>
+              </template>
+              <template #default="scope">
+                <div>{{method.toFixed(scope.row.lastNMonthS, 1)}}</div>
+              </template>
+            </el-table-column>
+            <el-table-column prop="lastNMonthSAvgMonth" label="avgMonth" width="117" align="center">
+              <template #default="scope">
+                <div>{{method.toFixed(scope.row.lastNMonthSAvgMonth, 3)}}</div>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+        <div v-if="state.tableAllFlag"
+          style="width: 351px;margin-top: 20px;display: flex;flex-direction: column;align-items: center;">
+          <el-table border :data="state.yearData" :row-style="{height:'30px'}" :header-row-style="{height:'30px'}"
+            :cell-style="{padding:'0px'}" :header-cell-style="{padding:'0px'}">
+            <el-table-column prop="year" label="year" width="117" align="center">
+            </el-table-column>
+            <el-table-column prop="yearS" width="117" align="center">
+              <template #header>
+                <div @dblclick="method.dblclickKB()">rate</div>
+              </template>
+              <template #default="scope">
+                <div>{{method.toFixed(scope.row.yearS, 2)}}</div>
+              </template>
+            </el-table-column>
+            <el-table-column prop="yearSAvgMonth" label="avgMonth" width="117" align="center">
+              <template #default="scope">
+                <div>{{method.toFixed(scope.row.yearSAvgMonth, 3)}}</div>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+        <div style="width: 351px;height: 500px;"></div>
+      </div>
     </el-config-provider>
-</div>
-<script src="https://unpkg.com/vue@3.2.45/dist/vue.global.prod.js"></script>
-<script src="https://unpkg.com/element-plus@2.2.28/dist/index.full.min.js"></script>
-<script src="./lib.js"></script>
-<script>
-    let {reactive, watchEffect, onMounted, createApp, toRaw,} = Vue
+  </div>
+  <script src="https://unpkg.com/vue@3.2.45/dist/vue.global.prod.js"></script>
+  <script src="https://unpkg.com/element-plus@2.2.28/dist/index.full.min.js"></script>
+  <script src="./lib.js"></script>
+  <script>
+    let { reactive, watchEffect, onMounted, createApp, toRaw, } = Vue
     let Status = {
-        DUO: "多",
-        KONG: "空",
-        WU: "无",
+      DUO: "多",
+      KONG: "空",
+      WU: "无",
     }
     const state = reactive({
-        show: false,
-        locale: zhCn,
-        data: [],
-        tableData: [],
-        yearData: [],
-        lastNMonthData: [],
-        month: getNowStringTime().substring(0, 7),
-        monthRateData: [{
-            leverage: 6,
-            month: null,
-            monthRate: null,
-            monthRate2: null,
-        }],
-        // 0 up 1 down
-        arrowState: 0,
-        price: null,
-        // 用于检测ws是否断连
-        priceTime: null,
+      show: false,
+      locale: zhCn,
+      data: [],
+      tableData: [],
+      yearData: [],
+      lastNMonthData: [],
+      month: getNowStringTime().substring(0, 7),
+      monthRateData: [{
+        leverage: 6,
+        month: null,
+        monthRate: null,
+        monthRate2: null,
+      }],
+      // 0 up 1 down
+      arrowState: 0,
+      price: null,
+      // 用于检测ws是否断连
+      priceTime: null,
 
-        serverStatus: null,
-        serverTime: null,
-        startTime: null,
+      serverStatus: null,
+      serverTime: null,
+      startTime: null,
 
-        // 0 btc 1 server
-        showBtcOrServer: 1,
+      // 0 btc 1 server
+      showBtcOrServer: 1,
 
-        tableAllFlag: false,
+      tableAllFlag: true,
     });
     const method = {
-        dblclickKB() {
-            state.tableAllFlag = !state.tableAllFlag
-        },
-        change() {
-            if (state.showBtcOrServer === 0) {
-                state.showBtcOrServer = 1
-            } else {
-                state.showBtcOrServer = 0
-            }
-        },
-        m1() {
-            let m = state.month ? state.month : getNowStringTime().substring(0, 7)
-            let d = stringTimeToDateTime(m + "-01 00:00:00");
-            d.setMonth(d.getMonth() - 1);
-            state.month = dateTimeToStringTime(d).substring(0, 7);
-        },
-        m2() {
-            let m = state.month ? state.month : getNowStringTime().substring(0, 7)
-            let d = stringTimeToDateTime(m + "-01 00:00:00");
-            d.setMonth(d.getMonth() + 1);
-            state.month = dateTimeToStringTime(d).substring(0, 7);
-        },
-        monthChange(e) {
-            if (e) {
-                state.month = dateTimeToStringTime(e).substring(0, 7);
-            } else {
-                state.month = "";
-            }
-        },
-        toFixed(num, len) {
-            num = '' + num
-            if (isNaN(Number.parseFloat(num))) {
-                return ''
-            }
-            if (len < 0) {
-                len = 0
-            }
-            let fu = false
-            if (Number.parseFloat("" + num) < 0) {
-                fu = true
-                num = '' + (Number.parseFloat("" + num) * -1)
-            }
-            let r = Number.parseInt("" + Number.parseFloat("" + num) * Math.pow(10, len)) + ''
-            let l = len + 1 - r.length
-            let _s = ''
-            for (let i = 0; i < l; i++) {
-                _s += '0'
-            }
-            r = _s + r
-            let a1 = r.slice(0, r.length - len)
-            let a2 = r.slice(r.length - len, r.length)
-            let res = a1 + '.' + a2
-            if (res.slice(res.length - 1, res.length) === '.') {
-                res = res.slice(0, res.length - 1)
-            }
-            if (fu) {
-                res = '-' + res
-            }
-            return res
-        },
-        monthCalc(month1, month2) {
-            let startTime = stringTimeToDateTime(month1 + '-01 00:00:00')
-            let endTime = stringTimeToDateTime(month2 + '-01 00:00:00')
-            let yearToMonth = (endTime.getFullYear() - startTime.getFullYear()) * 12
-            let monthToMonth = endTime.getMonth() - startTime.getMonth()
-            return yearToMonth + monthToMonth
+      dblclickKB() {
+        state.tableAllFlag = !state.tableAllFlag
+      },
+      change() {
+        if (state.showBtcOrServer === 0) {
+          state.showBtcOrServer = 1
+        } else {
+          state.showBtcOrServer = 0
         }
+      },
+      m1() {
+        let m = state.month ? state.month : getNowStringTime().substring(0, 7)
+        let d = stringTimeToDateTime(m + "-01 00:00:00");
+        d.setMonth(d.getMonth() - 1);
+        state.month = dateTimeToStringTime(d).substring(0, 7);
+      },
+      m2() {
+        let m = state.month ? state.month : getNowStringTime().substring(0, 7)
+        let d = stringTimeToDateTime(m + "-01 00:00:00");
+        d.setMonth(d.getMonth() + 1);
+        state.month = dateTimeToStringTime(d).substring(0, 7);
+      },
+      monthChange(e) {
+        if (e) {
+          state.month = dateTimeToStringTime(e).substring(0, 7);
+        } else {
+          state.month = "";
+        }
+      },
+      toFixed(num, len) {
+        num = '' + num
+        if (isNaN(Number.parseFloat(num))) {
+          return ''
+        }
+        if (len < 0) {
+          len = 0
+        }
+        let fu = false
+        if (Number.parseFloat("" + num) < 0) {
+          fu = true
+          num = '' + (Number.parseFloat("" + num) * -1)
+        }
+        let r = Number.parseInt("" + Number.parseFloat("" + num) * Math.pow(10, len)) + ''
+        let l = len + 1 - r.length
+        let _s = ''
+        for (let i = 0; i < l; i++) {
+          _s += '0'
+        }
+        r = _s + r
+        let a1 = r.slice(0, r.length - len)
+        let a2 = r.slice(r.length - len, r.length)
+        let res = a1 + '.' + a2
+        if (res.slice(res.length - 1, res.length) === '.') {
+          res = res.slice(0, res.length - 1)
+        }
+        if (fu) {
+          res = '-' + res
+        }
+        return res
+      },
+      monthCalc(month1, month2) {
+        let startTime = stringTimeToDateTime(month1 + '-01 00:00:00')
+        let endTime = stringTimeToDateTime(month2 + '-01 00:00:00')
+        let yearToMonth = (endTime.getFullYear() - startTime.getFullYear()) * 12
+        let monthToMonth = endTime.getMonth() - startTime.getMonth()
+        return yearToMonth + monthToMonth
+      }
     }
     watchEffect(async () => {
-        let monthRate = 1
-        let monthRate2 = 1
-        let tableData = []
-        for (let item of state.data) {
-            if (item.time.slice(0, 7) === state.month) {
-                monthRate *= item.s
-                monthRate2 *= item.s2
-                if (state.tableAllFlag) {
-                    tableData.push(toRaw(item))
-                } else {
-                    if (item.show) {
-                        tableData.push(toRaw(item))
-                    }
-                }
+      let monthRate = 1
+      let monthRate2 = 1
+      let tableData = []
+      for (let item of state.data) {
+        if (item.time.slice(0, 7) === state.month) {
+          monthRate *= item.s
+          monthRate2 *= item.s2
+          if (state.tableAllFlag) {
+            tableData.push(toRaw(item))
+          } else {
+            if (item.show) {
+              tableData.push(toRaw(item))
             }
+          }
         }
-        state.tableData = tableData
-        state.monthRateData[0].month = state.month
-        state.monthRateData[0].monthRate = monthRate
-        state.monthRateData[0].monthRate2 = monthRate2
+      }
+      state.tableData = tableData
+      state.monthRateData[0].month = state.month
+      state.monthRateData[0].monthRate = monthRate
+      state.monthRateData[0].monthRate2 = monthRate2
     })
     const mounted = async () => {
-        let ws = null
-        let wsInit = () => {
-            // wss://ws.okx.com:8443/ws/v5/public
-            // wss://wsaws.okx.com:8443/ws/v5/public
-            ws = new WebSocket("wss://wsaws.okx.com:8443/ws/v5/public")
-            ws.onopen = () => {
-                ws.send(JSON.stringify({
-                    "op": "subscribe",
-                    "args": [
-                        {
-                            "channel": "tickers",
-                            "instId": "BTC-USDT"
-                        },
-                    ]
-                }))
-            }
-            ws.onmessage = (res) => {
-                let data = JSON.parse(res.data + '')
-                if (data.data && data.data.length > 0 && data.data[0].last) {
-                    let price = Number.parseFloat(data.data[0].last + '')
-                    if (!isNaN(price)) {
-                        if (state.price) {
-                            if (price > state.price) {
-                                state.arrowState = 0
-                            }
-                            if (price < state.price) {
-                                state.arrowState = 1
-                            }
-                        }
-                        state.price = price
-                        state.priceTime = getNowMilliTime()
-                    }
-                }
-            }
+      let ws = null
+      let wsInit = () => {
+        // wss://ws.okx.com:8443/ws/v5/public
+        // wss://wsaws.okx.com:8443/ws/v5/public
+        ws = new WebSocket("wss://wsaws.okx.com:8443/ws/v5/public")
+        ws.onopen = () => {
+          ws.send(JSON.stringify({
+            "op": "subscribe",
+            "args": [
+              {
+                "channel": "tickers",
+                "instId": "BTC-USDT"
+              },
+            ]
+          }))
         }
-        wsInit()
-        setInterval(() => {
-            if (state.priceTime) {
-                if (getNowMilliTime() - state.priceTime > 30 * 1000) {
-                    wsInit()
+        ws.onmessage = (res) => {
+          let data = JSON.parse(res.data + '')
+          if (data.data && data.data.length > 0 && data.data[0].last) {
+            let price = Number.parseFloat(data.data[0].last + '')
+            if (!isNaN(price)) {
+              if (state.price) {
+                if (price > state.price) {
+                  state.arrowState = 0
                 }
-            } else {
-                wsInit()
+                if (price < state.price) {
+                  state.arrowState = 1
+                }
+              }
+              state.price = price
+              state.priceTime = getNowMilliTime()
             }
-        }, 30 * 1000)
-        let res = await fetch("./btcDataDanArray.json");
-        let data = await res.json();
-        let yearSet = new Set()
-        if (data.length > 0) {
-            data[0].s = 1
-            data[0].s2 = 1
-            data[0].chg = 0
-            data[0].show = true
-            yearSet.add(data[0].time.slice(0, 4))
-            for (let i = 1; i < data.length; i++) {
-                let item1 = data[i - 1];
-                let item2 = data[i];
-                item2.avgChg = ((item2.avg / item1.avg) - 1) * 100
-                yearSet.add(item2.time.slice(0, 4))
-                item2.show = !(item2.status === Status.WU && item1.status === Status.WU);
-                let s = 0;
-                let p1 = item1.price;
-                let p2 = item2.price;
-                if (item1.status === Status.DUO) {
-                    let ss = ((p2 - p1) / p1) * state.monthRateData[0].leverage;
-                    s = (1 + ss) * (1 - state.monthRateData[0].leverage / 1000);
-                }
-                if (item1.status === Status.KONG) {
-                    let ss = ((p2 - p1) / p1) * -1 * state.monthRateData[0].leverage;
-                    s = (1 + ss) * (1 - state.monthRateData[0].leverage / 1000);
-                }
-                if (item1.status === Status.WU) {
-                    s = 1;
-                }
-                item2.s = s
-                let s2 = 0;
-                if (item1.status2 === Status.DUO) {
-                    let ss = ((p2 - p1) / p1) * state.monthRateData[0].leverage;
-                    s2 = (1 + ss) * (1 - state.monthRateData[0].leverage / 1000);
-                }
-                if (item1.status2 === Status.KONG) {
-                    let ss = ((p2 - p1) / p1) * -1 * state.monthRateData[0].leverage;
-                    s2 = (1 + ss) * (1 - state.monthRateData[0].leverage / 1000);
-                }
-                if (item1.status2 === Status.WU) {
-                    s2 = 1;
-                }
-                item2.s2 = s2
-            }
+          }
         }
-        for (let i = data.length - 1; i >= 0; i--) {
-            if (data[i].status === Status.WU) {
-                data[i].showStartTime = true
-            } else {
-                break
-            }
+      }
+      wsInit()
+      setInterval(() => {
+        if (state.priceTime) {
+          if (getNowMilliTime() - state.priceTime > 30 * 1000) {
+            wsInit()
+          }
+        } else {
+          wsInit()
         }
-        let yearData = []
-        for (let year of yearSet) {
-            let yearS = 1
-            let yearLen = new Set()
-            for (let item of data) {
-                if (item.time.slice(0, 4) === year) {
-                    yearS *= item.s
-                    yearLen.add(item.time.slice(0, 7))
-                }
-            }
-            yearData.push({year, yearS, yearSAvgMonth: Math.pow(yearS, 1 / yearLen.size)})
+      }, 30 * 1000)
+      let res = await fetch("./btcDataDanArray.json");
+      let data = await res.json();
+      let yearSet = new Set()
+      if (data.length > 0) {
+        data[0].s = 1
+        data[0].s2 = 1
+        data[0].chg = 0
+        data[0].show = true
+        yearSet.add(data[0].time.slice(0, 4))
+        for (let i = 1; i < data.length; i++) {
+          let item1 = data[i - 1];
+          let item2 = data[i];
+          item2.avgChg = ((item2.avg / item1.avg) - 1) * 100
+          yearSet.add(item2.time.slice(0, 4))
+          item2.show = !(item2.status === Status.WU && item1.status === Status.WU);
+          let s = 0;
+          let p1 = item1.price;
+          let p2 = item2.price;
+          if (item1.status === Status.DUO) {
+            let ss = ((p2 - p1) / p1) * state.monthRateData[0].leverage;
+            s = (1 + ss) * (1 - state.monthRateData[0].leverage / 1000);
+          }
+          if (item1.status === Status.KONG) {
+            let ss = ((p2 - p1) / p1) * -1 * state.monthRateData[0].leverage;
+            s = (1 + ss) * (1 - state.monthRateData[0].leverage / 1000);
+          }
+          if (item1.status === Status.WU) {
+            s = 1;
+          }
+          item2.s = s
+          let s2 = 0;
+          if (item1.status2 === Status.DUO) {
+            let ss = ((p2 - p1) / p1) * state.monthRateData[0].leverage;
+            s2 = (1 + ss) * (1 - state.monthRateData[0].leverage / 1000);
+          }
+          if (item1.status2 === Status.KONG) {
+            let ss = ((p2 - p1) / p1) * -1 * state.monthRateData[0].leverage;
+            s2 = (1 + ss) * (1 - state.monthRateData[0].leverage / 1000);
+          }
+          if (item1.status2 === Status.WU) {
+            s2 = 1;
+          }
+          item2.s2 = s2
         }
-        yearData = yearData.reverse()
-        let maxMonth = method.monthCalc(data[0].time.slice(0, 7), data[data.length - 1].time.slice(0, 7)) + 1
-        let lastNMonth = []
-        for (let i = 12; i <= 60; i += 6) {
-            if (i <= maxMonth) {
-                lastNMonth.push(i)
-            }
+      }
+      for (let i = data.length - 1; i >= 0; i--) {
+        if (data[i].status === Status.WU) {
+          data[i].showStartTime = true
+        } else {
+          break
         }
-        let lastNMonthData = []
-        let lastMonth = data[data.length - 1].time.slice(0, 7)
-        for (let monthN of lastNMonth) {
-            let lastNMonthS = 1
-            for (let item of data) {
-                if (method.monthCalc(item.time.slice(0, 7), lastMonth) < monthN) {
-                    lastNMonthS *= item.s
-                }
-            }
-            lastNMonthData.push({monthN, lastNMonthS, lastNMonthSAvgMonth: Math.pow(lastNMonthS, 1 / monthN)})
+      }
+      let yearData = []
+      for (let year of yearSet) {
+        let yearS = 1
+        let yearLen = new Set()
+        for (let item of data) {
+          if (item.time.slice(0, 4) === year) {
+            yearS *= item.s
+            yearLen.add(item.time.slice(0, 7))
+          }
         }
-        state.data = data
-        state.yearData = yearData
-        state.lastNMonthData = lastNMonthData
-        state.show = true
-        // console.log(toRaw(state))
+        yearData.push({ year, yearS, yearSAvgMonth: Math.pow(yearS, 1 / yearLen.size) })
+      }
+      yearData = yearData.reverse()
+      let maxMonth = method.monthCalc(data[0].time.slice(0, 7), data[data.length - 1].time.slice(0, 7)) + 1
+      let lastNMonth = []
+      for (let i = 12; i <= 60; i += 6) {
+        if (i <= maxMonth) {
+          lastNMonth.push(i)
+        }
+      }
+      let lastNMonthData = []
+      let lastMonth = data[data.length - 1].time.slice(0, 7)
+      for (let monthN of lastNMonth) {
+        let lastNMonthS = 1
+        for (let item of data) {
+          if (method.monthCalc(item.time.slice(0, 7), lastMonth) < monthN) {
+            lastNMonthS *= item.s
+          }
+        }
+        lastNMonthData.push({ monthN, lastNMonthS, lastNMonthSAvgMonth: Math.pow(lastNMonthS, 1 / monthN) })
+      }
+      state.data = data
+      state.yearData = yearData
+      state.lastNMonthData = lastNMonthData
+      state.show = true
+      // console.log(toRaw(state))
 
-        let _count = await fetch("./count.txt");
-        let _logErr = await fetch("./logErr.txt");
-        let _time = await fetch("./time.json");
+      let _count = await fetch("./count.txt");
+      let _logErr = await fetch("./logErr.txt");
+      let _time = await fetch("./time.json");
 
-        let time = await _time.json()
-        let count = await _count.text()
-        let logErr = await _logErr.text()
+      let time = await _time.json()
+      let count = await _count.text()
+      let logErr = await _logErr.text()
 
-        state.serverTime = time.time
-        let b1 = Number.parseInt(count) === 4
-        let b2 = ('' + logErr).trim() === ''
-        let b3 = getNowMilliTime() - stringTimeToMilliTime(time.time) < (3 * 60 * 60 * 1000 + 10 * 60 * 1000)
-        state.serverStatus = b1 && b2 && b3
-        state.startTime = time.startTime
+      state.serverTime = time.time
+      let b1 = Number.parseInt(count) === 4
+      let b2 = ('' + logErr).trim() === ''
+      let b3 = getNowMilliTime() - stringTimeToMilliTime(time.time) < (3 * 60 * 60 * 1000 + 10 * 60 * 1000)
+      state.serverStatus = b1 && b2 && b3
+      state.startTime = time.startTime
     }
     createApp({
-        setup() {
-            onMounted(mounted);
-            return {state, method};
-        },
+      setup() {
+        onMounted(mounted);
+        return { state, method };
+      },
     }).use(ElementPlus).mount("#app");
     document.getElementsByTagName("body")[0].style.visibility = "visible";
-</script>
+  </script>
 </body>
+
 </html>
