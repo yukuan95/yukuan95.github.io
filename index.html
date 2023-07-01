@@ -314,36 +314,52 @@
           state.month = "";
         }
       },
-      toFixed(num, len) {
-        num = '' + num
-        if (isNaN(Number.parseFloat(num))) {
-          return ''
+      toFixed(f, n) {
+        if (n < 0) { n = 0 }
+        if (isNaN(Number.parseFloat(f + ''))) { return '' }
+        let s = ''
+        for (let i = 0; i < n; i++) {
+          s += '0'
         }
-        if (len < 0) {
-          len = 0
+        if ((Number.parseFloat(f + '') + '').indexOf('.') !== -1) {
+          s = f + s
+        } else {
+          s = f + '.' + s
         }
-        let fu = false
-        if (Number.parseFloat("" + num) < 0) {
-          fu = true
-          num = '' + (Number.parseFloat("" + num) * -1)
-        }
-        let r = Number.parseInt("" + Number.parseFloat("" + num) * Math.pow(10, len)) + ''
-        let l = len + 1 - r.length
-        let _s = ''
-        for (let i = 0; i < l; i++) {
-          _s += '0'
-        }
-        r = _s + r
-        let a1 = r.slice(0, r.length - len)
-        let a2 = r.slice(r.length - len, r.length)
-        let res = a1 + '.' + a2
+        let res = s.slice(0, s.indexOf('.') + 1 + n)
         if (res.slice(res.length - 1, res.length) === '.') {
           res = res.slice(0, res.length - 1)
         }
-        if (fu) {
-          res = '-' + res
-        }
         return res
+        //   num = '' + num
+        //   if (isNaN(Number.parseFloat(num))) {
+        //     return ''
+        //   }
+        //   if (len < 0) {
+        //     len = 0
+        //   }
+        //   let fu = false
+        //   if (Number.parseFloat("" + num) < 0) {
+        //     fu = true
+        //     num = '' + (Number.parseFloat("" + num) * -1)
+        //   }
+        //   let r = Number.parseInt("" + Number.parseFloat("" + num) * Math.pow(10, len)) + ''
+        //   let l = len + 1 - r.length
+        //   let _s = ''
+        //   for (let i = 0; i < l; i++) {
+        //     _s += '0'
+        //   }
+        //   r = _s + r
+        //   let a1 = r.slice(0, r.length - len)
+        //   let a2 = r.slice(r.length - len, r.length)
+        //   let res = a1 + '.' + a2
+        //   if (res.slice(res.length - 1, res.length) === '.') {
+        //     res = res.slice(0, res.length - 1)
+        //   }
+        //   if (fu) {
+        //     res = '-' + res
+        //   }
+        //   return res
       },
       monthCalc(month1, month2) {
         let startTime = stringTimeToDateTime(month1 + '-01 00:00:00')
