@@ -74,12 +74,17 @@
             <div v-if="state.showBtcOrServer===0">
               <div v-if="state.price!==null && state.arrowState!==null">
                 <span>BTC : </span>
-                <span v-if="state.arrowState===1" style="color: #f23645">{{method.toFixed(state.price,
-                  1)}}</span>
-                <span v-if="state.arrowState===0" style="color: #089981">{{method.toFixed(state.price,
-                  1)}}</span>
-                <i v-if="state.arrowState===1" class="bi bi-arrow-down-right" style="color: #f23645"></i>
-                <i v-if="state.arrowState===0" class="bi bi-arrow-up-right" style="color: #089981"></i>
+                <template v-if="state.price">
+                  <span v-if="state.arrowState===1" style="color: #f23645">{{method.toFixed(state.price,
+                    1)}}</span>
+                  <span v-if="state.arrowState===0" style="color: #089981">{{method.toFixed(state.price,
+                    1)}}</span>
+                  <i v-if="state.arrowState===1" class="bi bi-arrow-down-right" style="color: #f23645"></i>
+                  <i v-if="state.arrowState===0" class="bi bi-arrow-up-right" style="color: #089981"></i>
+                </template>
+                <template v-if="state.priceShort">
+                  <span>{{ method.toFixed(state.priceShort,1) }}</span>
+                </template>
               </div>
             </div>
             <div v-if="state.showBtcOrServer===1">
@@ -283,6 +288,8 @@
       showBtcOrServer: 1,
 
       tableAllFlag: true,
+
+      priceShort: '',
     });
     const method = {
       dblclickKB() {
@@ -511,6 +518,7 @@
       let b3 = getNowMilliTime() - stringTimeToMilliTime(time.time) < (3 * 60 * 60 * 1000 + 10 * 60 * 1000)
       state.serverStatus = b1 && b2 && b3
       state.startTime = time.startTime
+      state.priceShort = time.price
     }
     createApp({
       setup() {
