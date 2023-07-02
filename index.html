@@ -82,8 +82,15 @@
                   <i v-if="state.arrowState===1" class="bi bi-arrow-down-right" style="color: #f23645"></i>
                   <i v-if="state.arrowState===0" class="bi bi-arrow-up-right" style="color: #089981"></i>
                 </template>
-                <template v-if="state.priceShort">
-                  <span>{{ method.toFixed(state.priceShort,1) }}</span>
+                <template v-if="state.priceShort && !state.price">
+                  <span v-if="Number.parseFloat(state.priceShort) < state.data[state.data.length-1].price"
+                    style="color: #f23645">{{method.toFixed(state.priceShort,1)}}</span>
+                  <span v-if="Number.parseFloat(state.priceShort) >= state.data[state.data.length-1].price"
+                    style="color: #089981">{{method.toFixed(state.priceShort,1)}}</span>
+                  <i v-if="Number.parseFloat(state.priceShort) < state.data[state.data.length-1].price"
+                    class="bi bi-arrow-down-right" style="color: #f23645"></i>
+                  <i v-if="Number.parseFloat(state.priceShort) >= state.data[state.data.length-1].price"
+                    class="bi bi-arrow-up-right" style="color: #089981"></i>
                 </template>
               </div>
             </div>
