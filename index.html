@@ -74,15 +74,15 @@
             <div v-if="state.showBtcOrServer===0">
               <div v-if="state.price!==null && state.arrowState!==null">
                 <span>BTC : </span>
-                <!-- <template v-if="state.price">
+                <template v-if="state.price">
                   <span v-if="state.arrowState===1" style="color: #f23645">{{method.toFixed(state.price,
                     1)}}</span>
                   <span v-if="state.arrowState===0" style="color: #089981">{{method.toFixed(state.price,
                     1)}}</span>
                   <i v-if="state.arrowState===1" class="bi bi-arrow-down-right" style="color: #f23645"></i>
                   <i v-if="state.arrowState===0" class="bi bi-arrow-up-right" style="color: #089981"></i>
-                </template> -->
-                <template v-if="state.priceShort">
+                </template>
+                <template v-else-if="state.priceShort">
                   <span v-if="Number.parseFloat(state.priceShort) < state.data[state.data.length-1].price"
                     style="color: #f23645">{{method.toFixed(state.priceShort,1)}}</span>
                   <span v-if="Number.parseFloat(state.priceShort) >= state.data[state.data.length-1].price"
