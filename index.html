@@ -491,8 +491,6 @@
       state.data = data
       state.yearData = yearData
       state.lastNMonthData = lastNMonthData
-      state.show = true
-      // console.log(toRaw(state))
 
       let _count = await fetch("./count.txt");
       let _logErr = await fetch("./logErr.txt");
@@ -509,6 +507,9 @@
       state.serverStatus = b1 && b2 && b3
       state.startTime = time.startTime
       state.priceShort = time.price
+
+      state.show = true
+      // console.log(toRaw(state))
     }
     createApp({
       setup() {
