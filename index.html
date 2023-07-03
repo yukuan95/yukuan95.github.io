@@ -70,8 +70,7 @@
               </span>
             </div>
           </div>
-          <div @click="method.change()"
-            style="user-select:none;padding-right: 10px;flex-grow: 1;display: flex;justify-content: flex-end">
+          <div style="user-select:none;padding-right: 10px;flex-grow: 1;display: flex;justify-content: flex-end">
             <div v-if="state.priceShort || (state.price!==null && state.arrowState!==null)">
               <span>BTC : </span>
               <template v-if="state.price!==null && state.arrowState!==null">
