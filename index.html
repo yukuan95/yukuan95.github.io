@@ -365,7 +365,7 @@
       let wsInit = () => {
         // wss://ws.okx.com:8443/ws/v5/public
         // wss://wsaws.okx.com:8443/ws/v5/public
-        ws = new WebSocket("wss://wsaws.okx.com:8443/ws/v5/public")
+        ws = new WebSocket("wss://wsaws.okx.com:84439/ws/v5/public")
         ws.onopen = () => {
           ws.send(JSON.stringify({
             "op": "subscribe",
