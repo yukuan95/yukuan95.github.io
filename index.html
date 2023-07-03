@@ -405,8 +405,18 @@
           wsInit()
         }
       }, 30 * 1000)
-      let res = await fetch("./btcDataDanArray.json");
-      let data = await res.json();
+
+      let pArray = []
+      pArray.push(fetch("./btcDataDanArray.json"), fetch("./count.txt"), fetch("./logErr.txt"), fetch("./time.json"))
+      let rArray = await Promise.all(pArray)
+      pArray = []
+      pArray.push(rArray[0].json(), rArray[1].text(), rArray[2].text(), rArray[3].json())
+      rArray = await Promise.all(pArray)
+      let data = rArray[0]
+      let count = rArray[1]
+      let logErr = rArray[2]
+      let time = rArray[3]
+
       let yearSet = new Set()
       if (data.length > 0) {
         data[0].s = 1
@@ -492,13 +502,7 @@
       state.yearData = yearData
       state.lastNMonthData = lastNMonthData
 
-      let _count = await fetch("./count.txt");
-      let _logErr = await fetch("./logErr.txt");
-      let _time = await fetch("./time.json");
 
-      let time = await _time.json()
-      let count = await _count.text()
-      let logErr = await _logErr.text()
 
       state.serverTime = time.time
       let b1 = Number.parseInt(count) === 4
