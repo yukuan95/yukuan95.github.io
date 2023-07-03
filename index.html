@@ -61,7 +61,7 @@
       <div v-if="state.show" style="min-width: 351px;display: flex;flex-direction: column;align-items: center;">
         <div style="width: 351px;margin-top: 20px;display: flex;justify-content: flex-start">
           <div style="padding-left: 10px;flex-grow: 0;">
-            <div v-if="state.serverTime">
+            <div v-if="state.serverTime" style="user-select:none;">
               <span v-if="state.serverStatus === false" style="color: #f23645">
                 <span style="margin-left: 4px">{{state.serverTime.slice(0, 16)}}</span>
               </span>
@@ -71,7 +71,7 @@
             </div>
           </div>
           <div @click="method.change()"
-            style="cursor: pointer;user-select:none;padding-right: 10px;flex-grow: 1;display: flex;justify-content: flex-end">
+            style="user-select:none;padding-right: 10px;flex-grow: 1;display: flex;justify-content: flex-end">
             <div v-if="state.priceShort || (state.price!==null && state.arrowState!==null)">
               <span>BTC : </span>
               <template v-if="state.price!==null && state.arrowState!==null">
@@ -365,7 +365,7 @@
       let wsInit = () => {
         // wss://ws.okx.com:8443/ws/v5/public
         // wss://wsaws.okx.com:8443/ws/v5/public
-        ws = new WebSocket("wss://wsaws.okx.com:84439/ws/v5/public")
+        ws = new WebSocket("wss://wsaws.okx.com:8443/ws/v5/public")
         ws.onopen = () => {
           ws.send(JSON.stringify({
             "op": "subscribe",
