@@ -61,43 +61,37 @@
       <div v-if="state.show" style="min-width: 351px;display: flex;flex-direction: column;align-items: center;">
         <div style="width: 351px;margin-top: 20px;display: flex;justify-content: flex-start">
           <div style="padding-left: 10px;flex-grow: 0;">
-            <span style="margin-left: 4px">twitter : </span>
-            <el-link type="primary" target="_blank" href="https://twitter.com/onlyTradeBTC">
-              <span v-if="state.serverStatus === false" style="color: #f23645">@</span>
-              <span v-if="state.serverStatus === true" style="color: #089981">@</span>
-              <span v-if="state.serverStatus === null">@</span>
-              onlyTradeBTC
-            </el-link>
+            <div v-if="state.serverTime">
+              <span v-if="state.serverStatus === false" style="color: #f23645">
+                <span style="margin-left: 4px">{{state.serverTime.slice(0, 16)}}</span>
+              </span>
+              <span v-if="state.serverStatus === true" style="color: #089981">
+                <span style="margin-left: 4px">{{state.serverTime.slice(0, 16)}}</span>
+              </span>
+            </div>
           </div>
           <div @click="method.change()"
             style="cursor: pointer;user-select:none;padding-right: 10px;flex-grow: 1;display: flex;justify-content: flex-end">
-            <div v-if="state.showBtcOrServer===0">
-              <div v-if="state.price!==null && state.arrowState!==null">
-                <span>BTC : </span>
-                <template v-if="state.price">
-                  <span v-if="state.arrowState===1" style="color: #f23645">{{method.toFixed(state.price,
-                    1)}}</span>
-                  <span v-if="state.arrowState===0" style="color: #089981">{{method.toFixed(state.price,
-                    1)}}</span>
-                  <i v-if="state.arrowState===1" class="bi bi-arrow-down-right" style="color: #f23645"></i>
-                  <i v-if="state.arrowState===0" class="bi bi-arrow-up-right" style="color: #089981"></i>
-                </template>
-                <template v-else-if="state.priceShort">
-                  <span v-if="Number.parseFloat(state.priceShort) < state.data[state.data.length-1].price"
-                    style="color: #f23645">{{method.toFixed(state.priceShort,1)}}</span>
-                  <span v-if="Number.parseFloat(state.priceShort) >= state.data[state.data.length-1].price"
-                    style="color: #089981">{{method.toFixed(state.priceShort,1)}}</span>
-                  <i v-if="Number.parseFloat(state.priceShort) < state.data[state.data.length-1].price"
-                    class="bi bi-arrow-down-right" style="color: #f23645"></i>
-                  <i v-if="Number.parseFloat(state.priceShort) >= state.data[state.data.length-1].price"
-                    class="bi bi-arrow-up-right" style="color: #089981"></i>
-                </template>
-              </div>
-            </div>
-            <div v-if="state.showBtcOrServer===1">
-              <div v-if="state.serverTime">
-                <span style="margin-left: 4px">{{state.serverTime.slice(0, 16)}}</span>
-              </div>
+            <div v-if="state.priceShort || (state.price!==null && state.arrowState!==null)">
+              <span>BTC : </span>
+              <template v-if="state.price!==null && state.arrowState!==null">
+                <span v-if="state.arrowState===1" style="color: #f23645">{{method.toFixed(state.price,
+                  1)}}</span>
+                <span v-if="state.arrowState===0" style="color: #089981">{{method.toFixed(state.price,
+                  1)}}</span>
+                <i v-if="state.arrowState===1" class="bi bi-arrow-down-right" style="color: #f23645"></i>
+                <i v-if="state.arrowState===0" class="bi bi-arrow-up-right" style="color: #089981"></i>
+              </template>
+              <template v-else-if="state.priceShort">
+                <span v-if="Number.parseFloat(state.priceShort) < state.data[state.data.length-1].price"
+                  style="color: #f23645">{{method.toFixed(state.priceShort,1)}}</span>
+                <span v-if="Number.parseFloat(state.priceShort) >= state.data[state.data.length-1].price"
+                  style="color: #089981">{{method.toFixed(state.priceShort,1)}}</span>
+                <i v-if="Number.parseFloat(state.priceShort) < state.data[state.data.length-1].price"
+                  class="bi bi-arrow-down-right" style="color: #f23645"></i>
+                <i v-if="Number.parseFloat(state.priceShort) >= state.data[state.data.length-1].price"
+                  class="bi bi-arrow-up-right" style="color: #089981"></i>
+              </template>
             </div>
           </div>
         </div>
@@ -291,9 +285,6 @@
       serverTime: null,
       startTime: null,
 
-      // 0 btc 1 server
-      showBtcOrServer: 1,
-
       tableAllFlag: true,
 
       priceShort: '',
@@ -301,13 +292,6 @@
     const method = {
       dblclickKB() {
         state.tableAllFlag = !state.tableAllFlag
-      },
-      change() {
-        if (state.showBtcOrServer === 0) {
-          state.showBtcOrServer = 1
-        } else {
-          state.showBtcOrServer = 0
-        }
       },
       m1() {
         let m = state.month ? state.month : getNowStringTime().substring(0, 7)
