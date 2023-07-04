@@ -279,13 +279,10 @@
       price: null,
       // 用于检测ws是否断连
       priceTime: null,
-
       serverStatus: null,
       serverTime: null,
       startTime: null,
-
       tableAllFlag: true,
-
       priceShort: '',
     });
     const method = {
@@ -405,7 +402,6 @@
           wsInit()
         }
       }, 30 * 1000)
-
       let pArray = []
       pArray.push(fetch("./btcDataDanArray.json"), fetch("./count.txt"), fetch("./logErr.txt"), fetch("./time.json"))
       let rArray = await Promise.all(pArray)
@@ -416,7 +412,6 @@
       let count = rArray[1]
       let logErr = rArray[2]
       let time = rArray[3]
-
       let yearSet = new Set()
       if (data.length > 0) {
         data[0].s = 1
@@ -501,9 +496,6 @@
       state.data = data
       state.yearData = yearData
       state.lastNMonthData = lastNMonthData
-
-
-
       state.serverTime = time.time
       let b1 = Number.parseInt(count) === 4
       let b2 = ('' + logErr).trim() === ''
@@ -511,7 +503,6 @@
       state.serverStatus = b1 && b2 && b3
       state.startTime = time.startTime
       state.priceShort = time.price
-
       state.show = true
       // console.log(toRaw(state))
     }
