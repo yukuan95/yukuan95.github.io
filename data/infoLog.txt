@@ -1,0 +1,10 @@
+{"time":"2024-03-14 22:26:00.677 +08","from":"Main","msg":{"time":"2024-03-14 22:26:00.035 +08","price":72335.24123166,"priceAvg":72453.58150751813,"state":"SHORT","flag":true,"quantity":81}}
+{"time":"2024-03-16 22:55:21.321 +08","from":"Main","msg":{"time":"2024-03-16 22:55:21.018 +08","price":68051.73988423,"priceAvg":70442.03981943094,"state":"SHORT","flag":true,"quantity":110}}
+{"time":"2024-03-18 02:12:00.319 +08","from":"Main","msg":{"time":"2024-03-18 02:12:00.026 +08","price":68438.5,"priceAvg":68175.48588584816,"state":"HEDGE","flag":true,"quantity":15}}
+{"time":"2024-03-18 09:15:00.050 +08","from":"Main","msg":{"time":"2024-03-18 09:15:00.027 +08","price":67473.64237344,"priceAvg":67907.62315118233,"state":"HEDGE","flag":false}}
+{"time":"2024-03-18 11:56:00.041 +08","from":"Main","msg":{"time":"2024-03-18 11:56:00.022 +08","price":67949.29907362,"priceAvg":67814.96711937395,"state":"HEDGE","flag":false}}
+{"time":"2024-03-18 22:42:00.034 +08","from":"Main","msg":{"time":"2024-03-18 22:42:00.015 +08","price":66852.60547168,"priceAvg":67858.63725602736,"state":"HEDGE","flag":false}}
+{"time":"2024-03-19 08:11:00.049 +08","from":"Main","msg":{"time":"2024-03-19 08:11:00.026 +08","price":67836,"priceAvg":67693.98223659425,"state":"HEDGE","flag":false}}
+{"time":"2024-03-19 09:10:00.054 +08","from":"Main","msg":{"time":"2024-03-19 09:10:00.036 +08","price":66717.89995434,"priceAvg":67661.38934489034,"state":"HEDGE","flag":false}}
+{"time":"2024-03-21 04:21:00.354 +08","from":"Main","msg":{"time":"2024-03-21 04:21:00.026 +08","price":66480.1,"priceAvg":65380.9398479771,"state":"LONG","flag":true,"quantity":77}}
+{"time":"2024-03-22 19:33:00.317 +08","from":"Main","msg":{"time":"2024-03-22 19:33:00.018 +08","price":64909.80300126,"priceAvg":65104.99748065178,"state":"SHORT","flag":true,"quantity":91}}

@@ -1,0 +1,10 @@
+.idea
+.vscode
+**/.DS_Store
+vue-test/.idea
+vue-test/.vscode
+vue-test/dist
+vue-test/node_modules
+vue-test/auto-imports.d.ts
+vue-test/components.d.ts
+vue-test/pnpm-lock.yaml
