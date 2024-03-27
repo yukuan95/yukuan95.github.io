@@ -11,3 +11,4 @@
 {"time":"2024-03-24 01:40:00.301 +08","from":"Main","msg":{"time":"2024-03-24 01:40:00.028 +08","price":65881.1,"priceAvg":65452.283039977854,"state":"LONG","flag":true,"quantity":59}}
 {"time":"2024-03-24 03:44:00.333 +08","from":"Main","msg":{"time":"2024-03-24 03:44:00.022 +08","price":64929.21321838,"priceAvg":65471.44313817757,"state":"SHORT","flag":true,"quantity":75}}
 {"time":"2024-03-24 17:55:00.362 +08","from":"Main","msg":{"time":"2024-03-24 17:55:00.021 +08","price":65084.29536909,"priceAvg":64929.04431559361,"state":"LONG","flag":true,"quantity":53}}
+{"time":"2024-03-28 00:54:00.773 +08","from":"Main","msg":{"time":"2024-03-28 00:54:00.033 +08","price":69108.62684309,"priceAvg":69259.89947070068,"state":"HEDGE","flag":true,"quantity":14}}
