@@ -1,1 +1,6 @@
-
+time: 2025-02-06 18:18:01.068 +08, from: orderUWithPrice
+{"side":"BUY","leverage":6,"maxQuantity":0.07100000000000001}
+=====
+time: 2025-02-06 18:18:01.069 +08, from: OrderUCopy
+{"code":-1111,"msg":"Precision is over the maximum defined for this asset."}
+=====
