@@ -15,7 +15,7 @@ async function init() {
   const getPrice = async () => {
     for await (const i of genPrice()) {
       const price = useStore.getState().price
-      if (i.price !== price) {
+      if (i.price && i.price !== price) {
         useStore.setState((state) => {
           return { priceOld: state.price, price: Number(Decimal(i.price).toFixed(2)) }
         })
