@@ -179,36 +179,6 @@ export async function getFonts(): Promise<void> {
   })
 }
 
-function toNonExponential(num: number): string {
-  const m: any = num.toExponential().match(/\d(?:\.(\d*))?e([+-]\d+)/)
-  return num.toFixed(Math.max(0, (m[1] || '').length - m[2]))
-}
-
-export function toFixedString(f: number | string, n: number): string {
-  const floatNumber = Number.parseFloat(f + '')
-  if (isNaN(floatNumber)) {
-    throw new Error('toFixedString number is NaN')
-  }
-  if (n < 0) {
-    n = 0
-  }
-  const floatString = toNonExponential(floatNumber)
-  let s = ''
-  for (let i = 0; i < n; i++) {
-    s += '0'
-  }
-  if (floatString.includes('.')) {
-    s = floatString + s
-  } else {
-    s = floatString + '.' + s
-  }
-  s = s.slice(0, s.indexOf('.') + 1 + n)
-  if (s.slice(s.length - 1, s.length) === '.') {
-    s = s.slice(0, s.length - 1)
-  }
-  return s
-}
-
 export function getNowMilliTime(): number {
   return new Date().getTime()
 }

@@ -1,5 +1,6 @@
 import { DatePicker, Button, Popover } from 'antd'
 import { FC, useEffect } from 'react'
+import { Decimal } from 'decimal.js'
 import { useStore, useConst } from './Store.ts'
 import { createStyles, css, cx } from 'antd-style'
 import {
@@ -11,18 +12,17 @@ async function init() {
   const themeMedia = window.matchMedia("(prefers-color-scheme: light)")
   useStore.setState({ isLight: themeMedia.matches })
   themeMedia.onchange = (e) => useStore.setState({ isLight: e.matches })
-  // const getPrice = async () => {
-  //   for await (const i of genPrice()) {
-  //     console.log(i)
-  //     const price = useStore.getState().price
-  //     if (i.price !== price) {
-  //       useStore.setState((state) => {
-  //         return { priceOld: state.price, price: i.price }
-  //       })
-  //     }
-  //   }
-  // }
-  // getPrice()
+  const getPrice = async () => {
+    for await (const i of genPrice()) {
+      const price = useStore.getState().price
+      if (i.price !== price) {
+        useStore.setState((state) => {
+          return { priceOld: state.price, price: Number(Decimal(i.price).toFixed(2)) }
+        })
+      }
+    }
+  }
+  getPrice()
   const resData = await Promise.all([getData(), getFonts()])
   useStore.setState({ getData: resData[0], isLoading: false })
 }
