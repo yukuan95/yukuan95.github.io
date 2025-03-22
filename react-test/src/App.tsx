@@ -1,14 +1,14 @@
 import { DatePicker, Button, Popover } from 'antd'
 import { FC, useEffect } from 'react'
-import { Decimal } from 'decimal.js'
 import { useStore, useConst } from './Store.ts'
 import { createStyles, css, cx } from 'antd-style'
 import {
   Color, UpOrDown, Status, ArrowSvgName, getData,
-  StoreType, GetData, genPrice, getFonts,
+  StoreType, GetData, genPrice, getFonts, toFixedNumber
 } from './Lib.ts'
 
 async function init() {
+  console.log(Math.pow(2, -50))
   const themeMedia = window.matchMedia("(prefers-color-scheme: light)")
   useStore.setState({ isLight: themeMedia.matches })
   themeMedia.onchange = (e) => useStore.setState({ isLight: e.matches })
@@ -17,7 +17,7 @@ async function init() {
       const price = useStore.getState().price
       if (i.price && i.price !== price) {
         useStore.setState((state) => {
-          return { priceOld: state.price, price: Number(Decimal(i.price).toFixed(2)) }
+          return { priceOld: state.price, price: toFixedNumber(i.price, 2) }
         })
       }
     }

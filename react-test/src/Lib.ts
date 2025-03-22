@@ -179,6 +179,23 @@ export async function getFonts(): Promise<void> {
   })
 }
 
+export function toFixedString(f: number | string, n: number): string {
+  return toNumber(f).toFixed(n)
+}
+
+export function toFixedNumber(f: number | string, n: number): number {
+  return toNumber(toFixedString(f, n))
+}
+
+export function toNumber(f: number | string | undefined): number {
+  const res = Number.parseFloat('' + f)
+  if (isNaN(res)) {
+    throw new Error('toNumber isNaN')
+  } else {
+    return res
+  }
+}
+
 export function getNowMilliTime(): number {
   return new Date().getTime()
 }
