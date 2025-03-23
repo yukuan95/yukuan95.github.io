@@ -3,34 +3,31 @@ import { FC, useEffect } from 'react'
 import { useStore, useConst } from './Store.ts'
 import { createStyles, css, cx } from 'antd-style'
 import {
-  Color, UpOrDown, Status, ArrowSvgName, getData,
-  StoreType, GetData, genPrice, getFonts, toFixedNumber
+  Color, UpOrDown, ArrowSvgName, getData, genPrice,
+  toFixedNumber, removeMilli, toFixedString
 } from './Lib.ts'
 
 async function init() {
-  console.log(Math.pow(2, -50))
   const themeMedia = window.matchMedia("(prefers-color-scheme: light)")
   useStore.setState({ isLight: themeMedia.matches })
   themeMedia.onchange = (e) => useStore.setState({ isLight: e.matches })
   const getPrice = async () => {
     for await (const i of genPrice()) {
-      const price = useStore.getState().price
-      if (i.price && i.price !== price) {
-        useStore.setState((state) => {
-          return { priceOld: state.price, price: toFixedNumber(i.price, 2) }
-        })
-      }
+      useStore.setState({ price: toFixedNumber(i.price, 2), priceOld: useStore.getState().price })
     }
   }
   getPrice()
-  const resData = await Promise.all([getData(), getFonts()])
-  useStore.setState({ getData: resData[0], isLoading: false })
+  const resData = await getData()
+  const state = useStore.getState()
+  const price = toFixedNumber(state.price ?? resData.nowPrice, 2)
+  const priceOld = toFixedNumber(state.priceOld ?? resData.shortPrice, 2)
+  useStore.setState({ getData: resData, price, priceOld, isLoading: false })
 }
 
 const ArrowSvg: FC<{ name: string }> = ({ name }) => {
   if (name === ArrowSvgName.rightUpArrow) {
     return (
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+      <svg style={{ color: Color.green }} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
         viewBox="0 0 16 16">
         <path fillRule="evenodd"
           d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0v-6z" />
@@ -39,7 +36,7 @@ const ArrowSvg: FC<{ name: string }> = ({ name }) => {
   }
   if (name === ArrowSvgName.rightDownArrow) {
     return (
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+      <svg style={{ color: Color.red }} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
         viewBox="0 0 16 16">
         <path fillRule="evenodd"
           d="M14 13.5a.5.5 0 0 1-.5.5h-6a.5.5 0 0 1 0-1h4.793L2.146 2.854a.5.5 0 1 1 .708-.708L13 12.293V7.5a.5.5 0 0 1 1 0v6z" />
@@ -68,19 +65,11 @@ const ArrowSvg: FC<{ name: string }> = ({ name }) => {
 }
 
 const RightUpArrow: FC = () => {
-  return (
-    <span style={{ color: Color.green }}>
-      <ArrowSvg name={ArrowSvgName.rightUpArrow} />
-    </span>
-  )
+  return (<ArrowSvg name={ArrowSvgName.rightUpArrow} />)
 }
 
 const RightDownArrow: FC = () => {
-  return (
-    <span style={{ color: Color.red }}>
-      <ArrowSvg name={ArrowSvgName.rightDownArrow} />
-    </span>
-  )
+  return (<ArrowSvg name={ArrowSvgName.rightDownArrow} />)
 }
 
 const ArrowButtonStyle = createStyles({
@@ -109,27 +98,52 @@ const LeftArrowButton: FC = () => {
   )
 }
 
-const AppStyle = createStyles((_, props: { isLight: boolean }) => {
-  return {
-    app: css`
-      height: 100%;
-      background-color: ${props.isLight ? Color.white : Color.black};
-    `,
-    fsbc: css`
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    `
-  }
-})
-
-const TimeAndPriceStyle = createStyles(() => {
+const TimeAndPriceStyle = createStyles((_, props: {
+  isError: boolean; upOrDown: UpOrDown
+}) => {
+  const priceColor = props.upOrDown === UpOrDown.up ? Color.green :
+    props.upOrDown === UpOrDown.down ? Color.red : 'inherit'
   return {
     c: css`
       width: ${useConst.width};
       padding-left: ${useConst.paddingLeft};
       padding-right: ${useConst.paddingRight};
-    `
+    `,
+    timeColor: css`
+      color: ${props.isError ? Color.red : Color.green};
+    `,
+    priceColor: css`
+      color: ${priceColor};
+  `,
+  }
+})
+
+const AppStyle = createStyles(({ token }, props: { isLight: boolean }) => {
+  return {
+    app: css`
+      height: 100%;
+      background-color: ${props.isLight ? Color.white : Color.black};
+      font-family: ${token.fontFamily};
+      color: ${props.isLight ? Color.black : Color.white};
+    `,
+    fsbc: css`
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    `,
+    fcc: css`
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    `,
+    fco: css`
+      display: flex;
+      flex-direction: column;
+    `,
+    fro: css`
+      display: flex;
+      flex-direction: row;
+    `,
   }
 })
 
@@ -137,27 +151,35 @@ const TimeAndPrice: FC = () => {
   const isLight = useStore((state) => state.isLight)
   const upOrDown = useStore((state) => state.upOrDown())
   const getData = useStore((state) => state.getData)
-  const { styles: appStyle } = AppStyle({ isLight: isLight })
-  const { styles: tapStyle } = TimeAndPriceStyle()
+  const price = useStore((state) => state.price)
+  const isError = (getData?.resErrorLogArray?.length ?? 0) > 0
+  const { styles: appStyle } = AppStyle({ isLight })
+  const { styles: tapStyle } = TimeAndPriceStyle({ isError, upOrDown })
   return (
-    <div className={cx(appStyle.fsbc, tapStyle.c)}>
-      <Popover content={getData?.startTime} >
-        <div>{getData?.analyseTime}</div>
+    <div style={{ userSelect: 'none' }} className={cx(appStyle.fsbc, tapStyle.c)}>
+      <Popover content={removeMilli(getData?.startTime)} >
+        <div className={tapStyle.timeColor}>{removeMilli(getData?.analyseTime)}</div>
       </Popover>
-      <div>{upOrDown}</div>
-      <div>{((getData?.resErrorLogArray?.length ?? 0) > 0) + ''}</div>
+      <div className={cx(appStyle.fcc, appStyle.fro)}>
+        <span style={{ whiteSpace: 'pre' }}>BTC : </span>
+        <span className={tapStyle.priceColor}>{price ? toFixedString(price, 1) : ''}</span>
+        {upOrDown === UpOrDown.up ? <RightUpArrow /> : ''}
+        {upOrDown === UpOrDown.down ? <RightDownArrow /> : ''}
+      </div>
     </div>
   )
 }
 
-function App() {
+const App: FC = () => {
   useEffect(() => { init() }, [])
   const { styles } = AppStyle({ isLight: useStore((state) => state.isLight) })
   return (
     <div className={styles.app}>
       <TimeAndPrice />
       <div>
-        <Button onClick={() => useStore.setState((state) => ({ isLight: !state.isLight }))}>
+        <Button onClick={() => {
+          useStore.setState((state) => { state.isLight = !state.isLight })
+        }}>
           change
         </Button>
       </div>

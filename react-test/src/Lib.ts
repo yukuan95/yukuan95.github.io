@@ -50,7 +50,7 @@ export type StoreType = {
   startTime: null | string,
   price: null | number,
   priceOld: null | number,
-  upOrDown: Function,
+  upOrDown: () => UpOrDown,
   getData: null | GetData,
 }
 
@@ -168,17 +168,6 @@ export async function getData() {
   return res
 }
 
-export async function getFonts(): Promise<void> {
-  const font = new FontFace("TAHOMA", "url(https://yukuan95.github.io/TAHOMA.ttf)")
-  document.fonts.add(font)
-  font.load()
-  return new Promise<void>((res) => {
-    document.fonts.ready.then(() => {
-      res()
-    })
-  })
-}
-
 export function toFixedString(f: number | string, n: number): string {
   return toNumber(f).toFixed(n)
 }
@@ -250,4 +239,12 @@ export function monthPlus(yearMonth: string, n: number): string {
 
 export function toLowerCase(s: string) {
   return `${s.toUpperCase().slice(0, 1)}${s.toLowerCase().slice(1, s.length)}`
+}
+
+export function removeMilli(time?: string): string {
+  if (!time) {
+    return ''
+  } else {
+    return `${time.slice(0, 16)} ${time.slice(-4)}`
+  }
 }
