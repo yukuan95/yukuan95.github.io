@@ -6,30 +6,33 @@ const useConst = {
   width: '355px',
   paddingLeft: '5px',
   paddingRight: '5px',
-  upOrDownOld: UpOrDown.none
 }
 
-const useStore = create<StoreType>()(immer((_, get) => ({
-  isLoading: true,
-  isLight: true,
-  analyseTime: null,
-  startTime: null,
-  price: null,
-  priceOld: null,
-  upOrDown(): UpOrDown {
-    const price = get().price
-    const priceOld = get().priceOld
-    if (price && priceOld && price > priceOld) {
-      useConst.upOrDownOld = UpOrDown.up
-      return UpOrDown.up
-    }
-    if (price && priceOld && price < priceOld) {
-      useConst.upOrDownOld = UpOrDown.down
-      return UpOrDown.down
-    }
-    return useConst.upOrDownOld
-  },
-  getData: null,
-})));
+const useStore = create<StoreType>()(immer((setState) => {
+  const state: StoreType = {
+    isLoading: true,
+    isLight: true,
+    analyseTime: null,
+    startTime: null,
+    price: null,
+    priceOld: null,
+    upOrDown: UpOrDown.none,
+    updateUpOrDown(): void {
+      setState((state) => {
+        const { price, priceOld } = state
+        if (price && priceOld && price > priceOld) {
+          state.upOrDown = UpOrDown.up
+          return
+        }
+        if (price && priceOld && price < priceOld) {
+          state.upOrDown = UpOrDown.down
+          return
+        }
+      })
+    },
+    getData: null,
+  }
+  return state
+}));
 
 export { useStore, useConst }

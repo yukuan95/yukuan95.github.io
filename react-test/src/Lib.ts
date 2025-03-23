@@ -50,7 +50,8 @@ export type StoreType = {
   startTime: null | string,
   price: null | number,
   priceOld: null | number,
-  upOrDown: () => UpOrDown,
+  upOrDown: UpOrDown,
+  updateUpOrDown: () => void,
   getData: null | GetData,
 }
 

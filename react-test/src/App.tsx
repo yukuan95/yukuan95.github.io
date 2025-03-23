@@ -1,27 +1,32 @@
 import { DatePicker, Button, Popover } from 'antd'
 import { FC, useEffect } from 'react'
 import { useStore, useConst } from './Store.ts'
+import { useShallow } from 'zustand/react/shallow'
 import { createStyles, css, cx } from 'antd-style'
 import {
   Color, UpOrDown, ArrowSvgName, getData, genPrice,
   toFixedNumber, removeMilli, toFixedString
 } from './Lib.ts'
 
-async function init() {
+const { setState } = useStore
+
+async function init(): Promise<void> {
   const themeMedia = window.matchMedia("(prefers-color-scheme: light)")
-  useStore.setState({ isLight: themeMedia.matches })
-  themeMedia.onchange = (e) => useStore.setState({ isLight: e.matches })
+  setState({ isLight: themeMedia.matches })
+  themeMedia.onchange = (e) => setState({ isLight: e.matches })
   const getPrice = async () => {
     for await (const i of genPrice()) {
-      useStore.setState({ price: toFixedNumber(i.price, 2), priceOld: useStore.getState().price })
+      setState((state) => ({ price: toFixedNumber(i.price, 2), priceOld: state.price }))
     }
   }
   getPrice()
   const resData = await getData()
-  const state = useStore.getState()
-  const price = toFixedNumber(state.price ?? resData.nowPrice, 2)
-  const priceOld = toFixedNumber(state.priceOld ?? resData.shortPrice, 2)
-  useStore.setState({ getData: resData, price, priceOld, isLoading: false })
+  setState((state) => ({
+    getData: resData,
+    price: toFixedNumber(state.price ?? resData.nowPrice, 2),
+    priceOld: toFixedNumber(state.priceOld ?? resData.shortPrice, 2),
+    isLoading: false
+  }))
 }
 
 const ArrowSvg: FC<{ name: string }> = ({ name }) => {
@@ -148,13 +153,13 @@ const AppStyle = createStyles(({ token }, props: { isLight: boolean }) => {
 })
 
 const TimeAndPrice: FC = () => {
-  const isLight = useStore((state) => state.isLight)
-  const upOrDown = useStore((state) => state.upOrDown())
-  const getData = useStore((state) => state.getData)
-  const price = useStore((state) => state.price)
+  const { isLight, upOrDown, getData, price } = useStore(useShallow((state) => ({
+    isLight: state.isLight, upOrDown: state.upOrDown,
+    getData: state.getData, price: state.price,
+  })))
   const isError = (getData?.resErrorLogArray?.length ?? 0) > 0
   const { styles: appStyle } = AppStyle({ isLight })
-  const { styles: tapStyle } = TimeAndPriceStyle({ isError, upOrDown })
+  const { styles: tapStyle } = TimeAndPriceStyle({ isError, upOrDown: upOrDown })
   return (
     <div style={{ userSelect: 'none' }} className={cx(appStyle.fsbc, tapStyle.c)}>
       <Popover content={removeMilli(getData?.startTime)} >
@@ -172,13 +177,18 @@ const TimeAndPrice: FC = () => {
 
 const App: FC = () => {
   useEffect(() => { init() }, [])
-  const { styles } = AppStyle({ isLight: useStore((state) => state.isLight) })
+  const { isLight, price, priceOld, updateUpOrDown } = useStore(useShallow((state) => ({
+    isLight: state.isLight, price: state.price,
+    priceOld: state.priceOld, updateUpOrDown: state.updateUpOrDown,
+  })))
+  useEffect(updateUpOrDown, [price, priceOld])
+  const { styles: appStyle } = AppStyle({ isLight })
   return (
-    <div className={styles.app}>
+    <div className={appStyle.app}>
       <TimeAndPrice />
       <div>
         <Button onClick={() => {
-          useStore.setState((state) => { state.isLight = !state.isLight })
+          setState((state) => { state.isLight = !state.isLight })
         }}>
           change
         </Button>
