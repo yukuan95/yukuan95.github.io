@@ -1,6 +1,0 @@
-time: 2025-03-24 19:40:54.071 +08, from: orderUWithSide
-maxQuantity(-0.003) < minQty
-=====
-time: 2025-03-24 19:42:43.756 +08, from: orderUWithSide
-maxQuantity(-0.002) < minQty
-=====
