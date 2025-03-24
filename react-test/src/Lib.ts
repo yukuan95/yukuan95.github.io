@@ -1,8 +1,9 @@
 export enum Color {
-  'white' = '#FFFFFFD9',
-  'black' = '#1F1F1F',
-  'red' = '#F23645',
-  'green' = '#089981',
+  'white' = '#FFFFFFFF',
+  'black' = '#292929FF',
+  'black2' = '#141414FF',
+  'red' = '#F23645FF',
+  'green' = '#089981FF',
 }
 
 export enum UpOrDown {
@@ -51,7 +52,9 @@ export type StoreType = {
   price: null | number,
   priceOld: null | number,
   upOrDown: UpOrDown,
+  yearMonth: string,
   updateUpOrDown: () => void,
+  updateShowData: () => void,
   getData: null | GetData,
 }
 

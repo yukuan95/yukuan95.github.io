@@ -1,11 +1,12 @@
-import { DatePicker, Button, Popover } from 'antd'
+import { DatePicker, Button, Tooltip } from 'antd'
 import { FC, useEffect } from 'react'
 import { useStore, useConst } from './Store.ts'
 import { useShallow } from 'zustand/react/shallow'
 import { createStyles, css, cx } from 'antd-style'
+import dayjs from 'dayjs'
 import {
-  Color, UpOrDown, ArrowSvgName, getData, genPrice,
-  toFixedNumber, removeMilli, toFixedString
+  Color, UpOrDown, ArrowSvgName, getData, genPrice, monthPlus,
+  toFixedNumber, removeMilli, toFixedString, milliTimeToStringTime
 } from './Lib.ts'
 
 const { setState } = useStore
@@ -19,8 +20,9 @@ async function init(): Promise<void> {
       setState((state) => ({ price: toFixedNumber(i.price, 2), priceOld: state.price }))
     }
   }
-  getPrice()
+  // getPrice()
   const resData = await getData()
+  console.log(resData)
   setState((state) => ({
     getData: resData,
     price: toFixedNumber(state.price ?? resData.nowPrice, 2),
@@ -80,7 +82,7 @@ const RightDownArrow: FC = () => {
 const ArrowButtonStyle = createStyles({
   ArrowButton: css`
     width: 40px;
-    height: 35px;
+    height: 32px;
     padding: 0;
   `
 })
@@ -109,11 +111,6 @@ const TimeAndPriceStyle = createStyles((_, props: {
   const priceColor = props.upOrDown === UpOrDown.up ? Color.green :
     props.upOrDown === UpOrDown.down ? Color.red : 'inherit'
   return {
-    c: css`
-      width: ${useConst.width};
-      padding-left: ${useConst.paddingLeft};
-      padding-right: ${useConst.paddingRight};
-    `,
     timeColor: css`
       color: ${props.isError ? Color.red : Color.green};
     `,
@@ -123,14 +120,8 @@ const TimeAndPriceStyle = createStyles((_, props: {
   }
 })
 
-const AppStyle = createStyles(({ token }, props: { isLight: boolean }) => {
+const FlexStyle = createStyles(() => {
   return {
-    app: css`
-      height: 100%;
-      background-color: ${props.isLight ? Color.white : Color.black};
-      font-family: ${token.fontFamily};
-      color: ${props.isLight ? Color.black : Color.white};
-    `,
     fsbc: css`
       display: flex;
       justify-content: space-between;
@@ -149,43 +140,130 @@ const AppStyle = createStyles(({ token }, props: { isLight: boolean }) => {
       display: flex;
       flex-direction: row;
     `,
+    c: css`
+      width: ${useConst.width};
+      padding-left: ${useConst.paddingLeft};
+      padding-right: ${useConst.paddingRight};
+    `,
+  }
+})
+
+const AppStyle = createStyles(({ token }, props: { isLight: boolean }) => {
+  return {
+    app: css`
+      height: 100%;
+      background-color: ${props.isLight ? Color.white : Color.black};
+      font-family: ${token.fontFamily};
+      color: ${props.isLight ? Color.black : Color.white};
+    `,
   }
 })
 
 const TimeAndPrice: FC = () => {
-  const { isLight, upOrDown, getData, price } = useStore(useShallow((state) => ({
-    isLight: state.isLight, upOrDown: state.upOrDown,
-    getData: state.getData, price: state.price,
+  const { upOrDown, getData, price } = useStore(useShallow((state) => ({
+    upOrDown: state.upOrDown, getData: state.getData, price: state.price,
   })))
   const isError = (getData?.resErrorLogArray?.length ?? 0) > 0
-  const { styles: appStyle } = AppStyle({ isLight })
+  const { styles: flexStyle } = FlexStyle()
   const { styles: tapStyle } = TimeAndPriceStyle({ isError, upOrDown: upOrDown })
   return (
-    <div style={{ userSelect: 'none' }} className={cx(appStyle.fsbc, tapStyle.c)}>
-      <Popover content={removeMilli(getData?.startTime)} >
+    <div style={{ userSelect: 'none' }} className={cx(flexStyle.fsbc, flexStyle.c)}>
+      <Tooltip title={removeMilli(getData?.startTime)} >
         <div className={tapStyle.timeColor}>{removeMilli(getData?.analyseTime)}</div>
-      </Popover>
-      <div className={cx(appStyle.fcc, appStyle.fro)}>
-        <span style={{ whiteSpace: 'pre' }}>BTC : </span>
-        <span className={tapStyle.priceColor}>{price ? toFixedString(price, 1) : ''}</span>
-        {upOrDown === UpOrDown.up ? <RightUpArrow /> : ''}
-        {upOrDown === UpOrDown.down ? <RightDownArrow /> : ''}
-      </div>
+      </Tooltip>
+      <Tooltip title={<>
+        <div className={flexStyle.fsbc}>
+          <div style={{ whiteSpace: 'pre' }}>shortPrice : </div>
+          <div>{getData?.shortPrice ? toFixedString(getData?.shortPrice, 2) : ''}</div>
+        </div>
+        <div className={flexStyle.fsbc}>
+          <div style={{ whiteSpace: 'pre' }}>longPrice : </div>
+          <div>{getData?.longPrice ? toFixedString(getData?.longPrice, 2) : ''}</div>
+        </div>
+      </>}>
+        <div className={cx(flexStyle.fcc, flexStyle.fro)}>
+          <span style={{ whiteSpace: 'pre' }}>BTC : </span>
+          <span className={tapStyle.priceColor}>{price ? toFixedString(price, 1) : ''}</span>
+          {upOrDown === UpOrDown.up ? <RightUpArrow /> : ''}
+          {upOrDown === UpOrDown.down ? <RightDownArrow /> : ''}
+        </div>
+      </Tooltip>
     </div>
   )
 }
 
-const App: FC = () => {
-  useEffect(() => { init() }, [])
-  const { isLight, price, priceOld, updateUpOrDown } = useStore(useShallow((state) => ({
-    isLight: state.isLight, price: state.price,
-    priceOld: state.priceOld, updateUpOrDown: state.updateUpOrDown,
+const MonthPicker: FC = () => {
+  const { styles: flexStyle } = FlexStyle()
+  const { yearMonth } = useStore(useShallow((state) => ({
+    yearMonth: state.yearMonth
   })))
-  useEffect(updateUpOrDown, [price, priceOld])
+  const getYearMonth = (data?: Date) => {
+    return milliTimeToStringTime(data?.getTime() ?? new Date().getTime()).slice(0, 7)
+  }
+  const onChange = (e: any) => {
+    setState((state) => {
+      const date = e?.$d ?? null
+      if (date) {
+        state.yearMonth = getYearMonth(date)
+      } else {
+        state.yearMonth = ''
+      }
+    })
+  }
+  useEffect(() => {
+    setState((state) => {
+      if (!state.yearMonth) {
+        state.yearMonth = getYearMonth()
+      }
+    })
+  }, [yearMonth])
+  const onClickLeft = () => {
+    setState((state) => {
+      state.yearMonth = monthPlus(yearMonth || getYearMonth(), -1)
+    })
+  }
+  const onClickRight = () => {
+    setState((state) => {
+      state.yearMonth = monthPlus(yearMonth || getYearMonth(), 1)
+    })
+  }
+  return (<div className={cx(flexStyle.fro, flexStyle.c, flexStyle.fsbc)}>
+    <div>
+      <DatePicker
+        style={{ width: '220px' }}
+        value={yearMonth ? dayjs(yearMonth) : ''}
+        onChange={onChange} picker="month" />
+    </div>
+    <div className={cx(flexStyle.fro)}>
+      <div onClick={onClickLeft}>
+        <LeftArrowButton />
+      </div>
+      <div style={{ width: '15px' }}></div>
+      <div onClick={onClickRight}>
+        <RightArrowButton />
+      </div>
+    </div>
+  </div>)
+}
+
+const App: FC = () => {
+  const {
+    isLight, price, priceOld, yearMonth, updateUpOrDown, updateShowData
+  } = useStore(useShallow((state) => {
+    const { isLight, price, priceOld, yearMonth, updateUpOrDown, updateShowData } = state
+    return { isLight, price, priceOld, yearMonth, updateUpOrDown, updateShowData }
+  }))
+  useEffect(() => { init() }, [])
+  useEffect(() => { updateUpOrDown() }, [price, priceOld])
+  useEffect(() => { if (yearMonth) { updateShowData() } }, [yearMonth])
   const { styles: appStyle } = AppStyle({ isLight })
   return (
     <div className={appStyle.app}>
+      <div style={{ height: '20px' }}></div>
       <TimeAndPrice />
+      <div style={{ height: '20px' }}></div>
+      <MonthPicker />
+      <div style={{ height: '20px' }}></div>
       <div>
         <Button onClick={() => {
           setState((state) => { state.isLight = !state.isLight })
@@ -193,25 +271,8 @@ const App: FC = () => {
           change
         </Button>
       </div>
-      <div>
-        <DatePicker picker="month" />
-      </div>
-      <div>
-        <RightUpArrow />
-      </div>
-      <div>
-        <RightDownArrow />
-      </div>
-      <div>
-        <RightArrowButton />
-      </div>
-      <div>
-        <LeftArrowButton />
-      </div>
     </div>
   )
 }
 
 export default App
-
-

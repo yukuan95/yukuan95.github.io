@@ -8,12 +8,21 @@ import dayjs from 'dayjs'
 import { FC } from 'react'
 import 'dayjs/locale/zh-cn'
 import { useStore } from './Store.ts'
+import { Color } from './Lib.ts'
 dayjs.locale('zh-cn')
 
 const AppTop: FC = () => {
   return (
     <ConfigProvider
-      theme={{ algorithm: useStore((state) => state.isLight) ? theme.defaultAlgorithm : theme.darkAlgorithm }}
+      theme={{
+        algorithm: useStore((state) => state.isLight) ? theme.defaultAlgorithm : theme.darkAlgorithm,
+        components: {
+          Tooltip: {
+            colorBgSpotlight: useStore((state) => state.isLight) ? Color.white : Color.black2,
+            colorTextLightSolid: useStore((state) => state.isLight) ? Color.black2 : Color.white,
+          }
+        },
+      }}
       locale={locale}>
       <App />
     </ConfigProvider>

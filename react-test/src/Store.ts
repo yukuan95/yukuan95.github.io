@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { UpOrDown, StoreType } from './Lib.ts'
+import { UpOrDown, StoreType, getNowStringTime } from './Lib.ts'
 import { immer } from "zustand/middleware/immer";
 
 const useConst = {
@@ -8,7 +8,7 @@ const useConst = {
   paddingRight: '5px',
 }
 
-const useStore = create<StoreType>()(immer((setState) => {
+const useStore = create<StoreType>()(immer((setState, get) => {
   const state: StoreType = {
     isLoading: true,
     isLight: true,
@@ -17,6 +17,7 @@ const useStore = create<StoreType>()(immer((setState) => {
     price: null,
     priceOld: null,
     upOrDown: UpOrDown.none,
+    yearMonth: getNowStringTime().slice(0, 7),
     updateUpOrDown(): void {
       setState((state) => {
         const { price, priceOld } = state
@@ -29,6 +30,9 @@ const useStore = create<StoreType>()(immer((setState) => {
           return
         }
       })
+    },
+    updateShowData(): void {
+      const { yearMonth } = get()
     },
     getData: null,
   }
