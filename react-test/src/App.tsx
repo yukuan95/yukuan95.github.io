@@ -1,4 +1,4 @@
-import { DatePicker, Button, Tooltip } from 'antd'
+import { DatePicker, Button, Tooltip, Table } from 'antd'
 import { FC, useEffect } from 'react'
 import { useStore, useConst } from './Store.ts'
 import { useShallow } from 'zustand/react/shallow'
@@ -6,9 +6,11 @@ import { createStyles, css, cx } from 'antd-style'
 import dayjs from 'dayjs'
 import {
   Color, UpOrDown, ArrowSvgName, getData, genPrice, monthPlus,
-  toFixedNumber, removeMilli, toFixedString, milliTimeToStringTime
+  toFixedNumber, removeMilli, toFixedString, milliTimeToStringTime,
+  DataType1, DataType2, DataType3, DataType4,
 } from './Lib.ts'
 
+const { Column } = Table
 const { setState } = useStore
 
 async function init(): Promise<void> {
@@ -22,7 +24,6 @@ async function init(): Promise<void> {
   }
   // getPrice()
   const resData = await getData()
-  console.log(resData)
   setState((state) => ({
     getData: resData,
     price: toFixedNumber(state.price ?? resData.nowPrice, 2),
@@ -145,6 +146,9 @@ const FlexStyle = createStyles(() => {
       padding-left: ${useConst.paddingLeft};
       padding-right: ${useConst.paddingRight};
     `,
+    column: css`
+      height: 30px;
+    `
   }
 })
 
@@ -246,15 +250,76 @@ const MonthPicker: FC = () => {
   </div>)
 }
 
+const Table1: FC = () => {
+  const { tableData1 } = useStore(useShallow((state) => ({ tableData1: state.tableData1 })))
+  const { styles: flexStyle } = FlexStyle()
+  return (
+    <div className={flexStyle.c}>
+      <Table<DataType1> dataSource={tableData1} size="small" pagination={false} bordered>
+        <Column className={flexStyle.column} align="center" title="month" dataIndex="month" />
+        <Column className={flexStyle.column} align="center" title="leverage" dataIndex="leverage" />
+        <Column className={flexStyle.column} align="center" title="rate" dataIndex="rate" render={(_, item) => (<>
+          <Tooltip placement="left" title={<>
+            <div style={{ whiteSpace: 'pre' }}>rate2 : {item.rate2}</div>
+            <div style={{ whiteSpace: 'pre' }}>rateAvg : {item.rateAvg}</div>
+          </>}>
+            {item.rate}
+          </Tooltip>
+        </>)} />
+      </Table>
+    </div>
+  )
+}
+
+const Table2: FC = () => {
+  const { styles: flexStyle } = FlexStyle()
+  const { tableData2, getData } = useStore(useShallow((state) => ({
+    tableData2: state.tableData2, getData: state.getData
+  })))
+  return (
+    <div className={flexStyle.c}>
+      <Table<DataType2> dataSource={tableData2} size="small" pagination={false} bordered>
+        <Column className={flexStyle.column} align="left" title={`time(${getData?.analyseTime?.slice(24, 27) ?? ''})`} dataIndex="time" />
+        <Column className={flexStyle.column} align="center" title="price" dataIndex="price" render={(_, item) => (<>
+          <Tooltip placement="left" title={<>
+            {item.avg ? <div style={{ whiteSpace: 'pre' }}>avg : {item.avg}</div> : ''}
+            {item.avgChg ? <div style={{ whiteSpace: 'pre' }}>avgChg : {item.avgChg}</div> : ''}
+            {item.status2 ? <div style={{ whiteSpace: 'pre' }}>status2 : {item.status2}</div> : ''}
+            {item.rate2 ? <div style={{ whiteSpace: 'pre' }}>rate2 : {item.rate2}</div> : ''}
+          </>}>
+            {item.rate}
+          </Tooltip>
+        </>)} />
+        <Column className={flexStyle.column} align="center" title="status" dataIndex="status" />
+        <Column className={flexStyle.column} align="center" title="rate" dataIndex="rate" />
+      </Table>
+    </div>
+  )
+}
+
+const Table3: FC = () => {
+  const { tableData3 } = useStore(useShallow((state) => ({ tableData3: state.tableData3 })))
+  return (<></>)
+}
+const Table4: FC = () => {
+  const { tableData4 } = useStore(useShallow((state) => ({ tableData4: state.tableData4 })))
+  return (<></>)
+}
+
 const App: FC = () => {
   const {
-    isLight, price, priceOld, yearMonth, updateUpOrDown, updateShowData
+    isLight, price, priceOld, yearMonth, updateUpOrDown, updateShowData, isLoading,
   } = useStore(useShallow((state) => {
-    const { isLight, price, priceOld, yearMonth, updateUpOrDown, updateShowData } = state
-    return { isLight, price, priceOld, yearMonth, updateUpOrDown, updateShowData }
+    const {
+      isLight, price, priceOld, yearMonth, updateUpOrDown, updateShowData, isLoading
+    } = state
+    return {
+      isLight, price, priceOld, yearMonth, updateUpOrDown, updateShowData, isLoading
+    }
   }))
   useEffect(() => { init() }, [])
   useEffect(() => { updateUpOrDown() }, [price, priceOld])
+  useEffect(() => { if (!isLoading) { updateShowData() } }, [isLoading])
   useEffect(() => { if (yearMonth) { updateShowData() } }, [yearMonth])
   const { styles: appStyle } = AppStyle({ isLight })
   return (
@@ -263,6 +328,14 @@ const App: FC = () => {
       <TimeAndPrice />
       <div style={{ height: '20px' }}></div>
       <MonthPicker />
+      <div style={{ height: '20px' }}></div>
+      <div><Table1 /></div>
+      <div style={{ height: '20px' }}></div>
+      <div><Table2 /></div>
+      <div style={{ height: '20px' }}></div>
+      <div><Table3 /></div>
+      <div style={{ height: '20px' }}></div>
+      <div><Table4 /></div>
       <div style={{ height: '20px' }}></div>
       <div>
         <Button onClick={() => {

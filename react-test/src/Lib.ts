@@ -44,6 +44,39 @@ export type GetData = {
   longPrice: number,
 }
 
+export type DataType1 = {
+  month: string;
+  leverage: string;
+  rate: string;
+  rate2: string;
+  rateAvg: string;
+}
+
+export type DataType2 = {
+  time: string;
+  price: string;
+  status: string;
+  rate: string;
+  avg: string;
+  avgChg: string;
+  status2: string;
+  rate2: string;
+}
+
+export type DataType3 = {
+  lastNMonth: string;
+  rate: string;
+  avgMonth: string;
+  rate2: string;
+}
+
+export type DataType4 = {
+  year: string;
+  rate: string;
+  avgMonth: string;
+  rate2: string;
+}
+
 export type StoreType = {
   isLoading: boolean,
   isLight: boolean,
@@ -56,6 +89,10 @@ export type StoreType = {
   updateUpOrDown: () => void,
   updateShowData: () => void,
   getData: null | GetData,
+  tableData1: Array<DataType1>,
+  tableData2: Array<DataType2>,
+  tableData3: Array<DataType3>,
+  tableData4: Array<DataType4>,
 }
 
 export class Stream<T> {

@@ -20,6 +20,11 @@ const AppTop: FC = () => {
           Tooltip: {
             colorBgSpotlight: useStore((state) => state.isLight) ? Color.white : Color.black2,
             colorTextLightSolid: useStore((state) => state.isLight) ? Color.black2 : Color.white,
+          },
+          Table: {
+            cellPaddingBlockSM: 0,
+            cellPaddingInlineSM: 0,
+            headerBorderRadius: 0,
           }
         },
       }}
