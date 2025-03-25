@@ -11,12 +11,10 @@ export default defineConfig({
         manualChunks(id: string) {
           if (id.slice(-2) === 'js') {
             if (id.includes('node_modules')) {
-              if (id.includes('pnpm/antd@5.2')) {
+              if (id.includes('pnpm/antd')) {
                 return 'a'
               } else if (id.includes('pnpm/react')) {
                 return 'b'
-              } else {
-                return 'c'
               }
             }
           }
