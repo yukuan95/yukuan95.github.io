@@ -43,7 +43,7 @@
         "priceAvg": 4052.427282407417,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.021164749984851516,
+        "priceAvgChg": 0,
         "s": 1.910138738871312
       },
       {
@@ -52,7 +52,7 @@
         "priceAvg": 4016.2383796295962,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": -0.008930179434662677,
+        "priceAvgChg": -0.029905924404459605,
         "s": 1
       },
       {
@@ -589,7 +589,7 @@
         "priceAvg": 6296.370293981309,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.08903949228543961,
+        "priceAvgChg": 0,
         "s": 1.9744577656675752
       },
       {
@@ -598,7 +598,7 @@
         "priceAvg": 7297.321062499785,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0.15897266548558653,
+        "priceAvgChg": 0.2621670031931258,
         "s": 1
       },
       {
@@ -1441,7 +1441,7 @@
         "priceAvg": 10567.292157406553,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.07478629320927532,
+        "priceAvgChg": 0,
         "s": 1.9752365907446696
       },
       {
@@ -1450,7 +1450,7 @@
         "priceAvg": 9213.83452546208,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": -0.12807989140300646,
+        "priceAvgChg": -0.19328756429960448,
         "s": 1
       },
       {
@@ -2039,7 +2039,7 @@
         "priceAvg": 7000.296099536058,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.025514356159134888,
+        "priceAvgChg": 0,
         "s": 1.9798714953271028
       },
       {
@@ -2048,7 +2048,7 @@
         "priceAvg": 8098.294298610124,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0.15685025082679505,
+        "priceAvgChg": 0.18636654014917453,
         "s": 1
       },
       {
@@ -2565,7 +2565,7 @@
         "priceAvg": 6768.864567128684,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.11484583332152698,
+        "priceAvgChg": 0,
         "s": 1.976519804464406
       },
       {
@@ -2574,7 +2574,7 @@
         "priceAvg": 6565.056009258298,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": -0.03010971128897033,
+        "priceAvgChg": -0.1414975697264449,
         "s": 1
       },
       {
@@ -3862,7 +3862,7 @@
         "priceAvg": 6228.778222221344,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.03402086962102191,
+        "priceAvgChg": 0,
         "s": 1.8883748301031962
       },
       {
@@ -3871,7 +3871,7 @@
         "priceAvg": 5646.034189813902,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": -0.09355671555755274,
+        "priceAvgChg": -0.1243947043564202,
         "s": 1
       },
       {
@@ -5474,7 +5474,7 @@
         "priceAvg": 4117.638268517605,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.03895416548069375,
+        "priceAvgChg": 0,
         "s": 2.0451256910169056
       },
       {
@@ -5483,7 +5483,7 @@
         "priceAvg": 4976.332067128715,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0.20854036770943685,
+        "priceAvgChg": 0.2556180491832887,
         "s": 1
       },
       {
@@ -6481,7 +6481,7 @@
         "priceAvg": 10682.44520138808,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.123117947592839,
+        "priceAvgChg": 0,
         "s": 1.994693844813432
       },
       {
@@ -6490,7 +6490,7 @@
         "priceAvg": 11401.029807869543,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0.06726780179392722,
+        "priceAvgChg": 0.19866762308271646,
         "s": 1
       },
       {
@@ -6915,7 +6915,7 @@
         "priceAvg": 9853.768638888043,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.025385115001083536,
+        "priceAvgChg": 0,
         "s": 1.9748538599363532
       },
       {
@@ -6924,7 +6924,7 @@
         "priceAvg": 8144.91505555472,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": -0.1734213219284758,
+        "priceAvgChg": -0.19440411672876512,
         "s": 1
       },
       {
@@ -7288,7 +7288,7 @@
         "priceAvg": 7951.427347221452,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.06622738674228135,
+        "priceAvgChg": 0,
         "s": 1.9827213472350262
       },
       {
@@ -7297,7 +7297,7 @@
         "priceAvg": 7116.010127314062,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": -0.10506506359506873,
+        "priceAvgChg": -0.16433426573753707,
         "s": 1
       },
       {
@@ -7688,7 +7688,7 @@
         "priceAvg": 7642.693317128885,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.06756403650671183,
+        "priceAvgChg": 0,
         "s": 1.9604384060586217
       },
       {
@@ -7697,7 +7697,7 @@
         "priceAvg": 7945.551481480741,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0.039627151291428575,
+        "priceAvgChg": 0.10986855809465146,
         "s": 1
       },
       {
@@ -8549,7 +8549,7 @@
         "priceAvg": 7720.819243054804,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.10806867133145404,
+        "priceAvgChg": 0,
         "s": 1.9160945278565622
       }
     ],
@@ -8560,7 +8560,7 @@
         "priceAvg": 8855.486189814068,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0.14696198823459605,
+        "priceAvgChg": 0.2709126463707918,
         "s": 1
       },
       {
@@ -9284,7 +9284,7 @@
         "priceAvg": 9820.882055555046,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.07212756325869973,
+        "priceAvgChg": 0,
         "s": 2.0136821058644236
       },
       {
@@ -9293,7 +9293,7 @@
         "priceAvg": 10956.248127314235,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0.11560734212432422,
+        "priceAvgChg": 0.1960733812652664,
         "s": 1
       },
       {
@@ -10001,7 +10001,7 @@
         "priceAvg": 12987.669421295597,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.1419600186014991,
+        "priceAvgChg": 0,
         "s": 2.0064240388073586
       },
       {
@@ -10010,7 +10010,7 @@
         "priceAvg": 13015.95055555487,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0.0021775372733849885,
+        "priceAvgChg": 0.14444667910671916,
         "s": 1
       },
       {
@@ -10138,7 +10138,7 @@
         "priceAvg": 14118.89789351784,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.03308993053661591,
+        "priceAvgChg": 0,
         "s": 1.9755018649105418
       },
       {
@@ -10147,7 +10147,7 @@
         "priceAvg": 15182.861481480775,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0.07535741075451896,
+        "priceAvgChg": 0.11094091277842089,
         "s": 1
       },
       {
@@ -10889,7 +10889,7 @@
         "priceAvg": 31806.1270370362,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.0025801498408934975,
+        "priceAvgChg": 0,
         "s": 2.0253351313254706
       },
       {
@@ -10898,7 +10898,7 @@
         "priceAvg": 33909.58564814744,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0.06613375494167828,
+        "priceAvgChg": 0.06888453977986231,
         "s": 1
       }
     ],
@@ -11417,7 +11417,7 @@
         "priceAvg": 61872.4509722212,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.01927541283522971,
+        "priceAvgChg": 0,
         "s": 1.9949763262968676
       },
       {
@@ -11426,7 +11426,7 @@
         "priceAvg": 56239.8239583325,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": -0.0910361061406405,
+        "priceAvgChg": -0.10855676044709761,
         "s": 1
       },
       {
@@ -11662,7 +11662,7 @@
         "priceAvg": 56546.70331018528,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.009256512478777124,
+        "priceAvgChg": 0,
         "s": 2.013700727953337
       },
       {
@@ -11671,7 +11671,7 @@
         "priceAvg": 49357.360138889046,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": -0.1271399171028469,
+        "priceAvgChg": -0.13521955735241076,
         "s": 1
       },
       {
@@ -12170,7 +12170,7 @@
         "priceAvg": 33599.47062499952,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.09376374182350244,
+        "priceAvgChg": 0,
         "s": 1.9964313580367146
       },
       {
@@ -12179,7 +12179,7 @@
         "priceAvg": 39480.66775462944,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0.17503838662428328,
+        "priceAvgChg": 0.2852143825404274,
         "s": 1
       },
       {
@@ -12462,7 +12462,7 @@
         "priceAvg": 51117.826921296335,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.0004450077039421796,
+        "priceAvgChg": 0,
         "s": 1.9546338615316774
       },
       {
@@ -12471,7 +12471,7 @@
         "priceAvg": 45781.48247685168,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": -0.10439302227500347,
+        "priceAvgChg": -0.10399447027021136,
         "s": 1
       },
       {
@@ -13161,7 +13161,7 @@
         "priceAvg": 56320.13541666748,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.0193342356640146,
+        "priceAvgChg": 0,
         "s": 2.0510766093366097
       },
       {
@@ -13170,7 +13170,7 @@
         "priceAvg": 49168.880717593194,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": -0.1269750977366778,
+        "priceAvgChg": -0.14385436693759024,
         "s": 1
       },
       {
@@ -13784,7 +13784,7 @@
         "priceAvg": 40310.457152779076,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.04101375906991522,
+        "priceAvgChg": 0,
         "s": 1.8784070301597147
       },
       {
@@ -13793,7 +13793,7 @@
         "priceAvg": 35387.64148148293,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": -0.12212254633179609,
+        "priceAvgChg": -0.15812760070945442,
         "s": 1
       },
       {
@@ -13894,7 +13894,7 @@
         "priceAvg": 41774.561296297965,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.10824517157717106,
+        "priceAvgChg": 0,
         "s": 1.9630183420319156
       },
       {
@@ -13903,7 +13903,7 @@
         "priceAvg": 44046.92293981629,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0.05439582303213086,
+        "priceAvgChg": 0.16852907980649645,
         "s": 1
       },
       {
@@ -14530,7 +14530,7 @@
         "priceAvg": 34925.05009259431,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.09827032346081666,
+        "priceAvgChg": 0,
         "s": 1.754086192148994
       },
       {
@@ -14539,7 +14539,7 @@
         "priceAvg": 29993.992500001903,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": -0.14118970708757883,
+        "priceAvgChg": -0.22558527236356118,
         "s": 1
       },
       {
@@ -14937,7 +14937,7 @@
         "priceAvg": 28530.15081018706,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.06196391822994951,
+        "priceAvgChg": 0,
         "s": 1.945113547097757
       },
       {
@@ -14946,7 +14946,7 @@
         "priceAvg": 22520.666226853908,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": -0.21063627119655426,
+        "priceAvgChg": -0.259548340741819,
         "s": 1
       },
       {
@@ -15753,7 +15753,7 @@
         "priceAvg": 21784.78946759476,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.13070650921445348,
+        "priceAvgChg": 0,
         "s": 1.9673788704483535
       },
       {
@@ -15762,7 +15762,7 @@
         "priceAvg": 21873.971643520654,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0.004093781859060508,
+        "priceAvgChg": 0.1353353750097972,
         "s": 1
       },
       {
@@ -16297,7 +16297,7 @@
         "priceAvg": 20688.129398150217,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.01837466433309476,
+        "priceAvgChg": 0,
         "s": 1.9536336990033702
       },
       {
@@ -16306,7 +16306,7 @@
         "priceAvg": 16882.223171298196,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": -0.1839657009875585,
+        "priceAvgChg": -0.19896005731620436,
         "s": 1
       },
       {
@@ -17021,7 +17021,7 @@
         "priceAvg": 18207.354305557583,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.08408067608693415,
+        "priceAvgChg": 0,
         "s": 2.075917543421662
       },
       {
@@ -17030,7 +17030,7 @@
         "priceAvg": 21122.20467361303,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0.16009192324915222,
+        "priceAvgChg": 0.25763323647893266,
         "s": 1
       },
       {
@@ -18696,7 +18696,7 @@
         "priceAvg": 29568.0685185209,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.11745009181113075,
+        "priceAvgChg": 0,
         "s": 1.9789733205482543
       },
       {
@@ -18705,7 +18705,7 @@
         "priceAvg": 30504.678379631965,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0.03167639646547715,
+        "priceAvgChg": 0.15284688394972412,
         "s": 1
       },
       {
@@ -19438,7 +19438,7 @@
         "priceAvg": 28951.419513891808,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.014675574433323124,
+        "priceAvgChg": 0,
         "s": 1.9871030622077999
       },
       {
@@ -19447,7 +19447,7 @@
         "priceAvg": 26148.46993055851,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": -0.09681561838404351,
+        "priceAvgChg": -0.11007036800346337,
         "s": 1
       },
       {
@@ -20616,7 +20616,7 @@
         "priceAvg": 41003.317870372295,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.0866784895637287,
+        "priceAvgChg": 0,
         "s": 1.974054978216924
       },
       {
@@ -20625,7 +20625,7 @@
         "priceAvg": 43298.88722222427,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0.05598496587786328,
+        "priceAvgChg": 0.14751614772216204,
         "s": 1
       },
       {
@@ -21439,7 +21439,7 @@
         "priceAvg": 47881.63273148371,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.11781532102946213,
+        "priceAvgChg": 0,
         "s": 2.005002976614317
       },
       {
@@ -21448,7 +21448,7 @@
         "priceAvg": 48724.54511574309,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0.017604086080070802,
+        "priceAvgChg": 0.13749343816248683,
         "s": 1
       },
       {
@@ -21682,7 +21682,7 @@
         "priceAvg": 54708.35666666825,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.06495418190015911,
+        "priceAvgChg": 0,
         "s": 1.9784516218850066
       }
     ],
@@ -21693,7 +21693,7 @@
         "priceAvg": 61978.1441203717,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0.1328825776653726,
+        "priceAvgChg": 0.20646803868657027,
         "s": 1
       },
       {
@@ -23062,7 +23062,7 @@
         "priceAvg": 61570.394305557114,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.09809950606528517,
+        "priceAvgChg": 0,
         "s": 1.940224910150394
       },
       {
@@ -23071,7 +23071,7 @@
         "priceAvg": 56697.013217594096,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": -0.07915137044238751,
+        "priceAvgChg": -0.16948616616288403,
         "s": 1
       },
       {
@@ -23734,7 +23734,7 @@
         "priceAvg": 76930.66206018614,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.12089122630777793,
+        "priceAvgChg": 0,
         "s": 1.9961675292135403
       },
       {
@@ -23743,7 +23743,7 @@
         "priceAvg": 88777.99662037114,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0.15400016382175852,
+        "priceAvgChg": 0.2935086587855473,
         "s": 1
       },
       {
@@ -24604,7 +24604,7 @@
         "priceAvg": 97712.89210648413,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.00866334596217655,
         "s": 1.0338819219654491
       },
       {
@@ -24613,7 +24613,7 @@
         "priceAvg": 97587.58006944689,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.0012824514179835544,
         "s": 0.9349993715454155
       },
       {
@@ -24622,7 +24622,7 @@
         "priceAvg": 96978.92703703901,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.006236992780994655,
         "s": 0.9809998575719109
       },
       {
@@ -24631,7 +24631,7 @@
         "priceAvg": 96875.78293981674,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.0010635722664046332,
         "s": 0.9746404715856078
       },
       {
@@ -24640,7 +24640,7 @@
         "priceAvg": 96631.14606481678,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.0025252634618905256,
         "s": 0.9884788618306174
       },
       {
@@ -24649,7 +24649,7 @@
         "priceAvg": 96995.45858796494,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.00377013559275996,
         "s": 0.993815311437437
       },
       {
@@ -24658,7 +24658,7 @@
         "priceAvg": 96741.83629629796,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.002614785221485061,
         "s": 0.995145104548608
       },
       {
@@ -24667,7 +24667,7 @@
         "priceAvg": 96925.0388657426,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.0018937264006806398,
         "s": 0.9794494533064889
       },
       {
@@ -24676,7 +24676,7 @@
         "priceAvg": 96568.68004629774,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.0036766435548039045,
         "s": 0.987080382990042
       },
       {
@@ -24685,7 +24685,7 @@
         "priceAvg": 97138.83210648265,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.005904109488827691,
         "s": 1.0022125320993933
       },
       {
@@ -24694,7 +24694,7 @@
         "priceAvg": 95915.56474537245,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.012592979909098134,
         "s": 1.0367671209117943
       },
       {
@@ -24703,7 +24703,7 @@
         "priceAvg": 96967.65625000194,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.010968934055932245,
         "s": 0.9877984431638338
       },
       {
@@ -24723,7 +24723,7 @@
         "priceAvg": 84605.0574768538,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.12749198290690755,
         "s": 1
       },
       {
@@ -24732,7 +24732,7 @@
         "priceAvg": 87935.68789352108,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.039366800472636854,
         "s": 1
       },
       {
@@ -24741,7 +24741,7 @@
         "priceAvg": 87844.59798611377,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.001035869617778018,
         "s": 1
       },
       {
@@ -24750,7 +24750,7 @@
         "priceAvg": 87854.47097222491,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.00011239149973341078,
         "s": 1
       },
       {
@@ -24759,7 +24759,7 @@
         "priceAvg": 88131.24678240984,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.0031503895831599404,
         "s": 1
       },
       {
@@ -24768,7 +24768,7 @@
         "priceAvg": 88419.925740743,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.003275557408666696,
         "s": 1
       },
       {
@@ -24777,7 +24777,7 @@
         "priceAvg": 88388.90729166895,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.0003508083592492772,
         "s": 1
       },
       {
@@ -24786,7 +24786,7 @@
         "priceAvg": 87961.74187500212,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.004832794405493113,
         "s": 1
       },
       {
@@ -24795,7 +24795,7 @@
         "priceAvg": 88458.78141203908,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.005650633178038822,
         "s": 1
       },
       {
@@ -24804,7 +24804,7 @@
         "priceAvg": 89008.28655092798,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.006211990829144698,
         "s": 1
       },
       {
@@ -24813,7 +24813,7 @@
         "priceAvg": 82278.96050926046,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.07560336573625859,
         "s": 1
       },
       {
@@ -24822,7 +24822,7 @@
         "priceAvg": 81749.92553240852,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.006429772247698695,
         "s": 1
       },
       {
@@ -24831,7 +24831,7 @@
         "priceAvg": 81643.71418981608,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.00129922249960146,
         "s": 1
       },
       {
@@ -24840,7 +24840,7 @@
         "priceAvg": 81731.09155092703,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.0010702276590186521,
         "s": 1
       },
       {
@@ -24849,7 +24849,7 @@
         "priceAvg": 82209.00828703877,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.0058474287696739236,
         "s": 1
       },
       {
@@ -24858,7 +24858,7 @@
         "priceAvg": 83299.09918981665,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.013259993344911125,
         "s": 1
       },
       {
@@ -24867,7 +24867,7 @@
         "priceAvg": 83359.96023148338,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.0007306326509970429,
         "s": 1
       },
       {
@@ -24876,7 +24876,7 @@
         "priceAvg": 83509.29358796473,
         "state": "HEDGE",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.0017914278757651392,
         "s": 1
       },
       {
@@ -24885,7 +24885,7 @@
         "priceAvg": 83766.80298611273,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.00308360168173083,
         "s": 1
       },
       {
@@ -24894,7 +24894,7 @@
         "priceAvg": 83742.25291666803,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.00029307635685660305,
         "s": 0.9257150712321919
       },
       {
@@ -24903,7 +24903,7 @@
         "priceAvg": 83067.61388889067,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.008056136589120633,
         "s": 0.9825902840149777
       },
       {
@@ -24912,7 +24912,7 @@
         "priceAvg": 84040.840231483,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.01171607437640021,
         "s": 1.038340542118944
       },
       {
@@ -24921,7 +24921,7 @@
         "priceAvg": 84245.4631250013,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.002434803042838274,
         "s": 0.9618881347764585
       }
     ]
@@ -25278,7 +25278,7 @@
         "priceAvg": 4052.427282407417,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.021164749984851516,
+        "priceAvgChg": 0,
         "s": 1.910138738871312
       },
       {
@@ -25287,7 +25287,7 @@
         "priceAvg": 4016.2383796295962,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": -0.008930179434662677,
+        "priceAvgChg": -0.029905924404459605,
         "s": 1
       },
       {
@@ -25824,7 +25824,7 @@
         "priceAvg": 6296.370293981309,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.08903949228543961,
+        "priceAvgChg": 0,
         "s": 1.9744577656675752
       },
       {
@@ -25833,7 +25833,7 @@
         "priceAvg": 7297.321062499785,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0.15897266548558653,
+        "priceAvgChg": 0.2621670031931258,
         "s": 1
       },
       {
@@ -26676,7 +26676,7 @@
         "priceAvg": 10567.292157406553,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.07478629320927532,
+        "priceAvgChg": 0,
         "s": 1.9752365907446696
       },
       {
@@ -26685,7 +26685,7 @@
         "priceAvg": 9213.83452546208,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": -0.12807989140300646,
+        "priceAvgChg": -0.19328756429960448,
         "s": 1
       },
       {
@@ -27274,7 +27274,7 @@
         "priceAvg": 7000.296099536058,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.025514356159134888,
+        "priceAvgChg": 0,
         "s": 1.9798714953271028
       },
       {
@@ -27283,7 +27283,7 @@
         "priceAvg": 8098.294298610124,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0.15685025082679505,
+        "priceAvgChg": 0.18636654014917453,
         "s": 1
       },
       {
@@ -27800,7 +27800,7 @@
         "priceAvg": 6768.864567128684,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.11484583332152698,
+        "priceAvgChg": 0,
         "s": 1.976519804464406
       },
       {
@@ -27809,7 +27809,7 @@
         "priceAvg": 6565.056009258298,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": -0.03010971128897033,
+        "priceAvgChg": -0.1414975697264449,
         "s": 1
       },
       {
@@ -29097,7 +29097,7 @@
         "priceAvg": 6228.778222221344,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.03402086962102191,
+        "priceAvgChg": 0,
         "s": 1.8883748301031962
       },
       {
@@ -29106,7 +29106,7 @@
         "priceAvg": 5646.034189813902,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": -0.09355671555755274,
+        "priceAvgChg": -0.1243947043564202,
         "s": 1
       },
       {
@@ -30709,7 +30709,7 @@
         "priceAvg": 4117.638268517605,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.03895416548069375,
+        "priceAvgChg": 0,
         "s": 2.0451256910169056
       },
       {
@@ -30718,7 +30718,7 @@
         "priceAvg": 4976.332067128715,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0.20854036770943685,
+        "priceAvgChg": 0.2556180491832887,
         "s": 1
       },
       {
@@ -31716,7 +31716,7 @@
         "priceAvg": 10682.44520138808,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.123117947592839,
+        "priceAvgChg": 0,
         "s": 1.994693844813432
       },
       {
@@ -31725,7 +31725,7 @@
         "priceAvg": 11401.029807869543,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0.06726780179392722,
+        "priceAvgChg": 0.19866762308271646,
         "s": 1
       },
       {
@@ -32150,7 +32150,7 @@
         "priceAvg": 9853.768638888043,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.025385115001083536,
+        "priceAvgChg": 0,
         "s": 1.9748538599363532
       },
       {
@@ -32159,7 +32159,7 @@
         "priceAvg": 8144.91505555472,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": -0.1734213219284758,
+        "priceAvgChg": -0.19440411672876512,
         "s": 1
       },
       {
@@ -32523,7 +32523,7 @@
         "priceAvg": 7951.427347221452,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.06622738674228135,
+        "priceAvgChg": 0,
         "s": 1.9827213472350262
       },
       {
@@ -32532,7 +32532,7 @@
         "priceAvg": 7116.010127314062,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": -0.10506506359506873,
+        "priceAvgChg": -0.16433426573753707,
         "s": 1
       },
       {
@@ -32923,7 +32923,7 @@
         "priceAvg": 7642.693317128885,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.06756403650671183,
+        "priceAvgChg": 0,
         "s": 1.9604384060586217
       },
       {
@@ -32932,7 +32932,7 @@
         "priceAvg": 7945.551481480741,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0.039627151291428575,
+        "priceAvgChg": 0.10986855809465146,
         "s": 1
       },
       {
@@ -33784,7 +33784,7 @@
         "priceAvg": 7720.819243054804,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.10806867133145404,
+        "priceAvgChg": 0,
         "s": 1.9160945278565622
       }
     ],
@@ -33795,7 +33795,7 @@
         "priceAvg": 8855.486189814068,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0.14696198823459605,
+        "priceAvgChg": 0.2709126463707918,
         "s": 1
       },
       {
@@ -34519,7 +34519,7 @@
         "priceAvg": 9820.882055555046,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.07212756325869973,
+        "priceAvgChg": 0,
         "s": 2.0136821058644236
       },
       {
@@ -34528,7 +34528,7 @@
         "priceAvg": 10956.248127314235,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0.11560734212432422,
+        "priceAvgChg": 0.1960733812652664,
         "s": 1
       },
       {
@@ -35236,7 +35236,7 @@
         "priceAvg": 12987.669421295597,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.1419600186014991,
+        "priceAvgChg": 0,
         "s": 2.0064240388073586
       },
       {
@@ -35245,7 +35245,7 @@
         "priceAvg": 13015.95055555487,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0.0021775372733849885,
+        "priceAvgChg": 0.14444667910671916,
         "s": 1
       },
       {
@@ -35373,7 +35373,7 @@
         "priceAvg": 14118.89789351784,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.03308993053661591,
+        "priceAvgChg": 0,
         "s": 1.9755018649105418
       },
       {
@@ -35382,7 +35382,7 @@
         "priceAvg": 15182.861481480775,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0.07535741075451896,
+        "priceAvgChg": 0.11094091277842089,
         "s": 1
       },
       {
@@ -36124,7 +36124,7 @@
         "priceAvg": 31806.1270370362,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.0025801498408934975,
+        "priceAvgChg": 0,
         "s": 2.0253351313254706
       },
       {
@@ -36133,7 +36133,7 @@
         "priceAvg": 33909.58564814744,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0.06613375494167828,
+        "priceAvgChg": 0.06888453977986231,
         "s": 1
       }
     ],
@@ -36652,7 +36652,7 @@
         "priceAvg": 61872.4509722212,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.01927541283522971,
+        "priceAvgChg": 0,
         "s": 1.9949763262968676
       },
       {
@@ -36661,7 +36661,7 @@
         "priceAvg": 56239.8239583325,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": -0.0910361061406405,
+        "priceAvgChg": -0.10855676044709761,
         "s": 1
       },
       {
@@ -36897,7 +36897,7 @@
         "priceAvg": 56546.70331018528,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.009256512478777124,
+        "priceAvgChg": 0,
         "s": 2.013700727953337
       },
       {
@@ -36906,7 +36906,7 @@
         "priceAvg": 49357.360138889046,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": -0.1271399171028469,
+        "priceAvgChg": -0.13521955735241076,
         "s": 1
       },
       {
@@ -37405,7 +37405,7 @@
         "priceAvg": 33599.47062499952,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.09376374182350244,
+        "priceAvgChg": 0,
         "s": 1.9964313580367146
       },
       {
@@ -37414,7 +37414,7 @@
         "priceAvg": 39480.66775462944,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0.17503838662428328,
+        "priceAvgChg": 0.2852143825404274,
         "s": 1
       },
       {
@@ -37697,7 +37697,7 @@
         "priceAvg": 51117.826921296335,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.0004450077039421796,
+        "priceAvgChg": 0,
         "s": 1.9546338615316774
       },
       {
@@ -37706,7 +37706,7 @@
         "priceAvg": 45781.48247685168,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": -0.10439302227500347,
+        "priceAvgChg": -0.10399447027021136,
         "s": 1
       },
       {
@@ -38396,7 +38396,7 @@
         "priceAvg": 56320.13541666748,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.0193342356640146,
+        "priceAvgChg": 0,
         "s": 2.0510766093366097
       },
       {
@@ -38405,7 +38405,7 @@
         "priceAvg": 49168.880717593194,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": -0.1269750977366778,
+        "priceAvgChg": -0.14385436693759024,
         "s": 1
       },
       {
@@ -39019,7 +39019,7 @@
         "priceAvg": 40310.457152779076,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.04101375906991522,
+        "priceAvgChg": 0,
         "s": 1.8784070301597147
       },
       {
@@ -39028,7 +39028,7 @@
         "priceAvg": 35387.64148148293,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": -0.12212254633179609,
+        "priceAvgChg": -0.15812760070945442,
         "s": 1
       },
       {
@@ -39129,7 +39129,7 @@
         "priceAvg": 41774.561296297965,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.10824517157717106,
+        "priceAvgChg": 0,
         "s": 1.9630183420319156
       },
       {
@@ -39138,7 +39138,7 @@
         "priceAvg": 44046.92293981629,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0.05439582303213086,
+        "priceAvgChg": 0.16852907980649645,
         "s": 1
       },
       {
@@ -39765,7 +39765,7 @@
         "priceAvg": 34925.05009259431,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.09827032346081666,
+        "priceAvgChg": 0,
         "s": 1.754086192148994
       },
       {
@@ -39774,7 +39774,7 @@
         "priceAvg": 29993.992500001903,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": -0.14118970708757883,
+        "priceAvgChg": -0.22558527236356118,
         "s": 1
       },
       {
@@ -40172,7 +40172,7 @@
         "priceAvg": 28530.15081018706,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.06196391822994951,
+        "priceAvgChg": 0,
         "s": 1.945113547097757
       },
       {
@@ -40181,7 +40181,7 @@
         "priceAvg": 22520.666226853908,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": -0.21063627119655426,
+        "priceAvgChg": -0.259548340741819,
         "s": 1
       },
       {
@@ -40988,7 +40988,7 @@
         "priceAvg": 21784.78946759476,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.13070650921445348,
+        "priceAvgChg": 0,
         "s": 1.9673788704483535
       },
       {
@@ -40997,7 +40997,7 @@
         "priceAvg": 21873.971643520654,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0.004093781859060508,
+        "priceAvgChg": 0.1353353750097972,
         "s": 1
       },
       {
@@ -41532,7 +41532,7 @@
         "priceAvg": 20688.129398150217,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.01837466433309476,
+        "priceAvgChg": 0,
         "s": 1.9536336990033702
       },
       {
@@ -41541,7 +41541,7 @@
         "priceAvg": 16882.223171298196,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": -0.1839657009875585,
+        "priceAvgChg": -0.19896005731620436,
         "s": 1
       },
       {
@@ -42256,7 +42256,7 @@
         "priceAvg": 18207.354305557583,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.08408067608693415,
+        "priceAvgChg": 0,
         "s": 2.075917543421662
       },
       {
@@ -42265,7 +42265,7 @@
         "priceAvg": 21122.20467361303,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0.16009192324915222,
+        "priceAvgChg": 0.25763323647893266,
         "s": 1
       },
       {
@@ -43931,7 +43931,7 @@
         "priceAvg": 29568.0685185209,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.11745009181113075,
+        "priceAvgChg": 0,
         "s": 1.9789733205482543
       },
       {
@@ -43940,7 +43940,7 @@
         "priceAvg": 30504.678379631965,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0.03167639646547715,
+        "priceAvgChg": 0.15284688394972412,
         "s": 1
       },
       {
@@ -44673,7 +44673,7 @@
         "priceAvg": 28951.419513891808,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.014675574433323124,
+        "priceAvgChg": 0,
         "s": 1.9871030622077999
       },
       {
@@ -44682,7 +44682,7 @@
         "priceAvg": 26148.46993055851,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": -0.09681561838404351,
+        "priceAvgChg": -0.11007036800346337,
         "s": 1
       },
       {
@@ -45851,7 +45851,7 @@
         "priceAvg": 41003.317870372295,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.0866784895637287,
+        "priceAvgChg": 0,
         "s": 1.974054978216924
       },
       {
@@ -45860,7 +45860,7 @@
         "priceAvg": 43298.88722222427,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0.05598496587786328,
+        "priceAvgChg": 0.14751614772216204,
         "s": 1
       },
       {
@@ -46674,7 +46674,7 @@
         "priceAvg": 47881.63273148371,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.11781532102946213,
+        "priceAvgChg": 0,
         "s": 2.005002976614317
       },
       {
@@ -46683,7 +46683,7 @@
         "priceAvg": 48724.54511574309,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0.017604086080070802,
+        "priceAvgChg": 0.13749343816248683,
         "s": 1
       },
       {
@@ -46917,7 +46917,7 @@
         "priceAvg": 54708.35666666825,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.06495418190015911,
+        "priceAvgChg": 0,
         "s": 1.9784516218850066
       }
     ],
@@ -46928,7 +46928,7 @@
         "priceAvg": 61978.1441203717,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0.1328825776653726,
+        "priceAvgChg": 0.20646803868657027,
         "s": 1
       },
       {
@@ -48297,7 +48297,7 @@
         "priceAvg": 61570.394305557114,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": -0.09809950606528517,
+        "priceAvgChg": 0,
         "s": 1.940224910150394
       },
       {
@@ -48306,7 +48306,7 @@
         "priceAvg": 56697.013217594096,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": -0.07915137044238751,
+        "priceAvgChg": -0.16948616616288403,
         "s": 1
       },
       {
@@ -48969,7 +48969,7 @@
         "priceAvg": 76930.66206018614,
         "state": "HEDGE",
         "type": "Abnormal",
-        "priceAvgChg": 0.12089122630777793,
+        "priceAvgChg": 0,
         "s": 1.9961675292135403
       },
       {
@@ -48978,7 +48978,7 @@
         "priceAvg": 88777.99662037114,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0.15400016382175852,
+        "priceAvgChg": 0.2935086587855473,
         "s": 1
       },
       {
@@ -49839,7 +49839,7 @@
         "priceAvg": 97712.89210648413,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.00866334596217655,
         "s": 1.0338819219654491
       },
       {
@@ -49848,7 +49848,7 @@
         "priceAvg": 97587.58006944689,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.0012824514179835544,
         "s": 0.9349993715454155
       },
       {
@@ -49857,7 +49857,7 @@
         "priceAvg": 96978.92703703901,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.006236992780994655,
         "s": 0.9809998575719109
       },
       {
@@ -49866,7 +49866,7 @@
         "priceAvg": 96875.78293981674,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.0010635722664046332,
         "s": 0.9746404715856078
       },
       {
@@ -49875,7 +49875,7 @@
         "priceAvg": 96631.14606481678,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.0025252634618905256,
         "s": 0.9884788618306174
       },
       {
@@ -49884,7 +49884,7 @@
         "priceAvg": 96995.45858796494,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.00377013559275996,
         "s": 0.993815311437437
       },
       {
@@ -49893,7 +49893,7 @@
         "priceAvg": 96741.83629629796,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.002614785221485061,
         "s": 0.995145104548608
       },
       {
@@ -49902,7 +49902,7 @@
         "priceAvg": 96925.0388657426,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.0018937264006806398,
         "s": 0.9794494533064889
       },
       {
@@ -49911,7 +49911,7 @@
         "priceAvg": 96568.68004629774,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.0036766435548039045,
         "s": 0.987080382990042
       },
       {
@@ -49920,7 +49920,7 @@
         "priceAvg": 97138.83210648265,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.005904109488827691,
         "s": 1.0022125320993933
       },
       {
@@ -49929,7 +49929,7 @@
         "priceAvg": 95915.56474537245,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.012592979909098134,
         "s": 1.0367671209117943
       },
       {
@@ -49938,7 +49938,7 @@
         "priceAvg": 96967.65625000194,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.010968934055932245,
         "s": 0.9877984431638338
       },
       {
@@ -49958,7 +49958,7 @@
         "priceAvg": 84605.0574768538,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.12749198290690755,
         "s": 1
       },
       {
@@ -49967,7 +49967,7 @@
         "priceAvg": 87935.68789352108,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.039366800472636854,
         "s": 1.130548043207449
       },
       {
@@ -49976,7 +49976,7 @@
         "priceAvg": 87844.59798611377,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.001035869617778018,
         "s": 0.9208455872450201
       },
       {
@@ -49985,7 +49985,7 @@
         "priceAvg": 87854.47097222491,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.00011239149973341078,
         "s": 0.9432306632143095
       },
       {
@@ -49994,7 +49994,7 @@
         "priceAvg": 88131.24678240984,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.0031503895831599404,
         "s": 0.9070140415385483
       },
       {
@@ -50003,7 +50003,7 @@
         "priceAvg": 88419.925740743,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.003275557408666696,
         "s": 0.9500299695918069
       },
       {
@@ -50012,7 +50012,7 @@
         "priceAvg": 88388.90729166895,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.0003508083592492772,
         "s": 0.8671413539109083
       },
       {
@@ -50021,7 +50021,7 @@
         "priceAvg": 87961.74187500212,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.004832794405493113,
         "s": 0.8144520677173817
       },
       {
@@ -50030,7 +50030,7 @@
         "priceAvg": 88458.78141203908,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.005650633178038822,
         "s": 0.8540449718782054
       },
       {
@@ -50039,7 +50039,7 @@
         "priceAvg": 89008.28655092798,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.006211990829144698,
         "s": 0.8681341340531725
       },
       {
@@ -50048,7 +50048,7 @@
         "priceAvg": 82278.96050926046,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.07560336573625859,
         "s": 1.2716021032531104
       },
       {
@@ -50057,7 +50057,7 @@
         "priceAvg": 81749.92553240852,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.006429772247698695,
         "s": 0.8772899328519789
       },
       {
@@ -50066,7 +50066,7 @@
         "priceAvg": 81643.71418981608,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.00129922249960146,
         "s": 0.9106159304289748
       },
       {
@@ -50075,7 +50075,7 @@
         "priceAvg": 81731.09155092703,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.0010702276590186521,
         "s": 0.8794755690506194
       },
       {
@@ -50084,7 +50084,7 @@
         "priceAvg": 82209.00828703877,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.0058474287696739236,
         "s": 0.8828062805510298
       },
       {
@@ -50093,7 +50093,7 @@
         "priceAvg": 83299.09918981665,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.013259993344911125,
         "s": 0.9829063575465571
       },
       {
@@ -50102,7 +50102,7 @@
         "priceAvg": 83359.96023148338,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.0007306326509970429,
         "s": 0.8528807668913875
       },
       {
@@ -50111,7 +50111,7 @@
         "priceAvg": 83509.29358796473,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.0017914278757651392,
         "s": 0.9007253003217586
       },
       {
@@ -50120,7 +50120,7 @@
         "priceAvg": 83766.80298611273,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.00308360168173083,
         "s": 0.9205774224329871
       },
       {
@@ -50129,7 +50129,7 @@
         "priceAvg": 83742.25291666803,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.00029307635685660305,
         "s": 0.9257150712321919
       },
       {
@@ -50138,7 +50138,7 @@
         "priceAvg": 83067.61388889067,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": -0.008056136589120633,
         "s": 0.9825902840149777
       },
       {
@@ -50147,7 +50147,7 @@
         "priceAvg": 84040.840231483,
         "state": "SHORT",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.01171607437640021,
         "s": 1.038340542118944
       },
       {
@@ -50156,7 +50156,7 @@
         "priceAvg": 84245.4631250013,
         "state": "LONG",
         "type": "Normal",
-        "priceAvgChg": 0,
+        "priceAvgChg": 0.002434803042838274,
         "s": 0.9618881347764585
       }
     ]
@@ -50470,5 +50470,5 @@
     }
   },
   "startTime": "2025-03-17 15:28:00.000 +08",
-  "analyseTime": "2025-03-25 23:06:04.498 +08"
+  "analyseTime": "2025-03-25 23:15:59.335 +08"
 }
