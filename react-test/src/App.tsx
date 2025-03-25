@@ -24,7 +24,6 @@ async function init(): Promise<void> {
   }
   getPrice()
   const [resData] = await Promise.all([getData(), getFonts()])
-  console.log(resData)
   setState((state) => ({
     getData: resData,
     price: toFixedNumber(state.price ?? resData.nowPrice, 2),
