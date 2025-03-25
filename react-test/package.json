@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node ./build.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -15,9 +15,11 @@
     "antd": "^5.24.3",
     "antd-style": "^3.7.1",
     "dayjs": "^1.11.13",
+    "fs-extra": "^11.3.0",
     "immer": "^10.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "vite-plugin-compression": "^0.5.1",
     "zustand": "^5.0.3"
   },
   "devDependencies": {

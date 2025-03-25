@@ -1,7 +1,7 @@
 export enum Color {
   'white' = '#FFFFFFFF',
   'black' = '#292929FF',
-  'black2' = '#141414FF',
+  'black2' = '#505050FF',
   'red' = '#F23645FF',
   'green' = '#089981FF',
 }
@@ -45,6 +45,7 @@ export type GetData = {
 }
 
 export type DataType1 = {
+  key: React.Key;
   month: string;
   leverage: string;
   rate: string;
@@ -53,17 +54,20 @@ export type DataType1 = {
 }
 
 export type DataType2 = {
+  key: React.Key;
   time: string;
   price: string;
   status: string;
   rate: string;
   avg: string;
   avgChg: string;
+  isShow: boolean;
   status2: string;
   rate2: string;
 }
 
 export type DataType3 = {
+  key: React.Key;
   lastNMonth: string;
   rate: string;
   avgMonth: string;
@@ -71,6 +75,7 @@ export type DataType3 = {
 }
 
 export type DataType4 = {
+  key: React.Key;
   year: string;
   rate: string;
   avgMonth: string;
@@ -86,6 +91,7 @@ export type StoreType = {
   priceOld: null | number,
   upOrDown: UpOrDown,
   yearMonth: string,
+  isShowAll: boolean,
   updateUpOrDown: () => void,
   updateShowData: () => void,
   getData: null | GetData,
@@ -154,6 +160,17 @@ function getPrice(callback: (item: { time: string, price: number }) => void) {
     }
   }
   wsInit()
+}
+
+export async function getFonts(): Promise<void> {
+  const font = new FontFace("TAHOMA", "url(https://yukuan95.github.io/TAHOMA.ttf)")
+  document.fonts.add(font)
+  font.load()
+  return new Promise<void>((res) => {
+    document.fonts.ready.then(() => {
+      res()
+    })
+  })
 }
 
 export async function getData() {
@@ -289,3 +306,4 @@ export function removeMilli(time?: string): string {
     return `${time.slice(0, 16)} ${time.slice(-4)}`
   }
 }
+

@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import crypto from 'crypto'
+import viteCompression from "vite-plugin-compression";
 
 function cryptPwd(s: string): string {
   const md5 = crypto.createHash('md5')
@@ -9,19 +10,26 @@ function cryptPwd(s: string): string {
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), viteCompression(),],
   build: {
     rollupOptions: {
       output: {
         manualChunks(id: string) {
           if (id.slice(-2) === 'js') {
-            if (['5'].includes(cryptPwd(id).at(-1) ?? '')) {
+            const hash = cryptPwd(id).at(-1) ?? ''
+            if (['c'].includes(hash)) {
               return 'a'
             }
-            if (['0', 'd', '2', '6', 'e'].includes(cryptPwd(id).at(-1) ?? '')) {
+            if (['d', '4', '0'].includes(hash)) {
               return 'b'
             }
-            return 'c'
+            if (['2', 'e', '8', 'b'].includes(hash)) {
+              return 'c'
+            }
+            if (['f', '9', '7', 'a'].includes(hash)) {
+              return 'd'
+            }
+            return 'e'
           }
           return null
         }

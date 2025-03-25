@@ -7,7 +7,7 @@ import dayjs from 'dayjs'
 import {
   Color, UpOrDown, ArrowSvgName, getData, genPrice, monthPlus,
   toFixedNumber, removeMilli, toFixedString, milliTimeToStringTime,
-  DataType1, DataType2, DataType3, DataType4,
+  DataType1, DataType2, DataType3, DataType4, getFonts
 } from './Lib.ts'
 
 const { Column } = Table
@@ -22,13 +22,14 @@ async function init(): Promise<void> {
       setState((state) => ({ price: toFixedNumber(i.price, 2), priceOld: state.price }))
     }
   }
-  // getPrice()
-  const resData = await getData()
+  getPrice()
+  const [resData] = await Promise.all([getData(), getFonts()])
+  console.log(resData)
   setState((state) => ({
     getData: resData,
     price: toFixedNumber(state.price ?? resData.nowPrice, 2),
     priceOld: toFixedNumber(state.priceOld ?? resData.shortPrice, 2),
-    isLoading: false
+    isLoading: false,
   }))
 }
 
@@ -148,17 +149,45 @@ const FlexStyle = createStyles(() => {
     `,
     column: css`
       height: 30px;
+      font-family: TAHOMA, Tahoma, Helvetica, Arial, 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
     `
   }
 })
 
-const AppStyle = createStyles(({ token }, props: { isLight: boolean }) => {
+const AppStyle = createStyles((_, props: { isLight: boolean }) => {
   return {
     app: css`
-      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       background-color: ${props.isLight ? Color.white : Color.black};
-      font-family: ${token.fontFamily};
+      font-family: TAHOMA, Tahoma, Helvetica, Arial, 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
       color: ${props.isLight ? Color.black : Color.white};
+    `,
+    loading: css`
+      height: 100dvh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    `,
+    loader: css`
+      @keyframes load8 {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border-top: 4px solid #e2e2e2;
+      border-right: 4px solid #e2e2e2;
+      border-bottom: 4px solid #e2e2e2;
+      border-left: 4px solid #409eff;
+      animation: load8 1.1s infinite linear;
     `,
   }
 })
@@ -172,10 +201,10 @@ const TimeAndPrice: FC = () => {
   const { styles: tapStyle } = TimeAndPriceStyle({ isError, upOrDown: upOrDown })
   return (
     <div style={{ userSelect: 'none' }} className={cx(flexStyle.fsbc, flexStyle.c)}>
-      <Tooltip title={removeMilli(getData?.startTime)} >
+      <Tooltip mouseEnterDelay={0} title={removeMilli(getData?.startTime)} >
         <div className={tapStyle.timeColor}>{removeMilli(getData?.analyseTime)}</div>
       </Tooltip>
-      <Tooltip title={<>
+      <Tooltip mouseEnterDelay={0} title={<>
         <div className={flexStyle.fsbc}>
           <div style={{ whiteSpace: 'pre' }}>shortPrice : </div>
           <div>{getData?.shortPrice ? toFixedString(getData?.shortPrice, 2) : ''}</div>
@@ -256,14 +285,14 @@ const Table1: FC = () => {
   return (
     <div className={flexStyle.c}>
       <Table<DataType1> dataSource={tableData1} size="small" pagination={false} bordered>
-        <Column className={flexStyle.column} align="center" title="month" dataIndex="month" />
-        <Column className={flexStyle.column} align="center" title="leverage" dataIndex="leverage" />
-        <Column className={flexStyle.column} align="center" title="rate" dataIndex="rate" render={(_, item) => (<>
-          <Tooltip placement="left" title={<>
+        <Column className={flexStyle.column} align="center" title="month" key="month" dataIndex="month" />
+        <Column className={flexStyle.column} align="center" title="leverage" key="leverage" dataIndex="leverage" />
+        <Column className={flexStyle.column} align="center" title="rate" key="rate" dataIndex="rate" render={(_, item) => (<>
+          <Tooltip mouseEnterDelay={0} placement="left" title={<>
             <div style={{ whiteSpace: 'pre' }}>rate2 : {item.rate2}</div>
             <div style={{ whiteSpace: 'pre' }}>rateAvg : {item.rateAvg}</div>
           </>}>
-            {item.rate}
+            <div>{item.rate}</div>
           </Tooltip>
         </>)} />
       </Table>
@@ -279,71 +308,103 @@ const Table2: FC = () => {
   return (
     <div className={flexStyle.c}>
       <Table<DataType2> dataSource={tableData2} size="small" pagination={false} bordered>
-        <Column className={flexStyle.column} align="left" title={`time(${getData?.analyseTime?.slice(24, 27) ?? ''})`} dataIndex="time" />
-        <Column className={flexStyle.column} align="center" title="price" dataIndex="price" render={(_, item) => (<>
-          <Tooltip placement="left" title={<>
+        <Column className={flexStyle.column} align="center" title={`time(${getData?.analyseTime?.slice(24, 27) ?? ''})`} key="time" dataIndex="time" />
+        <Column className={flexStyle.column} align="center" title="price" key="price" dataIndex="price" render={(_, item) => (<>
+          <Tooltip mouseEnterDelay={0} placement="left" title={<>
             {item.avg ? <div style={{ whiteSpace: 'pre' }}>avg : {item.avg}</div> : ''}
             {item.avgChg ? <div style={{ whiteSpace: 'pre' }}>avgChg : {item.avgChg}</div> : ''}
             {item.status2 ? <div style={{ whiteSpace: 'pre' }}>status2 : {item.status2}</div> : ''}
             {item.rate2 ? <div style={{ whiteSpace: 'pre' }}>rate2 : {item.rate2}</div> : ''}
           </>}>
-            {item.rate}
+            <div>{item.rate}</div>
           </Tooltip>
         </>)} />
-        <Column className={flexStyle.column} align="center" title="status" dataIndex="status" />
-        <Column className={flexStyle.column} align="center" title="rate" dataIndex="rate" />
+        <Column className={flexStyle.column} align="center" title="status" key="status" dataIndex="status" />
+        <Column className={flexStyle.column} align="center" title={() => (
+          <div style={{ userSelect: 'none' }} onDoubleClick={() => { setState((state) => { state.isShowAll = !state.isShowAll }) }}>rate</div>
+        )} key="rate" dataIndex="rate" />
       </Table>
     </div>
   )
 }
 
 const Table3: FC = () => {
+  const { styles: flexStyle } = FlexStyle()
   const { tableData3 } = useStore(useShallow((state) => ({ tableData3: state.tableData3 })))
-  return (<></>)
+  return (<div className={flexStyle.c}>
+    <Table<DataType3> dataSource={tableData3} size="small" pagination={false} bordered>
+      <Column width={100} className={flexStyle.column} align="center" title="lastNMonth" key="lastNMonth" dataIndex="lastNMonth" render={(_, item) => (<>
+        <Tooltip mouseEnterDelay={0} placement="right" title={<>
+          {item.rate2 ? <div style={{ whiteSpace: 'pre' }}>rate2 : {item.rate2}</div> : ''}
+        </>}>
+          <div>{item.lastNMonth}</div>
+        </Tooltip>
+      </>)} />
+      <Column className={flexStyle.column} align="center" title="rate" key="rate" dataIndex="rate" />
+      <Column width={100} className={flexStyle.column} align="center" title="avgMonth" key="avgMonth" dataIndex="avgMonth" />
+    </Table>
+  </div>)
 }
+
 const Table4: FC = () => {
+  const { styles: flexStyle } = FlexStyle()
   const { tableData4 } = useStore(useShallow((state) => ({ tableData4: state.tableData4 })))
-  return (<></>)
+  return (<div className={flexStyle.c}>
+    <Table<DataType4> dataSource={tableData4} size="small" pagination={false} bordered>
+      <Column width={118} className={flexStyle.column} align="center" title="year" key="year" dataIndex="year" render={(_, item) => (<>
+        <Tooltip mouseEnterDelay={0} placement="right" title={<>
+          {item.rate2 ? <div style={{ whiteSpace: 'pre' }}>rate2 : {item.rate2}</div> : ''}
+        </>}>
+          <div>{item.year}</div>
+        </Tooltip>
+      </>)} />
+      <Column className={flexStyle.column} align="center" title="rate" key="rate" dataIndex="rate" />
+      <Column width={118} className={flexStyle.column} align="center" title="avgMonth" key="avgMonth" dataIndex="avgMonth" />
+    </Table>
+  </div>)
 }
 
 const App: FC = () => {
   const {
-    isLight, price, priceOld, yearMonth, updateUpOrDown, updateShowData, isLoading,
+    isLight, price, priceOld, yearMonth, updateUpOrDown, updateShowData, isLoading, isShowAll
   } = useStore(useShallow((state) => {
     const {
-      isLight, price, priceOld, yearMonth, updateUpOrDown, updateShowData, isLoading
+      isLight, price, priceOld, yearMonth, updateUpOrDown, updateShowData, isLoading, isShowAll
     } = state
     return {
-      isLight, price, priceOld, yearMonth, updateUpOrDown, updateShowData, isLoading
+      isLight, price, priceOld, yearMonth, updateUpOrDown, updateShowData, isLoading, isShowAll
     }
   }))
   useEffect(() => { init() }, [])
+  useEffect(() => {
+    const root = document.getElementById('root')
+    if (root) {
+      root.style.backgroundColor = isLight ? Color.white : Color.black
+    }
+  }, [isLight])
   useEffect(() => { updateUpOrDown() }, [price, priceOld])
-  useEffect(() => { if (!isLoading) { updateShowData() } }, [isLoading])
-  useEffect(() => { if (yearMonth) { updateShowData() } }, [yearMonth])
+  useEffect(() => { if (!isLoading || yearMonth) { updateShowData() } }, [isLoading, yearMonth, isShowAll])
   const { styles: appStyle } = AppStyle({ isLight })
   return (
     <div className={appStyle.app}>
-      <div style={{ height: '20px' }}></div>
-      <TimeAndPrice />
-      <div style={{ height: '20px' }}></div>
-      <MonthPicker />
-      <div style={{ height: '20px' }}></div>
-      <div><Table1 /></div>
-      <div style={{ height: '20px' }}></div>
-      <div><Table2 /></div>
-      <div style={{ height: '20px' }}></div>
-      <div><Table3 /></div>
-      <div style={{ height: '20px' }}></div>
-      <div><Table4 /></div>
-      <div style={{ height: '20px' }}></div>
-      <div>
-        <Button onClick={() => {
-          setState((state) => { state.isLight = !state.isLight })
-        }}>
-          change
-        </Button>
-      </div>
+      {isLoading ? <div className={appStyle.loading}>
+        <div className={appStyle.loader}></div>
+      </div> : (<>
+        <div style={{ height: '20px' }}></div>
+        <TimeAndPrice />
+        <div style={{ height: '20px' }}></div>
+        <MonthPicker />
+        <div style={{ height: '20px' }}></div>
+        <div><Table1 /></div>
+        <div style={{ height: '20px' }}></div>
+        <div><Table2 /></div>
+        <div style={{ height: '20px' }}></div>
+        <div><Table3 /></div>
+        <div style={{ height: '20px' }}></div>
+        <div><Table4 /></div>
+        <div style={{ height: '400px' }}></div>
+      </>)
+      }
     </div>
   )
 }

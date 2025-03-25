@@ -23,7 +23,6 @@ const AppTop: FC = () => {
           },
           Table: {
             cellPaddingBlockSM: 0,
-            cellPaddingInlineSM: 0,
             headerBorderRadius: 0,
           }
         },

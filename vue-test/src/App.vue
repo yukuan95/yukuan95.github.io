@@ -32,7 +32,7 @@ let state = reactive({
   priceArray: [] as Array<{ time: string, price: number }>,
   priceColor: Color.black,
   time: '',
-  startTime:'',
+  startTime: '',
   timeColor: Color.black,
   resErrorLogArray: [] as Array<string>,
 } as {
@@ -99,9 +99,9 @@ function setTable1() {
       leverage: { value: leverage },
       rate: {
         value: Lib.toFixedString(data ? data : 1, 4),
-        popover: { 
-          rate2: Lib.toFixedString(data2 ? data2 : 1, 4), 
-          rateAvg: Lib.toFixedString(dataAvg ? dataAvg : 1, 4), 
+        popover: {
+          rate2: Lib.toFixedString(data2 ? data2 : 1, 4),
+          rateAvg: Lib.toFixedString(dataAvg ? dataAvg : 1, 4),
         },
         placement: 'left',
       },
