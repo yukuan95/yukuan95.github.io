@@ -315,7 +315,7 @@ const Table2: FC = () => {
             {item.status2 ? <div style={{ whiteSpace: 'pre' }}>status2 : {item.status2}</div> : ''}
             {item.rate2 ? <div style={{ whiteSpace: 'pre' }}>rate2 : {item.rate2}</div> : ''}
           </>}>
-            <div>{item.rate}</div>
+            <div>{item.price}</div>
           </Tooltip>
         </>)} />
         <Column className={flexStyle.column} align="center" title="status" key="status" dataIndex="status" />
