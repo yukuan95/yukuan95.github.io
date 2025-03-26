@@ -154,7 +154,7 @@ const setTable4 = (state: WritableDraft<StoreType>) => {
       avgMonth: toFixedString(item.monthAvgS, 3),
     })
   }
-  state.tableData4 = table4
+  state.tableData4 = table4.reverse()
 }
 
 export { useStore, useConst }
