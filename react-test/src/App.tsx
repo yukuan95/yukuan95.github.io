@@ -19,7 +19,9 @@ async function init(): Promise<void> {
   themeMedia.onchange = (e) => setState({ isLight: e.matches })
   const getPrice = async () => {
     for await (const i of genPrice()) {
-      setState((state) => ({ price: toFixedNumber(i.price, 2), priceOld: state.price }))
+      const price = toFixedNumber(i.price, 2)
+      document.title = toFixedString(i.price, 2)
+      setState((state) => ({ price, priceOld: state.price }))
     }
   }
   getPrice()

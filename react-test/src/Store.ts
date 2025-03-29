@@ -130,7 +130,7 @@ const setTable3 = (state: WritableDraft<StoreType>) => {
       key: getNowStringTime() + String(item.lastNMonth),
       lastNMonth: String(item.lastNMonth),
       rate2: String(!item2 ? 1 : toFixedString(item2.totalS, 15)),
-      rate: toFixedString(item.totalS, item.lastNMonth <= 48 ? 3 : 1),
+      rate: toFixedString(item.totalS, 2),
       avgMonth: toFixedString(item.monthAvgS, 3),
     })
   }
