@@ -1,5 +1,5 @@
 import { DatePicker, Button, Tooltip, Table } from 'antd'
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useMemo } from 'react'
 import { useStore, useConst } from './Store.ts'
 import { useShallow } from 'zustand/react/shallow'
 import { createStyles, css, cx } from 'antd-style'
@@ -261,11 +261,12 @@ const MonthPicker: FC = () => {
       state.yearMonth = monthPlus(yearMonth || getYearMonth(), 1)
     })
   }
+  const yearMonthValue = useMemo(() => yearMonth ? dayjs(yearMonth) : '', [yearMonth])
   return (<div className={cx(flexStyle.fro, flexStyle.c, flexStyle.fsbc)}>
     <div>
       <DatePicker
         style={{ width: '220px' }}
-        value={yearMonth ? dayjs(yearMonth) : ''}
+        value={yearMonthValue}
         onChange={onChange} picker="month" />
     </div>
     <div className={cx(flexStyle.fro)}>
