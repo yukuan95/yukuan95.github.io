@@ -151,7 +151,10 @@ const FlexStyle = createStyles(() => {
     column: css`
       height: 30px;
       font-family: TAHOMA, Tahoma, Helvetica, Arial, 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-    `
+    `,
+    ff: css`
+      font-family: TAHOMA, Tahoma, Helvetica, Arial, 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    `,
   }
 })
 
@@ -202,10 +205,10 @@ const TimeAndPrice: FC = () => {
   const { styles: tapStyle } = TimeAndPriceStyle({ isError, upOrDown: upOrDown })
   return (
     <div style={{ userSelect: 'none' }} className={cx(flexStyle.fsbc, flexStyle.c)}>
-      <Tooltip mouseEnterDelay={0} title={removeMilli(getData?.startTime)} >
+      <Tooltip mouseEnterDelay={0} title={<div className={flexStyle.ff}>{removeMilli(getData?.startTime)}</div>} >
         <div className={tapStyle.timeColor}>{removeMilli(getData?.analyseTime)}</div>
       </Tooltip>
-      <Tooltip mouseEnterDelay={0} title={<>
+      <Tooltip mouseEnterDelay={0} title={<div className={flexStyle.ff}>
         <div className={flexStyle.fsbc}>
           <div style={{ whiteSpace: 'pre' }}>shortPrice : </div>
           <div>{getData?.shortPrice ? toFixedString(getData?.shortPrice, 2) : ''}</div>
@@ -214,7 +217,7 @@ const TimeAndPrice: FC = () => {
           <div style={{ whiteSpace: 'pre' }}>longPrice : </div>
           <div>{getData?.longPrice ? toFixedString(getData?.longPrice, 2) : ''}</div>
         </div>
-      </>}>
+      </div>}>
         <div className={cx(flexStyle.fcc, flexStyle.fro)}>
           <span style={{ whiteSpace: 'pre' }}>BTC : </span>
           <span className={tapStyle.priceColor}>{price ? toFixedString(price, 1) : ''}</span>
@@ -290,10 +293,10 @@ const Table1: FC = () => {
         <Column className={flexStyle.column} align="center" title="month" key="month" dataIndex="month" />
         <Column className={flexStyle.column} align="center" title="leverage" key="leverage" dataIndex="leverage" />
         <Column className={flexStyle.column} align="center" title="rate" key="rate" dataIndex="rate" render={(_, item) => (<>
-          <Tooltip mouseEnterDelay={0} placement="left" title={<>
+          <Tooltip mouseEnterDelay={0} placement="left" title={<div className={flexStyle.ff}>
             <div style={{ whiteSpace: 'pre' }}>rate2 : {item.rate2}</div>
             <div style={{ whiteSpace: 'pre' }}>rateAvg : {item.rateAvg}</div>
-          </>}>
+          </div>}>
             <div>{item.rate}</div>
           </Tooltip>
         </>)} />
@@ -312,12 +315,12 @@ const Table2: FC = () => {
       <Table<DataType2> dataSource={tableData2} size="small" pagination={false} bordered>
         <Column className={flexStyle.column} align="center" title={`time(${getData?.analyseTime?.slice(24, 27) ?? ''})`} key="time" dataIndex="time" />
         <Column className={flexStyle.column} align="center" title="price" key="price" dataIndex="price" render={(_, item) => (<>
-          <Tooltip mouseEnterDelay={0} placement="left" title={<>
+          <Tooltip mouseEnterDelay={0} placement="left" title={<div className={flexStyle.ff}>
             {item.avg ? <div style={{ whiteSpace: 'pre' }}>avg : {item.avg}</div> : ''}
             {item.avgChg ? <div style={{ whiteSpace: 'pre' }}>avgChg : {item.avgChg}</div> : ''}
             {item.status2 ? <div style={{ whiteSpace: 'pre' }}>status2 : {item.status2}</div> : ''}
             {item.rate2 ? <div style={{ whiteSpace: 'pre' }}>rate2 : {item.rate2}</div> : ''}
-          </>}>
+          </div>}>
             <div>{item.price}</div>
           </Tooltip>
         </>)} />
@@ -336,9 +339,9 @@ const Table3: FC = () => {
   return (<div className={flexStyle.c}>
     <Table<DataType3> dataSource={tableData3} size="small" pagination={false} bordered>
       <Column width={100} className={flexStyle.column} align="center" title="lastNMonth" key="lastNMonth" dataIndex="lastNMonth" render={(_, item) => (<>
-        <Tooltip mouseEnterDelay={0} placement="right" title={<>
+        <Tooltip mouseEnterDelay={0} placement="right" title={<div className={flexStyle.ff}>
           {item.rate2 ? <div style={{ whiteSpace: 'pre' }}>rate2 : {item.rate2}</div> : ''}
-        </>}>
+        </div>}>
           <div>{item.lastNMonth}</div>
         </Tooltip>
       </>)} />
@@ -354,9 +357,9 @@ const Table4: FC = () => {
   return (<div className={flexStyle.c}>
     <Table<DataType4> dataSource={tableData4} size="small" pagination={false} bordered>
       <Column width={118} className={flexStyle.column} align="center" title="year" key="year" dataIndex="year" render={(_, item) => (<>
-        <Tooltip mouseEnterDelay={0} placement="right" title={<>
+        <Tooltip mouseEnterDelay={0} placement="right" title={<div className={flexStyle.ff}>
           {item.rate2 ? <div style={{ whiteSpace: 'pre' }}>rate2 : {item.rate2}</div> : ''}
-        </>}>
+        </div>}>
           <div>{item.year}</div>
         </Tooltip>
       </>)} />
