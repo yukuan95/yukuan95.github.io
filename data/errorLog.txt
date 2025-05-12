@@ -13,3 +13,31 @@ TypeError: Cannot read properties of null (reading 'stack')
   at process.emit (node:events:518:28)
   at process._fatalException (node:internal/process/execution:154:25)
 =====
+time: 2025-05-12 23:12:21.855 +08, from: Main
+TypeError: Cannot read properties of null (reading 'stack')
+  at error (file:///root/work/ts-test/javascript/Log.js:8:23)
+  at process.<anonymous> (file:///root/work/ts-test/javascript/Log.js:16:56)
+  at process.emit (node:events:518:28)
+  at process._fatalException (node:internal/process/execution:154:25)
+=====
+time: 2025-05-12 23:15:21.855 +08, from: Main
+TypeError: Cannot read properties of null (reading 'stack')
+  at error (file:///root/work/ts-test/javascript/Log.js:8:23)
+  at process.<anonymous> (file:///root/work/ts-test/javascript/Log.js:16:56)
+  at process.emit (node:events:518:28)
+  at process._fatalException (node:internal/process/execution:154:25)
+=====
+time: 2025-05-12 23:18:21.952 +08, from: Main
+TypeError: Cannot read properties of null (reading 'stack')
+  at error (file:///root/work/ts-test/javascript/Log.js:8:23)
+  at process.<anonymous> (file:///root/work/ts-test/javascript/Log.js:16:56)
+  at process.emit (node:events:518:28)
+  at process._fatalException (node:internal/process/execution:154:25)
+=====
+time: 2025-05-12 23:22:04.605 +08, from: Main
+TypeError: Cannot read properties of null (reading 'stack')
+  at error (file:///root/work/ts-test/javascript/Log.js:8:23)
+  at process.<anonymous> (file:///root/work/ts-test/javascript/Log.js:16:56)
+  at process.emit (node:events:518:28)
+  at process._fatalException (node:internal/process/execution:154:25)
+=====
