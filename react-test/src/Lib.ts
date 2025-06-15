@@ -26,22 +26,24 @@ export enum ArrowSvgName {
 }
 
 export type GetData = {
-  dataMap1: Map<string, Array<{ time: string, price: number, priceAvg: number, priceAvgChg: number, state: Status, s: number }>>,
-  dataMap2: Map<string, Array<{ time: string, price: number, priceAvg: number, priceAvgChg: number, state: Status, s: number }>>,
-  dataMapMonthS1: Map<string, number>,
-  dataMapMonthS2: Map<string, number>,
-  dataMapMonthAvgS1: Map<string, number>,
-  dataMapYearSMonthAvgS1: Map<string, { yearTotalS: number, monthAvgS: number }>,
-  dataMapYearSMonthAvgS2: Map<string, { yearTotalS: number, monthAvgS: number }>,
-  lastNMonthSPerSixMonth1: Array<{ lastNMonth: number, totalS: number, monthAvgS: number }>,
-  lastNMonthSPerSixMonth2: Array<{ lastNMonth: number, totalS: number, monthAvgS: number }>,
-  resErrorLogArray: Array<string>,
   analyseTime: string,
   startTime: string,
   nowTime: string,
   nowPrice: number,
   shortPrice: number,
   longPrice: number,
+  lever: number,
+  orderFormMonth: Map<string, {
+    array: Array<{
+      time: string, nowPrice: number, longPrice: number,
+      status: Status, status2: Status, preS: number, preS2: number,
+      maxMinChg: number | null, longChg: number | null,
+    }>,
+    perMonthS: number
+  }>,
+  orderFormYear: Map<string, { perYearS: number, avgMonth: number, }>,
+  lastNMonth: Map<string, { lastNMonthS: number, avgMonth: number, }>,
+  errorLogArray: Array<string>,
 }
 
 export type DataType1 = {
@@ -61,6 +63,7 @@ export type DataType2 = {
   rate: string;
   avg: string;
   avgChg: string;
+  maxMinChg: string;
   isShow: boolean;
   status2: string;
   rate2: string;
@@ -71,7 +74,6 @@ export type DataType3 = {
   lastNMonth: string;
   rate: string;
   avgMonth: string;
-  rate2: string;
 }
 
 export type DataType4 = {
@@ -79,7 +81,6 @@ export type DataType4 = {
   year: string;
   rate: string;
   avgMonth: string;
-  rate2: string;
 }
 
 export type StoreType = {
@@ -187,43 +188,27 @@ export async function getData() {
   promiseArray2.push(resArray[2].json())
   const resArray2 = await Promise.all(promiseArray2)
   const resAnalyseData = resArray2[0]
-  const resErrorLog: string = resArray2[1]
+  const resErrorLog: Array<string> = (resArray2[1] as string)
+    .trim().split('=====').filter(item => !!item)
   const resPriceLog: {
     nowPrice: number, shortPrice: number,
     longPrice: number, nowTime: string
   } = resArray2[2]
   const {
-    analyseTime, startTime, dataMap1,
-    dataMap2, dataMapMonthS1, dataMapMonthS2,
-    dataMapYearSMonthAvgS1, dataMapYearSMonthAvgS2,
-    lastNMonthSPerSixMonth1, lastNMonthSPerSixMonth2,
-    dataMapMonthAvgS1,
+    startTime, analyseTime, lever,
+    orderFormMonth, orderFormYear, lastNMonth,
   } = resAnalyseData
-  const resErrorLogArray: Array<string> = []
-  resErrorLog.trim().split('=====').forEach((item) => {
-    if (item.trim()) {
-      resErrorLogArray.push(item.trim())
-    }
-  })
-  const res = {
-    dataMap1: new Map(Object.entries(dataMap1)),
-    dataMap2: new Map(Object.entries(dataMap2)),
-    dataMapMonthS1: new Map(Object.entries(dataMapMonthS1)),
-    dataMapMonthS2: new Map(Object.entries(dataMapMonthS2)),
-    dataMapMonthAvgS1: new Map(Object.entries(dataMapMonthAvgS1)),
-    dataMapYearSMonthAvgS1: new Map(Object.entries(dataMapYearSMonthAvgS1)),
-    dataMapYearSMonthAvgS2: new Map(Object.entries(dataMapYearSMonthAvgS2)),
-    lastNMonthSPerSixMonth1,
-    lastNMonthSPerSixMonth2,
-    resErrorLogArray,
-    analyseTime,
-    startTime,
-    nowTime: resPriceLog.nowTime,
-    nowPrice: resPriceLog.nowPrice,
-    shortPrice: resPriceLog.shortPrice,
-    longPrice: resPriceLog.longPrice,
+  const errorLogArray = resErrorLog
+  const {
+    nowPrice, shortPrice, longPrice, nowTime
+  } = resPriceLog
+  return {
+    startTime, analyseTime, lever,
+    orderFormMonth: new Map(Object.entries(orderFormMonth)),
+    orderFormYear: new Map(Object.entries(orderFormYear)),
+    lastNMonth: new Map(Object.entries(lastNMonth)),
+    errorLogArray, nowPrice, shortPrice, longPrice, nowTime,
   } as GetData
-  return res
 }
 
 export function toFixedString(f: number | string, n: number): string {

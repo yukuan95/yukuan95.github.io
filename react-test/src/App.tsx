@@ -200,7 +200,7 @@ const TimeAndPrice: FC = () => {
   const { upOrDown, getData, price } = useStore(useShallow((state) => ({
     upOrDown: state.upOrDown, getData: state.getData, price: state.price,
   })))
-  const isError = (getData?.resErrorLogArray?.length ?? 0) > 0
+  const isError = (getData?.errorLogArray?.length ?? 0) > 0
   const { styles: flexStyle } = FlexStyle()
   const { styles: tapStyle } = TimeAndPriceStyle({ isError, upOrDown: upOrDown })
   return (
@@ -318,6 +318,7 @@ const Table2: FC = () => {
           <Tooltip mouseEnterDelay={0} placement="left" title={<div className={flexStyle.ff}>
             {item.avg ? <div style={{ whiteSpace: 'pre' }}>avg : {item.avg}</div> : ''}
             {item.avgChg ? <div style={{ whiteSpace: 'pre' }}>avgChg : {item.avgChg}</div> : ''}
+            {item.maxMinChg ? <div style={{ whiteSpace: 'pre' }}>maxChg : {item.maxMinChg}</div> : ''}
             {item.status2 ? <div style={{ whiteSpace: 'pre' }}>status2 : {item.status2}</div> : ''}
             {item.rate2 ? <div style={{ whiteSpace: 'pre' }}>rate2 : {item.rate2}</div> : ''}
           </div>}>
@@ -339,11 +340,7 @@ const Table3: FC = () => {
   return (<div className={flexStyle.c}>
     <Table<DataType3> dataSource={tableData3} size="small" pagination={false} bordered>
       <Column width={100} className={flexStyle.column} align="center" title="lastNMonth" key="lastNMonth" dataIndex="lastNMonth" render={(_, item) => (<>
-        <Tooltip mouseEnterDelay={0} placement="right" title={<div className={flexStyle.ff}>
-          {item.rate2 ? <div style={{ whiteSpace: 'pre' }}>rate2 : {item.rate2}</div> : ''}
-        </div>}>
-          <div>{item.lastNMonth}</div>
-        </Tooltip>
+        <div>{item.lastNMonth}</div>
       </>)} />
       <Column className={flexStyle.column} align="center" title="rate" key="rate" dataIndex="rate" />
       <Column width={100} className={flexStyle.column} align="center" title="avgMonth" key="avgMonth" dataIndex="avgMonth" />
@@ -357,11 +354,7 @@ const Table4: FC = () => {
   return (<div className={flexStyle.c}>
     <Table<DataType4> dataSource={tableData4} size="small" pagination={false} bordered>
       <Column width={118} className={flexStyle.column} align="center" title="year" key="year" dataIndex="year" render={(_, item) => (<>
-        <Tooltip mouseEnterDelay={0} placement="right" title={<div className={flexStyle.ff}>
-          {item.rate2 ? <div style={{ whiteSpace: 'pre' }}>rate2 : {item.rate2}</div> : ''}
-        </div>}>
-          <div>{item.year}</div>
-        </Tooltip>
+        <div>{item.year}</div>
       </>)} />
       <Column className={flexStyle.column} align="center" title="rate" key="rate" dataIndex="rate" />
       <Column width={118} className={flexStyle.column} align="center" title="avgMonth" key="avgMonth" dataIndex="avgMonth" />
