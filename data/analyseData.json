@@ -1,6 +1,6 @@
 {
   "startTime": "2025-05-28 06:01:00.000 +08",
-  "analyseTime": "2025-06-15 13:00:16.034 +08",
+  "analyseTime": "2025-06-15 13:16:40.665 +08",
   "lever": 6,
   "orderFormMonth": {
     "2017-08": {
@@ -73369,67 +73369,67 @@
   },
   "lastNMonth": {
     "6": {
-      "perLastNMonthS": 5.957988425926754,
+      "lastNMonthS": 5.957988425926754,
       "avgMonth": 1.3464284381335307
     },
     "12": {
-      "perLastNMonthS": 104.50138927881446,
+      "lastNMonthS": 104.50138927881446,
       "avgMonth": 1.473194782276785
     },
     "18": {
-      "perLastNMonthS": 283.7206834084222,
+      "lastNMonthS": 283.7206834084222,
       "avgMonth": 1.3685848309338264
     },
     "24": {
-      "perLastNMonthS": 233.86840372134841,
+      "lastNMonthS": 233.86840372134841,
       "avgMonth": 1.2551832871977742
     },
     "30": {
-      "perLastNMonthS": 441.2981572466471,
+      "lastNMonthS": 441.2981572466471,
       "avgMonth": 1.2250610645309037
     },
     "36": {
-      "perLastNMonthS": 1059.8351881522285,
+      "lastNMonthS": 1059.8351881522285,
       "avgMonth": 1.2134849604292417
     },
     "42": {
-      "perLastNMonthS": 7975.072478374804,
+      "lastNMonthS": 7975.072478374804,
       "avgMonth": 1.2385069379201992
     },
     "48": {
-      "perLastNMonthS": 10259.296526299573,
+      "lastNMonthS": 10259.296526299573,
       "avgMonth": 1.212173958334681
     },
     "54": {
-      "perLastNMonthS": 122522.90039053549,
+      "lastNMonthS": 122522.90039053549,
       "avgMonth": 1.2422993149093373
     },
     "60": {
-      "perLastNMonthS": 883142.1542475283,
+      "lastNMonthS": 883142.1542475283,
       "avgMonth": 1.2563206846267896
     },
     "66": {
-      "perLastNMonthS": 5175001.092853347,
+      "lastNMonthS": 5175001.092853347,
       "avgMonth": 1.263938421535625
     },
     "72": {
-      "perLastNMonthS": 25407528.92562822,
+      "lastNMonthS": 25407528.92562822,
       "avgMonth": 1.2672044822499773
     },
     "78": {
-      "perLastNMonthS": 30587976.79609324,
+      "lastNMonthS": 30587976.79609324,
       "avgMonth": 1.247293328448214
     },
     "84": {
-      "perLastNMonthS": 52248112.647303045,
+      "lastNMonthS": 52248112.647303045,
       "avgMonth": 1.2356110768115198
     },
     "90": {
-      "perLastNMonthS": 366910908.0653682,
+      "lastNMonthS": 366910908.0653682,
       "avgMonth": 1.2449783085087738
     },
     "95": {
-      "perLastNMonthS": 871668033.1674536,
+      "lastNMonthS": 871668033.1674536,
       "avgMonth": 1.2419638619851996
     }
   }
