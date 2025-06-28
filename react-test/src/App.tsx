@@ -20,11 +20,11 @@ function setBodyColor(isLight: boolean) {
 async function init(): Promise<void> {
   const themeMedia = window.matchMedia("(prefers-color-scheme: light)")
   const isLight = themeMedia.matches
-  setState({ isLight })
   setBodyColor(isLight)
+  setState({ isLight })
   themeMedia.onchange = (e) => {
+    setBodyColor(e.matches)
     setState({ isLight: e.matches })
-    setBodyColor(isLight)
   }
   const getPrice = async () => {
     for await (const i of genPrice()) {
