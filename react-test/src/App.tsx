@@ -220,19 +220,19 @@ const TimeAndPrice: FC = () => {
       </Tooltip>
       <Tooltip mouseEnterDelay={0} title={<div className={flexStyle.ff}>
         <div className={flexStyle.fsbc}>
-          <div style={{ whiteSpace: 'pre' }}>shortPrice : </div>
+          <div>shortPrice</div><div style={{ whiteSpace: 'pre' }}> : </div>
           <div>{getData?.shortPrice ? toFixedString(getData?.shortPrice, 2) : ''}</div>
         </div>
         <div className={flexStyle.fsbc}>
-          <div style={{ whiteSpace: 'pre' }}>longPrice : </div>
+          <div>longPrice</div><div style={{ whiteSpace: 'pre' }}> : </div>
           <div>{getData?.longPrice ? toFixedString(getData?.longPrice, 2) : ''}</div>
         </div>
       </div>}>
-        <div className={cx(flexStyle.fcc, flexStyle.fro)}>
-          <span style={{ whiteSpace: 'pre' }}>BTC : </span>
-          <span className={tapStyle.priceColor}>{price ? toFixedString(price, 1) : ''}</span>
-          {upOrDown === UpOrDown.up ? <RightUpArrow /> : ''}
-          {upOrDown === UpOrDown.down ? <RightDownArrow /> : ''}
+        <div className={flexStyle.fcc}>
+          <div style={{ whiteSpace: 'pre' }}>BTC : </div>
+          <div className={tapStyle.priceColor}>{price ? toFixedString(price, 1) : ''}</div>
+          {upOrDown === UpOrDown.up ? <div className={flexStyle.fcc}><RightUpArrow /></div> : ''}
+          {upOrDown === UpOrDown.down ? <div className={flexStyle.fcc}><RightDownArrow /></div> : ''}
         </div>
       </Tooltip>
     </div>
@@ -305,12 +305,10 @@ const Table1: FC = () => {
         <Column className={flexStyle.column} align="center" title="rate" key="rate" dataIndex="rate" render={(_, item) => (<>
           <Tooltip mouseEnterDelay={0} placement="left" title={<div className={flexStyle.ff}>
             <div className={flexStyle.fsbc}>
-              <div style={{ whiteSpace: 'pre' }}>rate2: </div>
-              <div style={{ whiteSpace: 'pre' }}>{item.rate2}</div>
+              <div>rate2</div><div style={{ whiteSpace: 'pre' }}> : </div><div>{item.rate2}</div>
             </div>
             <div className={flexStyle.fsbc}>
-              <div style={{ whiteSpace: 'pre' }}>rateAvg: </div>
-              <div style={{ whiteSpace: 'pre' }}>{item.rateAvg}</div>
+              <div>rateAvg</div><div style={{ whiteSpace: 'pre' }}> : </div><div>{item.rateAvg}</div>
             </div>
           </div>}>
             <div>{item.rate}</div>
@@ -332,11 +330,21 @@ const Table2: FC = () => {
         <Column className={flexStyle.column} align="center" title={`time(${getData?.analyseTime?.slice(24, 27) ?? ''})`} key="time" dataIndex="time" />
         <Column className={flexStyle.column} align="center" title="price" key="price" dataIndex="price" render={(_, item) => (<>
           <Tooltip mouseEnterDelay={0} placement="left" title={<div className={flexStyle.ff}>
-            {item.avg ? <div style={{ whiteSpace: 'pre' }}>avg : {item.avg}</div> : ''}
-            {item.avgChg ? <div style={{ whiteSpace: 'pre' }}>avgChg : {item.avgChg}</div> : ''}
-            {item.maxMinChg ? <div style={{ whiteSpace: 'pre' }}>maxChg : {item.maxMinChg}</div> : ''}
-            {item.status2 ? <div style={{ whiteSpace: 'pre' }}>status2 : {item.status2}</div> : ''}
-            {item.rate2 ? <div style={{ whiteSpace: 'pre' }}>rate2 : {item.rate2}</div> : ''}
+            {item.avg ? <div className={flexStyle.fsbc}>
+              <div>avg</div><div style={{ whiteSpace: 'pre' }}> : </div><div>{item.avg}</div>
+            </div> : ''}
+            {item.avgChg ? <div className={flexStyle.fsbc}>
+              <div>avgChg</div><div style={{ whiteSpace: 'pre' }}> : </div><div>{item.avgChg}</div>
+            </div> : ''}
+            {item.maxMinChg ? <div className={flexStyle.fsbc}>
+              <div>maxChg</div><div style={{ whiteSpace: 'pre' }}> : </div><div>{item.maxMinChg}</div>
+            </div> : ''}
+            {item.status2 ? <div className={flexStyle.fsbc}>
+              <div>status2</div><div style={{ whiteSpace: 'pre' }}> : </div><div>{item.status2}</div>
+            </div> : ''}
+            {item.rate2 ? <div className={flexStyle.fsbc}>
+              <div>rate2</div><div style={{ whiteSpace: 'pre' }}> : </div><div>{item.rate2}</div>
+            </div> : ''}
           </div>}>
             <div>{item.price}</div>
           </Tooltip>
