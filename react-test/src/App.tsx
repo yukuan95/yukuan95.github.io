@@ -381,10 +381,7 @@ const App: FC = () => {
   }))
   useEffect(() => { init() }, [])
   useEffect(() => {
-    const root = document.getElementById('root')
-    if (root) {
-      root.style.backgroundColor = isLight ? Color.white : Color.black
-    }
+    document.body.style.backgroundColor = isLight ? Color.white : Color.black
   }, [isLight])
   useEffect(() => { updateUpOrDown() }, [price, priceOld])
   useEffect(() => { if (!isLoading || yearMonth) { updateShowData() } }, [isLoading, yearMonth, isShowAll])
