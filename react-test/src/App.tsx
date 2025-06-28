@@ -219,13 +219,13 @@ const TimeAndPrice: FC = () => {
         <div className={tapStyle.timeColor}>{removeMilli(getData?.analyseTime)}</div>
       </Tooltip>
       <Tooltip mouseEnterDelay={0} title={<div className={flexStyle.ff}>
-        <div className={flexStyle.fsbc}>
-          <div>shortPrice</div><div style={{ whiteSpace: 'pre' }}> : </div>
-          <div>{getData?.shortPrice ? toFixedString(getData?.shortPrice, 2) : ''}</div>
-        </div>
-        <div className={flexStyle.fsbc}>
-          <div>longPrice</div><div style={{ whiteSpace: 'pre' }}> : </div>
-          <div>{getData?.longPrice ? toFixedString(getData?.longPrice, 2) : ''}</div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto', justifyItems: 'center' }}>
+          <div>shortPrice</div>
+          <div style={{ whiteSpace: 'pre' }}> : </div>
+          <div >{getData?.shortPrice ? toFixedString(getData?.shortPrice, 2) : ''}</div>
+          <div>longPrice</div>
+          <div style={{ whiteSpace: 'pre' }}> : </div>
+          <div >{getData?.longPrice ? toFixedString(getData?.longPrice, 2) : ''}</div>
         </div>
       </div>}>
         <div className={flexStyle.fcc}>
@@ -304,11 +304,13 @@ const Table1: FC = () => {
         <Column className={flexStyle.column} align="center" title="leverage" key="leverage" dataIndex="leverage" />
         <Column className={flexStyle.column} align="center" title="rate" key="rate" dataIndex="rate" render={(_, item) => (<>
           <Tooltip mouseEnterDelay={0} placement="left" title={<div className={flexStyle.ff}>
-            <div className={flexStyle.fsbc}>
-              <div>rate2</div><div style={{ whiteSpace: 'pre' }}> : </div><div>{item.rate2}</div>
-            </div>
-            <div className={flexStyle.fsbc}>
-              <div>rateAvg</div><div style={{ whiteSpace: 'pre' }}> : </div><div>{item.rateAvg}</div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto', justifyItems: 'center' }}>
+              <div>rate2</div>
+              <div style={{ whiteSpace: 'pre' }}> : </div>
+              <div>{item.rate2}</div>
+              <div>rateAvg</div>
+              <div style={{ whiteSpace: 'pre' }}> : </div>
+              <div>{item.rateAvg}</div>
             </div>
           </div>}>
             <div>{item.rate}</div>
@@ -330,21 +332,33 @@ const Table2: FC = () => {
         <Column className={flexStyle.column} align="center" title={`time(${getData?.analyseTime?.slice(24, 27) ?? ''})`} key="time" dataIndex="time" />
         <Column className={flexStyle.column} align="center" title="price" key="price" dataIndex="price" render={(_, item) => (<>
           <Tooltip mouseEnterDelay={0} placement="left" title={<div className={flexStyle.ff}>
-            {item.avg ? <div className={flexStyle.fsbc}>
-              <div>avg</div><div style={{ whiteSpace: 'pre' }}> : </div><div>{item.avg}</div>
-            </div> : ''}
-            {item.avgChg ? <div className={flexStyle.fsbc}>
-              <div>avgChg</div><div style={{ whiteSpace: 'pre' }}> : </div><div>{item.avgChg}</div>
-            </div> : ''}
-            {item.maxMinChg ? <div className={flexStyle.fsbc}>
-              <div>maxChg</div><div style={{ whiteSpace: 'pre' }}> : </div><div>{item.maxMinChg}</div>
-            </div> : ''}
-            {item.status2 ? <div className={flexStyle.fsbc}>
-              <div>status2</div><div style={{ whiteSpace: 'pre' }}> : </div><div>{item.status2}</div>
-            </div> : ''}
-            {item.rate2 ? <div className={flexStyle.fsbc}>
-              <div>rate2</div><div style={{ whiteSpace: 'pre' }}> : </div><div>{item.rate2}</div>
-            </div> : ''}
+            <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto', justifyItems: 'center' }}>
+              {item.avg ? <>
+                <div>avgPrice</div>
+                <div style={{ whiteSpace: 'pre' }}> : </div>
+                <div>{toFixedString(item.avg, 0)}</div>
+              </> : ''}
+              {item.avgChg ? <>
+                <div>avgChg</div>
+                <div style={{ whiteSpace: 'pre' }}> : </div>
+                <div>{item.avgChg}</div>
+              </> : ''}
+              {item.maxMinChg ? <>
+                <div>maxChg</div>
+                <div style={{ whiteSpace: 'pre' }}> : </div>
+                <div>{item.maxMinChg}</div>
+              </> : ''}
+              {item.status2 ? <>
+                <div>status2</div>
+                <div style={{ whiteSpace: 'pre' }}> : </div>
+                <div>{item.status2}</div>
+              </> : ''}
+              {item.rate2 ? <>
+                <div>rate2</div>
+                <div style={{ whiteSpace: 'pre' }}> : </div>
+                <div>{item.rate2}</div>
+              </> : ''}
+            </div>
           </div>}>
             <div>{item.price}</div>
           </Tooltip>
