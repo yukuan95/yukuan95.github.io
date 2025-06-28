@@ -15,7 +15,9 @@ const { setState } = useStore
 
 async function init(): Promise<void> {
   const themeMedia = window.matchMedia("(prefers-color-scheme: light)")
-  setState({ isLight: themeMedia.matches })
+  const isLight = themeMedia.matches
+  document.body.style.backgroundColor = isLight ? Color.white : Color.black
+  setState({ isLight })
   themeMedia.onchange = (e) => setState({ isLight: e.matches })
   const getPrice = async () => {
     for await (const i of genPrice()) {
