@@ -14,7 +14,7 @@ const useConst = {
 const useStore = create<StoreType>()(immer((setState) => {
   const state: StoreType = {
     isLoading: true,
-    isLight: true,
+    isLight: window.matchMedia("(prefers-color-scheme: light)").matches,
     analyseTime: null,
     startTime: null,
     price: null,

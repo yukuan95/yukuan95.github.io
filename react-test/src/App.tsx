@@ -23,8 +23,9 @@ async function init(): Promise<void> {
   setBodyColor(isLight)
   setState({ isLight })
   themeMedia.onchange = (e) => {
-    setBodyColor(e.matches)
-    setState({ isLight: e.matches })
+    const isLight = e.matches
+    setBodyColor(isLight)
+    setState({ isLight })
   }
   const getPrice = async () => {
     for await (const i of genPrice()) {
