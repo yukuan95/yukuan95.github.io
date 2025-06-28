@@ -164,14 +164,14 @@ function getPrice(callback: (item: { time: string, price: number }) => void) {
 }
 
 export async function getFonts(): Promise<void> {
-  const font = new FontFace("TAHOMA", "url(/TAHOMA.ttf)")
+  const font = new FontFace("TAHOMA", "url(https://bucket-20250628.oss-cn-shanghai.aliyuncs.com/TAHOMA.ttf)")
   document.fonts.add(font)
   font.load()
   await font.loaded
 }
 
 export async function getData() {
-  const url = '/data/'
+  const url = 'https://bucket-20250628.oss-cn-shanghai.aliyuncs.com/data/'
   const urls = ['analyseData.json', 'errorLog.txt', 'priceLog.json']
   const promiseArray: any[] = []
   urls.forEach((item) => {
