@@ -14,6 +14,11 @@
 
 <body>
   <div style="height: 100%;" id="root"></div>
+  <script>
+    const themeMedia = window.matchMedia("(prefers-color-scheme: light)")
+    const isLight = themeMedia.matches
+    document.body.style.backgroundColor = isLight ? '#FFFFFFFF' : '#292929FF'
+  </script>
 </body>
 
 </html>
