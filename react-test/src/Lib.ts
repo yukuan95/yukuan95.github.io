@@ -164,22 +164,22 @@ function getPrice(callback: (item: { time: string, price: number }) => void) {
 }
 
 export async function getFonts(): Promise<void> {
-  const font = new FontFace("TAHOMA", "url(https://yukuan95.github.io/TAHOMA.ttf)")
-  document.fonts.add(font)
-  font.load()
-  return new Promise<void>((res) => {
-    document.fonts.ready.then(() => {
-      res()
-    })
-  })
+  const font1 = new FontFace("TAHOMA", "url(https://yukuan95.github.io/TAHOMA.ttf)")
+  const font2 = new FontFace("TAHOMA", "url(https://bucket-20250628.oss-cn-shanghai.aliyuncs.com/TAHOMA.ttf)")
+  document.fonts.add(font1)
+  document.fonts.add(font2)
+  font1.load()
+  font2.load()
+  await Promise.race([font1.loaded, font2.loaded])
 }
 
 export async function getData() {
-  const url = 'https://yukuan95.github.io/data/'
+  const url1 = 'https://yukuan95.github.io/data/'
+  const url2 = 'https://bucket-20250628.oss-cn-shanghai.aliyuncs.com/data/'
   const urls = ['analyseData.json', 'errorLog.txt', 'priceLog.json']
   const promiseArray: any[] = []
   urls.forEach((item) => {
-    promiseArray.push(fetch(url + item, { cache: "no-cache" }))
+    promiseArray.push(Promise.race([fetch(url1 + item, { cache: "no-cache" }), fetch(url2 + item, { cache: "no-cache" })]))
   })
   const resArray = await Promise.all(promiseArray)
   const promiseArray2: any[] = []
