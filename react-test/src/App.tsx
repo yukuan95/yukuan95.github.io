@@ -13,12 +13,19 @@ import {
 const { Column } = Table
 const { setState } = useStore
 
+function setBodyColor(isLight: boolean) {
+  document.body.style.backgroundColor = isLight ? Color.white : Color.black
+}
+
 async function init(): Promise<void> {
   const themeMedia = window.matchMedia("(prefers-color-scheme: light)")
   const isLight = themeMedia.matches
-  document.body.style.backgroundColor = isLight ? Color.white : Color.black
   setState({ isLight })
-  themeMedia.onchange = (e) => setState({ isLight: e.matches })
+  setBodyColor(isLight)
+  themeMedia.onchange = (e) => {
+    setState({ isLight: e.matches })
+    setBodyColor(isLight)
+  }
   const getPrice = async () => {
     for await (const i of genPrice()) {
       const price = toFixedNumber(i.price, 2)
@@ -382,9 +389,6 @@ const App: FC = () => {
     }
   }))
   useEffect(() => { init() }, [])
-  useEffect(() => {
-    document.body.style.backgroundColor = isLight ? Color.white : Color.black
-  }, [isLight])
   useEffect(() => { updateUpOrDown() }, [price, priceOld])
   useEffect(() => { if (!isLoading || yearMonth) { updateShowData() } }, [isLoading, yearMonth, isShowAll])
   const { styles: appStyle } = AppStyle({ isLight })
