@@ -294,8 +294,14 @@ const Table1: FC = () => {
         <Column className={flexStyle.column} align="center" title="leverage" key="leverage" dataIndex="leverage" />
         <Column className={flexStyle.column} align="center" title="rate" key="rate" dataIndex="rate" render={(_, item) => (<>
           <Tooltip mouseEnterDelay={0} placement="left" title={<div className={flexStyle.ff}>
-            <div style={{ whiteSpace: 'pre' }}>rate2 : {item.rate2}</div>
-            <div style={{ whiteSpace: 'pre' }}>rateAvg : {item.rateAvg}</div>
+            <div className={flexStyle.fsbc}>
+              <div style={{ whiteSpace: 'pre' }}>rate2: </div>
+              <div style={{ whiteSpace: 'pre' }}>{item.rate2}</div>
+            </div>
+            <div className={flexStyle.fsbc}>
+              <div style={{ whiteSpace: 'pre' }}>rateAvg: </div>
+              <div style={{ whiteSpace: 'pre' }}>{item.rateAvg}</div>
+            </div>
           </div>}>
             <div>{item.rate}</div>
           </Tooltip>
