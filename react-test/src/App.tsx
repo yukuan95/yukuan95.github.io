@@ -244,8 +244,8 @@ const TimeAndPrice: FC = () => {
         <div className={flexStyle.fcc}>
           <div style={{ whiteSpace: 'pre' }}>BTC : </div>
           <div className={timeAndPriceStyle.priceColor}>{price ? toFixedString(price, 1) : ''}</div>
-          {upOrDown === UpOrDown.up ? <div className={flexStyle.fcc}><RightUpArrow /></div> : ''}
-          {upOrDown === UpOrDown.down ? <div className={flexStyle.fcc}><RightDownArrow /></div> : ''}
+          {upOrDown === UpOrDown.up ? <RightUpArrow /> : ''}
+          {upOrDown === UpOrDown.down ? <RightDownArrow /> : ''}
         </div>
       </Tooltip>
     </div>
