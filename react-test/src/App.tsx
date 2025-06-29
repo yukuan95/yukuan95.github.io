@@ -13,6 +13,102 @@ import {
 const { Column } = Table
 const { setState } = useStore
 
+const ArrowButtonStyle = createStyles({
+  arrowButton: css`
+    width: 40px;
+    height: 32px;
+    padding: 0;
+  `
+})
+
+const TimeAndPriceStyle = createStyles((_, props: {
+  isError: boolean; upOrDown: UpOrDown
+}) => {
+  let priceColor = 'inherit'
+  if (props.upOrDown === UpOrDown.up) {
+    priceColor = Color.green
+  }
+  if (props.upOrDown === UpOrDown.down) {
+    priceColor = Color.red
+  }
+  return {
+    timeColor: css`
+      color: ${props.isError ? Color.red : Color.green};
+    `,
+    priceColor: css`
+      color: ${priceColor};
+  `,
+  }
+})
+
+const FontFamilyStyle = createStyles(() => {
+  return {
+    fontFamily: css`
+      font-family: TAHOMA, Tahoma, Helvetica, Arial, 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    `,
+  }
+})
+
+const FlexStyle = createStyles(() => {
+  return {
+    fsbc: css`
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    `,
+    fcc: css`
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    `,
+    container: css`
+      width: ${useConst.width};
+      padding-left: ${useConst.paddingLeft};
+      padding-right: ${useConst.paddingRight};
+    `,
+    columnHeight: css`
+      height: 30px;
+    `,
+  }
+})
+
+const AppStyle = createStyles((_, props: { isLight: boolean }) => {
+  return {
+    app: css`
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: ${props.isLight ? Color.black : Color.white};
+    `,
+    loading: css`
+      height: 100dvh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    `,
+    loader: css`
+      @keyframes load8 {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border-top: 4px solid #e2e2e2;
+      border-right: 4px solid #e2e2e2;
+      border-bottom: 4px solid #e2e2e2;
+      border-left: 4px solid #409eff;
+      animation: load8 1.1s infinite linear;
+    `,
+  }
+})
+
 function setBodyColor(isLight: boolean) {
   document.body.style.backgroundColor = isLight ? Color.white : Color.black
 }
@@ -85,126 +181,42 @@ const ArrowSvg: FC<{ name: string }> = ({ name }) => {
 }
 
 const RightUpArrow: FC = () => {
-  return (<ArrowSvg name={ArrowSvgName.rightUpArrow} />)
+  const { styles: flexStyle } = FlexStyle()
+  return (<div className={flexStyle.fcc}>
+    <ArrowSvg name={ArrowSvgName.rightUpArrow} />
+  </div>)
 }
 
 const RightDownArrow: FC = () => {
-  return (<ArrowSvg name={ArrowSvgName.rightDownArrow} />)
+  const { styles: flexStyle } = FlexStyle()
+  return (<div className={flexStyle.fcc}>
+    <ArrowSvg name={ArrowSvgName.rightDownArrow} />
+  </div>)
 }
 
-const ArrowButtonStyle = createStyles({
-  ArrowButton: css`
-    width: 40px;
-    height: 32px;
-    padding: 0;
-  `
-})
-
 const RightArrowButton: FC = () => {
-  const { styles } = ArrowButtonStyle()
+  const { styles: arrowButtonStyle } = ArrowButtonStyle()
+  const { styles: flexStyle } = FlexStyle()
   return (
-    <Button className={styles.ArrowButton}>
-      <ArrowSvg name={ArrowSvgName.rightArrow} />
+    <Button className={arrowButtonStyle.arrowButton}>
+      <div className={flexStyle.fcc}>
+        <ArrowSvg name={ArrowSvgName.rightArrow} />
+      </div>
     </Button>
   )
 }
 
 const LeftArrowButton: FC = () => {
-  const { styles } = ArrowButtonStyle()
+  const { styles: arrowButtonStyle } = ArrowButtonStyle()
+  const { styles: flexStyle } = FlexStyle()
   return (
-    <Button className={styles.ArrowButton}>
-      <ArrowSvg name={ArrowSvgName.leftArrow} />
+    <Button className={arrowButtonStyle.arrowButton}>
+      <div className={flexStyle.fcc}>
+        <ArrowSvg name={ArrowSvgName.leftArrow} />
+      </div>
     </Button>
   )
 }
-
-const TimeAndPriceStyle = createStyles((_, props: {
-  isError: boolean; upOrDown: UpOrDown
-}) => {
-  const priceColor = props.upOrDown === UpOrDown.up ? Color.green :
-    props.upOrDown === UpOrDown.down ? Color.red : 'inherit'
-  return {
-    timeColor: css`
-      color: ${props.isError ? Color.red : Color.green};
-    `,
-    priceColor: css`
-      color: ${priceColor};
-  `,
-  }
-})
-
-const FlexStyle = createStyles(() => {
-  return {
-    fsbc: css`
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    `,
-    fcc: css`
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    `,
-    fco: css`
-      display: flex;
-      flex-direction: column;
-    `,
-    fro: css`
-      display: flex;
-      flex-direction: row;
-    `,
-    c: css`
-      width: ${useConst.width};
-      padding-left: ${useConst.paddingLeft};
-      padding-right: ${useConst.paddingRight};
-    `,
-    column: css`
-      height: 30px;
-      font-family: TAHOMA, Tahoma, Helvetica, Arial, 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-    `,
-    ff: css`
-      font-family: TAHOMA, Tahoma, Helvetica, Arial, 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-    `,
-  }
-})
-
-const AppStyle = createStyles((_, props: { isLight: boolean }) => {
-  return {
-    app: css`
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: ${props.isLight ? Color.white : Color.black};
-      font-family: TAHOMA, Tahoma, Helvetica, Arial, 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-      color: ${props.isLight ? Color.black : Color.white};
-    `,
-    loading: css`
-      height: 100dvh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    `,
-    loader: css`
-      @keyframes load8 {
-        0% {
-          transform: rotate(0deg);
-        }
-
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border-top: 4px solid #e2e2e2;
-      border-right: 4px solid #e2e2e2;
-      border-bottom: 4px solid #e2e2e2;
-      border-left: 4px solid #409eff;
-      animation: load8 1.1s infinite linear;
-    `,
-  }
-})
 
 const TimeAndPrice: FC = () => {
   const { upOrDown, getData, price } = useStore(useShallow((state) => ({
@@ -212,13 +224,14 @@ const TimeAndPrice: FC = () => {
   })))
   const isError = (getData?.errorLogArray?.length ?? 0) > 0
   const { styles: flexStyle } = FlexStyle()
-  const { styles: tapStyle } = TimeAndPriceStyle({ isError, upOrDown: upOrDown })
+  const { styles: timeAndPriceStyle } = TimeAndPriceStyle({ isError, upOrDown })
+  const { styles: fontFamilyStyle } = FontFamilyStyle({ isError, upOrDown })
   return (
-    <div style={{ userSelect: 'none' }} className={cx(flexStyle.fsbc, flexStyle.c)}>
-      <Tooltip mouseEnterDelay={0} title={<div className={flexStyle.ff}>{removeMilli(getData?.startTime)}</div>} >
-        <div className={tapStyle.timeColor}>{removeMilli(getData?.analyseTime)}</div>
+    <div style={{ userSelect: 'none' }} className={cx(flexStyle.fsbc, flexStyle.container)}>
+      <Tooltip mouseEnterDelay={0} title={<div className={fontFamilyStyle.fontFamily}>{removeMilli(getData?.startTime)}</div>} >
+        <div className={timeAndPriceStyle.timeColor}>{removeMilli(getData?.analyseTime)}</div>
       </Tooltip>
-      <Tooltip mouseEnterDelay={0} title={<div className={flexStyle.ff}>
+      <Tooltip mouseEnterDelay={0} title={<div className={fontFamilyStyle.fontFamily}>
         <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto', justifyItems: 'center' }}>
           <div>shortPrice</div>
           <div style={{ whiteSpace: 'pre' }}> : </div>
@@ -230,7 +243,7 @@ const TimeAndPrice: FC = () => {
       </div>}>
         <div className={flexStyle.fcc}>
           <div style={{ whiteSpace: 'pre' }}>BTC : </div>
-          <div className={tapStyle.priceColor}>{price ? toFixedString(price, 1) : ''}</div>
+          <div className={timeAndPriceStyle.priceColor}>{price ? toFixedString(price, 1) : ''}</div>
           {upOrDown === UpOrDown.up ? <div className={flexStyle.fcc}><RightUpArrow /></div> : ''}
           {upOrDown === UpOrDown.down ? <div className={flexStyle.fcc}><RightDownArrow /></div> : ''}
         </div>
@@ -275,14 +288,14 @@ const MonthPicker: FC = () => {
     })
   }
   const yearMonthValue = useMemo(() => yearMonth ? dayjs(yearMonth) : '', [yearMonth])
-  return (<div className={cx(flexStyle.fro, flexStyle.c, flexStyle.fsbc)}>
+  return (<div className={cx(flexStyle.container, flexStyle.fsbc)}>
     <div>
       <DatePicker
         style={{ width: '220px' }}
         value={yearMonthValue}
         onChange={onChange} picker="month" />
     </div>
-    <div className={cx(flexStyle.fro)}>
+    <div className={cx(flexStyle.fsbc)}>
       <div onClick={onClickLeft}>
         <LeftArrowButton />
       </div>
@@ -297,13 +310,14 @@ const MonthPicker: FC = () => {
 const Table1: FC = () => {
   const { tableData1 } = useStore(useShallow((state) => ({ tableData1: state.tableData1 })))
   const { styles: flexStyle } = FlexStyle()
+  const { styles: fontFamilyStyle } = FontFamilyStyle()
   return (
-    <div className={flexStyle.c}>
+    <div className={flexStyle.container}>
       <Table<DataType1> dataSource={tableData1} size="small" pagination={false} bordered>
-        <Column className={flexStyle.column} align="center" title="month" key="month" dataIndex="month" />
-        <Column className={flexStyle.column} align="center" title="leverage" key="leverage" dataIndex="leverage" />
-        <Column className={flexStyle.column} align="center" title="rate" key="rate" dataIndex="rate" render={(_, item) => (<>
-          <Tooltip mouseEnterDelay={0} placement="left" title={<div className={flexStyle.ff}>
+        <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="month" key="month" dataIndex="month" />
+        <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="leverage" key="leverage" dataIndex="leverage" />
+        <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="rate" key="rate" dataIndex="rate" render={(_, item) => (<>
+          <Tooltip mouseEnterDelay={0} placement="left" title={<div className={fontFamilyStyle.fontFamily}>
             <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto', justifyItems: 'center' }}>
               <div>rate2</div>
               <div style={{ whiteSpace: 'pre' }}> : </div>
@@ -323,15 +337,16 @@ const Table1: FC = () => {
 
 const Table2: FC = () => {
   const { styles: flexStyle } = FlexStyle()
+  const { styles: fontFamilyStyle } = FontFamilyStyle()
   const { tableData2, getData } = useStore(useShallow((state) => ({
     tableData2: state.tableData2, getData: state.getData
   })))
   return (
-    <div className={flexStyle.c}>
+    <div className={flexStyle.container}>
       <Table<DataType2> dataSource={tableData2} size="small" pagination={false} bordered>
-        <Column className={flexStyle.column} align="center" title={`time(${getData?.analyseTime?.slice(24, 27) ?? ''})`} key="time" dataIndex="time" />
-        <Column className={flexStyle.column} align="center" title="price" key="price" dataIndex="price" render={(_, item) => (<>
-          <Tooltip mouseEnterDelay={0} placement="left" title={<div className={flexStyle.ff}>
+        <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={`time(${getData?.analyseTime?.slice(24, 27) ?? ''})`} key="time" dataIndex="time" />
+        <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="price" key="price" dataIndex="price" render={(_, item) => (<>
+          <Tooltip mouseEnterDelay={0} placement="left" title={<div className={fontFamilyStyle.fontFamily}>
             <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto', justifyItems: 'center' }}>
               {item.avg ? <>
                 <div>avgPrice</div>
@@ -363,8 +378,8 @@ const Table2: FC = () => {
             <div>{item.price}</div>
           </Tooltip>
         </>)} />
-        <Column className={flexStyle.column} align="center" title="status" key="status" dataIndex="status" />
-        <Column className={flexStyle.column} align="center" title={() => (
+        <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="status" key="status" dataIndex="status" />
+        <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (
           <div style={{ userSelect: 'none' }} onDoubleClick={() => { setState((state) => { state.isShowAll = !state.isShowAll }) }}>rate</div>
         )} key="rate" dataIndex="rate" />
       </Table>
@@ -374,28 +389,30 @@ const Table2: FC = () => {
 
 const Table3: FC = () => {
   const { styles: flexStyle } = FlexStyle()
+  const { styles: fontFamilyStyle } = FontFamilyStyle()
   const { tableData3 } = useStore(useShallow((state) => ({ tableData3: state.tableData3 })))
-  return (<div className={flexStyle.c}>
+  return (<div className={flexStyle.container}>
     <Table<DataType3> dataSource={tableData3} size="small" pagination={false} bordered>
-      <Column width={100} className={flexStyle.column} align="center" title="lastNMonth" key="lastNMonth" dataIndex="lastNMonth" render={(_, item) => (<>
+      <Column width={100} className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="lastNMonth" key="lastNMonth" dataIndex="lastNMonth" render={(_, item) => (<>
         <div>{item.lastNMonth}</div>
       </>)} />
-      <Column className={flexStyle.column} align="center" title="rate" key="rate" dataIndex="rate" />
-      <Column width={100} className={flexStyle.column} align="center" title="avgMonth" key="avgMonth" dataIndex="avgMonth" />
+      <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="rate" key="rate" dataIndex="rate" />
+      <Column width={100} className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="avgMonth" key="avgMonth" dataIndex="avgMonth" />
     </Table>
   </div>)
 }
 
 const Table4: FC = () => {
   const { styles: flexStyle } = FlexStyle()
+  const { styles: fontFamilyStyle } = FontFamilyStyle()
   const { tableData4 } = useStore(useShallow((state) => ({ tableData4: state.tableData4 })))
-  return (<div className={flexStyle.c}>
+  return (<div className={flexStyle.container}>
     <Table<DataType4> dataSource={tableData4} size="small" pagination={false} bordered>
-      <Column width={118} className={flexStyle.column} align="center" title="year" key="year" dataIndex="year" render={(_, item) => (<>
+      <Column width={118} className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="year" key="year" dataIndex="year" render={(_, item) => (<>
         <div>{item.year}</div>
       </>)} />
-      <Column className={flexStyle.column} align="center" title="rate" key="rate" dataIndex="rate" />
-      <Column width={118} className={flexStyle.column} align="center" title="avgMonth" key="avgMonth" dataIndex="avgMonth" />
+      <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="rate" key="rate" dataIndex="rate" />
+      <Column width={118} className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="avgMonth" key="avgMonth" dataIndex="avgMonth" />
     </Table>
   </div>)
 }
@@ -415,8 +432,9 @@ const App: FC = () => {
   useEffect(() => { updateUpOrDown() }, [price, priceOld])
   useEffect(() => { if (!isLoading || yearMonth) { updateShowData() } }, [isLoading, yearMonth, isShowAll])
   const { styles: appStyle } = AppStyle({ isLight })
+  const { styles: fontFamilyStyle } = FontFamilyStyle()
   return (
-    <div className={appStyle.app}>
+    <div className={cx(appStyle.app, fontFamilyStyle.fontFamily)}>
       {isLoading ? <div className={appStyle.loading}>
         <div className={appStyle.loader}></div>
       </div> : (<>
