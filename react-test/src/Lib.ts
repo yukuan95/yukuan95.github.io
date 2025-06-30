@@ -1,3 +1,5 @@
+import JSZip from 'jszip'
+
 export enum Color {
   'white' = '#FFFFFFFF',
   'black' = '#292929FF',
@@ -171,25 +173,39 @@ export async function getFonts(): Promise<void> {
 }
 
 export async function getData() {
-  const url = 'https://bucket-20250629.oss-cn-shanghai.aliyuncs.com/data/'
-  const urls = ['analyseData.json', 'errorLog.txt', 'priceLog.json']
+  const url = 'https://bucket-20250629.oss-cn-shanghai.aliyuncs.com/'
+  const urls = ['data.zip']
   const promiseArray: any[] = []
   urls.forEach((item) => {
     promiseArray.push(fetch(url + item, { cache: "no-cache" }))
   })
   const resArray = await Promise.all(promiseArray)
-  const promiseArray2: any[] = []
-  promiseArray2.push(resArray[0].json())
-  promiseArray2.push(resArray[1].text())
-  promiseArray2.push(resArray[2].json())
-  const resArray2 = await Promise.all(promiseArray2)
-  const resAnalyseData = resArray2[0]
-  const resErrorLog: Array<string> = (resArray2[1] as string)
+  const blobFile = await resArray[0].blob()
+  const zip = new JSZip()
+  const loadedZip = await zip.loadAsync(blobFile)
+  const files = ['data/errorLog.txt', 'data/analyseData.json', 'data/priceLog.json']
+  let errorLog = null
+  let analyseData = null
+  let priceLog = null
+  for (const filename in loadedZip.files) {
+    const zipEntry = loadedZip.files[filename]
+    if (filename === files[0]) {
+      errorLog = await zipEntry.async('text')
+    }
+    if (filename === files[1]) {
+      analyseData = JSON.parse(await zipEntry.async('text'))
+    }
+    if (filename === files[2]) {
+      priceLog = JSON.parse(await zipEntry.async('text'))
+    }
+  }
+  const resAnalyseData = analyseData
+  const resErrorLog: Array<string> = (errorLog as string)
     .trim().split('=====').filter(item => !!item)
   const resPriceLog: {
     nowPrice: number, shortPrice: number,
     longPrice: number, nowTime: string
-  } = resArray2[2]
+  } = priceLog
   const {
     startTime, analyseTime, lever,
     orderFormMonth, orderFormYear, lastNMonth,
