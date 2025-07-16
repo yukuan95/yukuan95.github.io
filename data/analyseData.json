@@ -1,6 +1,6 @@
 {
   "startTime": "2025-07-25 02:15:00.000 +08",
-  "analyseTime": "2025-07-16 20:00:18.722 +08",
+  "analyseTime": "2025-07-16 21:00:18.030 +08",
   "lever": 6,
   "orderFormMonth": {
     "2017-08": {
@@ -74154,6 +74154,31 @@
           "status2": "LONG",
           "preStatus2": "SHORT",
           "preS2": 0.9442067490176815
+        },
+        {
+          "time": "2025-07-16 20:24:00.000 +08",
+          "nowPrice": 118875,
+          "shortPrice": 118907.36000000317,
+          "longPrice": 118908.33375000046,
+          "isStart": false,
+          "startTime": "2025-07-25 02:15:00.000 +08",
+          "reason": "DeathCross",
+          "status": "HEDGE",
+          "type": "Normal",
+          "preNowPrice": 119253.5,
+          "preStatus": "HEDGE",
+          "preS": 1,
+          "maxPrice": 119069.95083333642,
+          "maxPriceTime": "2025-07-16 19:08:00.000 +08",
+          "minPrice": 118880.73916666971,
+          "minPriceTime": "2025-07-16 18:15:00.000 +08",
+          "maxMinChg": 0.001590976302018613,
+          "preLongPrice": 118879.0288657412,
+          "preLongPriceTime": "2025-07-16 18:15:00.000 +08",
+          "longChg": 0.00024651012494685226,
+          "status2": "SHORT",
+          "preStatus2": "LONG",
+          "preS2": 0.9750707945678743
         }
       ],
       "perMonthS": 1.1674915865832203
