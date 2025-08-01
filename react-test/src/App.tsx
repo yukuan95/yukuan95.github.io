@@ -291,6 +291,7 @@ const MonthPicker: FC = () => {
   return (<div className={cx(flexStyle.container, flexStyle.fsbc)}>
     <div>
       <DatePicker
+        inputReadOnly={true}
         style={{ width: '220px' }}
         value={yearMonthValue}
         onChange={onChange} picker="month" />
