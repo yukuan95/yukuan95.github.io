@@ -18,8 +18,8 @@ const AppTop: FC = () => {
         algorithm: useStore((state) => state.isLight) ? theme.defaultAlgorithm : theme.darkAlgorithm,
         components: {
           Tooltip: {
-            colorBgSpotlight: useStore((state) => state.isLight) ? Color.white : Color.black2,
-            colorTextLightSolid: useStore((state) => state.isLight) ? Color.black2 : Color.white,
+            colorBgSpotlight: useStore((state) => state.isLight) ? Color.white : Color.gray,
+            colorTextLightSolid: useStore((state) => state.isLight) ? Color.gray : Color.white,
           },
           Table: {
             cellPaddingBlockSM: 0,

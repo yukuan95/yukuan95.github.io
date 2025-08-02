@@ -3,7 +3,7 @@ import JSZip from 'jszip'
 export enum Color {
   'white' = '#FFFFFFFF',
   'black' = '#292929FF',
-  'black2' = '#505050FF',
+  'gray' = '#505050FF',
   'red' = '#F23645FF',
   'green' = '#089981FF',
 }
