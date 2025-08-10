@@ -386,7 +386,7 @@ const Chart = () => {
       width: 355px;
     `
   }
-  const { getData } = useSnapshot(state)
+  const { isLight, getData } = useSnapshot(state)
   const dateValue = getData?.dateValue ?? []
   const data = dateValue.map((item) => [
     new Date(item.date.slice(0, 23) + item.date.slice(24, 27)), item.value,
@@ -417,9 +417,9 @@ const Chart = () => {
           showSymbol: false,
         }]
       }
-      subscribeKey(state, 'isLight', (isLight) =>
-        myChart.setTheme(isLight ? 'default' : 'dark')
-      )
+      const setTheme = (isLight: boolean) => myChart.setTheme(isLight ? 'default' : 'dark')
+      subscribeKey(state, 'isLight', (isLight) => setTheme(isLight))
+      setTheme(isLight)
       myChart.setOption(option)
     }
   }, [])
