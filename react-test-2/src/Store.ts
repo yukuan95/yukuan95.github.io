@@ -97,8 +97,6 @@ export type DataType4 = {
 export type StateType = {
   isLoading: boolean;
   isLight: boolean;
-  analyseTime: string | null;
-  startTime: string | null;
   price: number | null;
   priceOld: number | null;
   upOrDown: UpOrDown;
@@ -377,8 +375,6 @@ export async function getData() {
   state.getData = resData
   state.price = toFixedNumber(state.price ?? resData.nowPrice, 2)
   state.priceOld = toFixedNumber(state.priceOld ?? resData.shortPrice, 2)
-  state.analyseTime = analyseTime
-  state.startTime = startTime
   updateShowData()
   state.isLoading = false
   return resData

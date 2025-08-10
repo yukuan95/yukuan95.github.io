@@ -203,7 +203,6 @@ const TimeAndPrice = () => {
     <div style={{ userSelect: 'none' }} className={cx(flexStyle.fsbc, flexStyle.container)}>
       <Tooltip mouseEnterDelay={0} title={<div className={cx(fontFamilyStyle.fontFamily)}>
         <div>{removeMilli(getData?.startTime)}</div>
-        <div>{removeMilli(getData?.dateValue?.at(-1)?.date)}</div>
       </div>} >
         <div className={timeAndPriceStyle.timeColor}>{removeMilli(getData?.analyseTime)}</div>
       </Tooltip>
@@ -268,7 +267,7 @@ const MonthPicker = () => {
 
 const Table1 = () => {
   useSnapshot(state)
-  const { tableData1, getData } = state
+  const { tableData1 } = state
   const flexStyle = FlexStyle()
   const fontFamilyStyle = FontFamilyStyle()
   return (
@@ -287,9 +286,6 @@ const Table1 = () => {
               <div>rateAvg</div>
               <div style={{ whiteSpace: 'pre' }}> : </div>
               <div>{item.rateAvg}</div>
-              <div>value</div>
-              <div style={{ whiteSpace: 'pre' }}> : </div>
-              <div>{getData?.dateValue?.at(-1)?.value}</div>
             </div>
           </div>}>
             <div>{item.rate}</div>
