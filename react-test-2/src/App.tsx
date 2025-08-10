@@ -385,12 +385,24 @@ const Table4 = () => {
 
 const Chart = () => {
   useSnapshot(state)
+  const flexStyle = FlexStyle()
+  const fontFamilyStyle = FontFamilyStyle()
   const { getData, isLight } = state
   const chartClass = {
     chart: css`
       height: 200px;
+      width: 342px;
+      position: absolute;
+      top: 32px;
+    `,
+    container: css`
       width: 345px;
-    `
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    `,
   }
   const dateValue = getData?.dateValue ?? []
   const data = dateValue.map((item) => [
@@ -403,7 +415,7 @@ const Chart = () => {
       const option = {
         backgroundColor: isLight ? '#FFFFFF' : '#141414',
         grid: {
-          left: '5', right: '5', bottom: '10', top: '10', containLabel: true
+          left: '5', right: '5', bottom: '5', top: '10', containLabel: true
         },
         tooltip: {
           trigger: 'axis'
@@ -437,9 +449,21 @@ const Chart = () => {
     }
   }, [])
 
-  return (<>
+  return (<div className={cx(chartClass.container)}>
+    <Table dataSource={[]} size="small" pagination={false} bordered
+      style={{ width: '454px' }}
+      locale={{ emptyText: <div style={{ height: '202px' }}></div> }}>
+      <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)}
+        align="center" title={() => (<>
+          <div>{removeMilli(state.getData?.dateValue?.at(-1)?.date)}</div>
+        </>)} />
+      <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)}
+        align="center" title={() => (<>
+          <div>{state.getData?.dateValue?.at(-1)?.value}</div>
+        </>)} />
+    </Table>
     <div className={cx(chartClass.chart)} ref={myChartEle}></div>
-  </>)
+  </div>)
 }
 
 async function init(): Promise<void> {
