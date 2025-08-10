@@ -383,7 +383,7 @@ const Chart = () => {
   const chartClass = {
     chart: css`
       height: 200px;
-      width: 355px;
+      width: 345px;
     `
   }
   const { isLight, getData } = useSnapshot(state)
@@ -417,10 +417,10 @@ const Chart = () => {
           showSymbol: false,
         }]
       }
+      myChart.setOption(option)
       const setTheme = (isLight: boolean) => myChart.setTheme(isLight ? 'default' : 'dark')
       subscribeKey(state, 'isLight', (isLight) => setTheme(isLight))
       setTheme(isLight)
-      myChart.setOption(option)
     }
   }, [])
 
