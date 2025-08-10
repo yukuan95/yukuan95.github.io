@@ -193,9 +193,9 @@ const LeftArrowButton = () => {
 }
 
 const TimeAndPrice = () => {
-  const snap = useSnapshot(state)
-  const isError = (snap.getData?.errorLogArray?.length ?? 0) > 0
-  const { price, upOrDown, getData } = snap
+  useSnapshot(state)
+  const { price, upOrDown, getData } = state
+  const isError = (getData?.errorLogArray?.length ?? 0) > 0
   const flexStyle = FlexStyle()
   const timeAndPriceStyle = TimeAndPriceStyle({ isError, upOrDown })
   const fontFamilyStyle = FontFamilyStyle()
@@ -229,9 +229,9 @@ const TimeAndPrice = () => {
 }
 
 const MonthPicker = () => {
+  useSnapshot(state)
   const flexStyle = FlexStyle()
-  const snap = useSnapshot(state)
-  const { yearMonth } = snap
+  const { yearMonth } = state
   const getYearMonth = (data?: Date) => {
     return milliTimeToStringTime(data?.getTime() ?? new Date().getTime()).slice(0, 7)
   }
@@ -267,7 +267,8 @@ const MonthPicker = () => {
 }
 
 const Table1 = () => {
-  const { tableData1, getData } = useSnapshot(state)
+  useSnapshot(state)
+  const { tableData1, getData } = state
   const flexStyle = FlexStyle()
   const fontFamilyStyle = FontFamilyStyle()
   return (
@@ -300,9 +301,10 @@ const Table1 = () => {
 }
 
 const Table2 = () => {
+  useSnapshot(state)
+  const { getData, tableData2 } = state
   const flexStyle = FlexStyle()
   const fontFamilyStyle = FontFamilyStyle()
-  const { tableData2, getData } = useSnapshot(state)
   return (
     <div className={flexStyle.container}>
       <Table<DataType2> dataSource={tableData2} size="small" pagination={false} bordered>
@@ -350,8 +352,9 @@ const Table2 = () => {
 }
 
 const Table3 = () => {
+  useSnapshot(state)
+  const { tableData3 } = state
   const flexStyle = FlexStyle()
-  const { tableData3 } = useSnapshot(state)
   const fontFamilyStyle = FontFamilyStyle()
   return (<div className={flexStyle.container}>
     <Table<DataType3> dataSource={tableData3} size="small" pagination={false} bordered>
@@ -365,8 +368,9 @@ const Table3 = () => {
 }
 
 const Table4 = () => {
+  useSnapshot(state)
+  const { tableData4 } = state
   const flexStyle = FlexStyle()
-  const { tableData4 } = useSnapshot(state)
   const fontFamilyStyle = FontFamilyStyle()
   return (<div className={flexStyle.container}>
     <Table<DataType4> dataSource={tableData4} size="small" pagination={false} bordered>
@@ -380,13 +384,14 @@ const Table4 = () => {
 }
 
 const Chart = () => {
+  useSnapshot(state)
+  const { getData, isLight } = state
   const chartClass = {
     chart: css`
       height: 200px;
       width: 345px;
     `
   }
-  const { isLight, getData } = useSnapshot(state)
   const dateValue = getData?.dateValue ?? []
   const data = dateValue.map((item) => [
     new Date(item.date.slice(0, 23) + item.date.slice(24, 27)), item.value,
@@ -444,7 +449,8 @@ async function init(): Promise<void> {
 }
 
 const App = () => {
-  const { isLight, isLoading, isShowChart } = useSnapshot(state)
+  useSnapshot(state)
+  const { isLight, isLoading, isShowChart } = state
   useEffect(() => { init() }, [])
   const appStyle = AppStyle({ isLight })
   const fontFamilyStyle = FontFamilyStyle()
@@ -475,7 +481,5 @@ const App = () => {
     </div>
   )
 }
-
-
 
 export default App

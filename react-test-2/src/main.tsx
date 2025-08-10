@@ -14,7 +14,7 @@ import dayjs from 'dayjs'
 dayjs.locale('zh-cn')
 
 const AppTop = () => {
-  const snap = useSnapshot(state)
+  useSnapshot(state)
   useEffect(() => {
     const setIsLight = (isLight: boolean) => state.isLight = isLight
     const themeMedia = window.matchMedia("(prefers-color-scheme: light)")
@@ -27,11 +27,11 @@ const AppTop = () => {
   return (
     <ConfigProvider
       theme={{
-        algorithm: snap.isLight ? theme.defaultAlgorithm : theme.darkAlgorithm,
+        algorithm: state.isLight ? theme.defaultAlgorithm : theme.darkAlgorithm,
         components: {
           Tooltip: {
-            colorBgSpotlight: snap.isLight ? Color.white : Color.gray,
-            colorTextLightSolid: snap.isLight ? Color.gray : Color.white,
+            colorBgSpotlight: state.isLight ? Color.white : Color.gray,
+            colorTextLightSolid: state.isLight ? Color.gray : Color.white,
           },
           Table: {
             cellPaddingBlockSM: 0,
