@@ -1,5 +1,6 @@
 import { DatePicker, Button, Tooltip, Table } from 'antd'
 import { useEffect, useMemo, useRef } from 'react'
+import { subscribeKey } from 'valtio/utils'
 import { cx, css } from '@emotion/css'
 import { useSnapshot } from 'valtio'
 import * as echarts from 'echarts'
@@ -416,6 +417,9 @@ const Chart = () => {
           showSymbol: false,
         }]
       }
+      subscribeKey(state, 'isLight', (isLight) =>
+        myChart.setTheme(isLight ? 'default' : 'dark')
+      )
       myChart.setOption(option)
     }
   }, [])
