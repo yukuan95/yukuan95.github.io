@@ -155,7 +155,7 @@ export const state: StateType = proxy({
   upOrDown: UpOrDown.none,
   yearMonth: getNowStringTime().slice(0, 7),
   isShowAll: true,
-  isShowChart: false,
+  isShowChart: true,
   getData: null,
   tableData1: [],
   tableData2: [],
