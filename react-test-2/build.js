@@ -1,6 +1,7 @@
-import { join } from 'path';
 import { fileURLToPath } from 'url';
+import { join } from 'path';
 import fs from 'fs-extra';
+
 const main = async () => {
   let url = import.meta.url;
   let __filename = fileURLToPath(url);
@@ -17,4 +18,5 @@ const main = async () => {
   }
   await fs.remove(src);
 };
+
 main();

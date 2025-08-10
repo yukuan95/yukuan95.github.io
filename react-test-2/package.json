@@ -12,8 +12,10 @@
   "dependencies": {
     "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "@emotion/css": "^11.13.5",
+    "@types/fs-extra": "^11.0.4",
     "antd": "^5.26.7",
     "dayjs": "^1.11.13",
+    "echarts": "^6.0.0",
     "fs-extra": "^11.3.1",
     "jszip": "^3.10.1",
     "react": "^19.1.1",

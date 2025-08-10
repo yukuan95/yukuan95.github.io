@@ -104,6 +104,7 @@ export type StateType = {
   upOrDown: UpOrDown;
   yearMonth: string | null;
   isShowAll: boolean;
+  isShowChart: boolean;
   getData: null | GetData,
   tableData1: Array<DataType1>;
   tableData2: Array<DataType2>;
@@ -154,6 +155,7 @@ export const state: StateType = proxy({
   upOrDown: UpOrDown.none,
   yearMonth: getNowStringTime().slice(0, 7),
   isShowAll: true,
+  isShowChart: false,
   getData: null,
   tableData1: [],
   tableData2: [],

@@ -1,7 +1,8 @@
 import { DatePicker, Button, Tooltip, Table } from 'antd'
-import { useEffect, useMemo } from 'react'
-import { useSnapshot } from 'valtio'
+import { useEffect, useMemo, useRef } from 'react'
 import { cx, css } from '@emotion/css'
+import { useSnapshot } from 'valtio'
+import * as echarts from 'echarts'
 import dayjs from 'dayjs'
 const { Column } = Table
 
@@ -199,7 +200,10 @@ const TimeAndPrice = () => {
   const fontFamilyStyle = FontFamilyStyle()
   return (
     <div style={{ userSelect: 'none' }} className={cx(flexStyle.fsbc, flexStyle.container)}>
-      <Tooltip mouseEnterDelay={0} title={<div className={fontFamilyStyle.fontFamily}>{removeMilli(getData?.startTime)}</div>} >
+      <Tooltip mouseEnterDelay={0} title={<div className={cx(fontFamilyStyle.fontFamily)}>
+        <div>{removeMilli(getData?.startTime)}</div>
+        <div>{removeMilli(getData?.dateValue?.at(-1)?.date)}</div>
+      </div>} >
         <div className={timeAndPriceStyle.timeColor}>{removeMilli(getData?.analyseTime)}</div>
       </Tooltip>
       <Tooltip mouseEnterDelay={0} title={<div className={fontFamilyStyle.fontFamily}>
@@ -262,7 +266,7 @@ const MonthPicker = () => {
 }
 
 const Table1 = () => {
-  const { tableData1 } = useSnapshot(state)
+  const { tableData1, getData } = useSnapshot(state)
   const flexStyle = FlexStyle()
   const fontFamilyStyle = FontFamilyStyle()
   return (
@@ -270,7 +274,9 @@ const Table1 = () => {
       <Table<DataType1> dataSource={tableData1} size="small" pagination={false} bordered>
         <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="month" key="month" dataIndex="month" />
         <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="leverage" key="leverage" dataIndex="leverage" />
-        <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="rate" key="rate" dataIndex="rate" render={(_, item) => (<>
+        <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (
+          <div style={{ userSelect: 'none' }} onDoubleClick={() => { state.isShowChart = !state.isShowChart }}>rate</div>
+        )} key="rate" dataIndex="rate" render={(_, item) => (<>
           <Tooltip mouseEnterDelay={0} placement="left" title={<div className={fontFamilyStyle.fontFamily}>
             <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto', justifyItems: 'center' }}>
               <div>rate2</div>
@@ -279,6 +285,9 @@ const Table1 = () => {
               <div>rateAvg</div>
               <div style={{ whiteSpace: 'pre' }}> : </div>
               <div>{item.rateAvg}</div>
+              <div>value</div>
+              <div style={{ whiteSpace: 'pre' }}> : </div>
+              <div>{getData?.dateValue?.at(-1)?.value}</div>
             </div>
           </div>}>
             <div>{item.rate}</div>
@@ -369,6 +378,53 @@ const Table4 = () => {
   </div>)
 }
 
+const Chart = () => {
+  const chartClass = {
+    chart: css`
+      height: 200px;
+      width: 355px;
+    `
+  }
+  const { getData } = useSnapshot(state)
+  const dateValue = getData?.dateValue ?? []
+  const data = dateValue.map((item) => [
+    new Date(item.date.slice(0, 23) + item.date.slice(24, 27)), item.value,
+  ])
+  const myChartEle = useRef(null)
+  useEffect(() => {
+    if (myChartEle.current) {
+      const myChart = echarts.init(myChartEle.current)
+      const option = {
+        grid: {
+          left: '5', right: '5', bottom: '10', top: '10', containLabel: true
+        },
+        tooltip: {
+          trigger: 'axis'
+        },
+        xAxis: {
+          type: 'time',
+        },
+        yAxis: {
+          name: 'value'
+        },
+        dataset: {
+          source: data
+        },
+        series: [{
+          type: 'line',
+          smooth: true,
+          showSymbol: false,
+        }]
+      }
+      myChart.setOption(option)
+    }
+  }, [])
+
+  return (<>
+    <div className={cx(chartClass.chart)} ref={myChartEle}></div>
+  </>)
+}
+
 async function init(): Promise<void> {
   const getPrice = async () => {
     for await (const i of genPrice()) {
@@ -384,7 +440,7 @@ async function init(): Promise<void> {
 }
 
 const App = () => {
-  const { isLight, isLoading } = useSnapshot(state)
+  const { isLight, isLoading, isShowChart } = useSnapshot(state)
   useEffect(() => { init() }, [])
   const appStyle = AppStyle({ isLight })
   const fontFamilyStyle = FontFamilyStyle()
@@ -399,6 +455,10 @@ const App = () => {
         <MonthPicker />
         <div style={{ height: '20px' }}></div>
         <div><Table1 /></div>
+        {isShowChart ? <>
+          <div style={{ height: '20px' }}></div>
+          <div><Chart /></div>
+        </> : <></>}
         <div style={{ height: '20px' }}></div>
         <div><Table2 /></div>
         <div style={{ height: '20px' }}></div>
