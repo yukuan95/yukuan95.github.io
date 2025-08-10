@@ -401,6 +401,7 @@ const Chart = () => {
     if (myChartEle.current) {
       const myChart = echarts.init(myChartEle.current)
       const option = {
+        backgroundColor: isLight ? '#FFFFFF' : '#141414',
         grid: {
           left: '5', right: '5', bottom: '10', top: '10', containLabel: true
         },
@@ -420,10 +421,17 @@ const Chart = () => {
           type: 'line',
           smooth: true,
           showSymbol: false,
+          lineStyle: {
+            width: 1.5
+          }
         }]
       }
       myChart.setOption(option)
-      const setTheme = (isLight: boolean) => myChart.setTheme(isLight ? 'default' : 'dark')
+      const setTheme = (isLight: boolean) => {
+        myChart.setTheme(isLight ? 'default' : 'dark')
+        option.backgroundColor = isLight ? '#FFFFFF' : '#141414'
+        myChart.setOption(option)
+      }
       subscribeKey(state, 'isLight', (isLight) => setTheme(isLight))
       setTheme(isLight)
     }
