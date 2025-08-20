@@ -10,7 +10,7 @@ const { Column } = Table
 import {
   state, getFonts, getData, toFixedNumber, genPrice, removeMilli,
   toFixedString, UpOrDown, Color, useConst, ArrowSvgName, monthPlus,
-  milliTimeToStringTime,
+  milliTimeToStringTime, getNowStringTime, stringTimeToMilliTime
 } from './Store.ts'
 
 import type {
@@ -195,7 +195,10 @@ const LeftArrowButton = () => {
 const TimeAndPrice = () => {
   useSnapshot(state)
   const { price, upOrDown, getData } = state
-  const isError = (getData?.errorLogArray?.length ?? 0) > 0
+  const nowStringTime = getNowStringTime()
+  const analyseTime = getData?.analyseTime ?? nowStringTime
+  const minutes = (stringTimeToMilliTime(nowStringTime) - stringTimeToMilliTime(analyseTime)) / (60 * 1000)
+  const isError = ((getData?.errorLogArray?.length ?? 0) > 0) || (minutes > 70)
   const flexStyle = FlexStyle()
   const timeAndPriceStyle = TimeAndPriceStyle({ isError, upOrDown })
   const fontFamilyStyle = FontFamilyStyle()
