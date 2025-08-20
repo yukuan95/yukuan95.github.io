@@ -1,5 +1,6 @@
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { DatePicker, Button, Tooltip, Table } from 'antd'
-import { useEffect, useMemo, useRef } from 'react'
+import ReactDOMServer from 'react-dom/server'
 import { subscribeKey } from 'valtio/utils'
 import { cx, css } from '@emotion/css'
 import { useSnapshot } from 'valtio'
@@ -382,11 +383,13 @@ const Table4 = () => {
   </div>)
 }
 
+let myChart: any = null
 const Chart = () => {
   useSnapshot(state)
   const flexStyle = FlexStyle()
   const fontFamilyStyle = FontFamilyStyle()
-  const { getData, isLight } = state
+  const { getData } = state
+  const [isLight, setIsLight] = useState(state.isLight)
   const chartClass = {
     chart: css`
       height: 200px;
@@ -402,52 +405,50 @@ const Chart = () => {
       justify-content: center;
       align-items: center;
     `,
+    marker: css`
+      display:inline-block;
+      margin-right:4px;
+      border-radius:10px;
+      width:10px;
+      height:10px;
+      background-color:#5070dd;
+    `
   }
   const dateValue = getData?.dateValue ?? []
   const data = dateValue.map((item) => [
     new Date(item.date.slice(0, 23) + item.date.slice(24, 27)), item.value,
   ])
+  const option = {
+    backgroundColor: isLight ? '#FFFFFF' : '#141414',
+    grid: { left: '5', right: '5', bottom: '5', top: '10', containLabel: true },
+    tooltip: {
+      trigger: 'axis',
+      formatter: (param: any) => {
+        const date = milliTimeToStringTime(param[0].data[0].getTime()).slice(0, 16)
+        const value = toFixedString(param[0].data[1], 4)
+        return ReactDOMServer.renderToString(<div className={fontFamilyStyle.fontFamily}>
+          <div>{date}</div>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div><span className={chartClass.marker}></span></div>
+            <div style={{ fontWeight: 600, color: isLight ? 'black' : 'white' }} >{value}</div>
+          </div>
+        </div >);
+      }
+    },
+    xAxis: { type: 'time', }, yAxis: { name: 'value' }, dataset: { source: data },
+    series: [{ type: 'line', smooth: true, showSymbol: false, }]
+  }
   const myChartEle = useRef(null)
   useEffect(() => {
-    if (myChartEle.current) {
-      const myChart = echarts.init(myChartEle.current)
-      const option = {
-        backgroundColor: isLight ? '#FFFFFF' : '#141414',
-        grid: {
-          left: '5', right: '5', bottom: '5', top: '10', containLabel: true
-        },
-        tooltip: {
-          trigger: 'axis'
-        },
-        xAxis: {
-          type: 'time',
-        },
-        yAxis: {
-          name: 'value'
-        },
-        dataset: {
-          source: data
-        },
-        series: [{
-          type: 'line',
-          smooth: true,
-          showSymbol: false,
-          lineStyle: {
-            width: 1.5
-          }
-        }]
-      }
-      myChart.setOption(option)
-      const setTheme = (isLight: boolean) => {
-        myChart.setTheme(isLight ? 'default' : 'dark')
-        option.backgroundColor = isLight ? '#FFFFFF' : '#141414'
-        myChart.setOption(option)
-      }
-      subscribeKey(state, 'isLight', (isLight) => setTheme(isLight))
-      setTheme(isLight)
-    }
+    if (!myChartEle.current) { return }
+    subscribeKey(state, 'isLight', (isLight) => setIsLight(isLight))
+    myChart = echarts.init(myChartEle.current)
+    myChart.setOption(option)
   }, [])
-
+  useEffect(() => {
+    myChart.setTheme(isLight ? 'default' : 'dark')
+    myChart.setOption(option)
+  }, [isLight])
   return (<div className={cx(chartClass.container)}>
     <Table dataSource={[]} size="small" pagination={false} bordered
       style={{ width: '454px' }}
