@@ -458,7 +458,7 @@ const Chart = () => {
         </>)} />
       <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)}
         align="center" title={() => (<>
-          <div>{state.getData?.dateValue?.at(-1)?.value}</div>
+          <div>{toFixedString(state.getData?.dateValue?.at(-1)?.value ?? 0, 4)}</div>
         </>)} />
     </Table>
     <div className={cx(chartClass.chart)} ref={myChartEle}></div>

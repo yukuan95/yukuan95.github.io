@@ -457,6 +457,6 @@ export function removeMilli(time?: string): string {
   if (!time) {
     return ''
   } else {
-    return `${time.slice(0, 16)} ${time.slice(-4)}`
+    return `${time.slice(0, 16)} ${time.slice(-3)}`
   }
 }
