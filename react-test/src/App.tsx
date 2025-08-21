@@ -435,7 +435,7 @@ const Chart = () => {
         }
       },
       xAxis: { type: 'time', }, yAxis: { name: 'value' }, dataset: { source: data },
-      series: [{ type: 'line', smooth: true, showSymbol: false, }]
+      series: [{ type: 'line', smooth: true, showSymbol: false, lineStyle: { width: 1.5 }, }]
     }
   }
   const setOption = (myChart: any, isLight: boolean) => {
