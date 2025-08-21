@@ -446,6 +446,7 @@ const Chart = () => {
   useEffect(() => {
     if (!myChartEle.current) { return }
     const myChart = echarts.init(myChartEle.current)
+    myChart.setOption(getOption(isLight))
     setOption(myChart, isLight)
     subscribeKey(state, 'isLight', (isLight) => {
       setOption(myChart, isLight)
