@@ -1,25 +1,37 @@
-import 'antd/dist/reset.css'
-import '@ant-design/v5-patch-for-react-19'
 import { createRoot } from 'react-dom/client'
 import { ConfigProvider, theme } from 'antd'
-import App from './App.tsx'
+import { subscribeKey } from 'valtio/utils'
+import '@ant-design/v5-patch-for-react-19'
+import { state, Color } from './Store.ts'
 import locale from 'antd/locale/zh_CN'
-import dayjs from 'dayjs'
-import { FC } from 'react'
+import { useSnapshot } from 'valtio'
+import { useEffect } from 'react'
+import 'antd/dist/reset.css'
 import 'dayjs/locale/zh-cn'
-import { useStore } from './Store.ts'
-import { Color } from './Lib.ts'
+import App from './App.tsx'
+import dayjs from 'dayjs'
+
 dayjs.locale('zh-cn')
 
-const AppTop: FC = () => {
+const AppTop = () => {
+  useSnapshot(state)
+  useEffect(() => {
+    const setIsLight = (isLight: boolean) => state.isLight = isLight
+    const themeMedia = window.matchMedia("(prefers-color-scheme: light)")
+    setIsLight(themeMedia.matches)
+    themeMedia.onchange = ({ matches }) => setIsLight(matches)
+    subscribeKey(state, 'isLight', (isLight) =>
+      document.body.style.backgroundColor = isLight ? Color.white : Color.black
+    )
+  }, [])
   return (
     <ConfigProvider
       theme={{
-        algorithm: useStore((state) => state.isLight) ? theme.defaultAlgorithm : theme.darkAlgorithm,
+        algorithm: state.isLight ? theme.defaultAlgorithm : theme.darkAlgorithm,
         components: {
           Tooltip: {
-            colorBgSpotlight: useStore((state) => state.isLight) ? Color.white : Color.gray,
-            colorTextLightSolid: useStore((state) => state.isLight) ? Color.gray : Color.white,
+            colorBgSpotlight: state.isLight ? Color.white : Color.gray,
+            colorTextLightSolid: state.isLight ? Color.gray : Color.white,
           },
           Table: {
             cellPaddingBlockSM: 0,

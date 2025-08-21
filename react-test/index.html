@@ -11,8 +11,7 @@
 <body>
   <div style="height: 100%;" id="root"></div>
   <script>
-    const themeMedia = window.matchMedia("(prefers-color-scheme: light)")
-    const isLight = themeMedia.matches
+    const isLight = window.matchMedia("(prefers-color-scheme: light)").matches
     document.body.style.backgroundColor = isLight ? '#FFFFFFFF' : '#292929FF'
   </script>
   <script type="module" src="/src/main.tsx"></script>

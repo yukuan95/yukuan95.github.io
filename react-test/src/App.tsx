@@ -1,29 +1,34 @@
 import { DatePicker, Button, Tooltip, Table } from 'antd'
-import { FC, useEffect, useMemo } from 'react'
-import { useStore, useConst } from './Store.ts'
-import { useShallow } from 'zustand/react/shallow'
-import { createStyles, css, cx } from 'antd-style'
+import { useEffect, useMemo, useRef } from 'react'
+import ReactDOMServer from 'react-dom/server'
+import { subscribeKey } from 'valtio/utils'
+import { cx, css } from '@emotion/css'
+import { useSnapshot } from 'valtio'
+import * as echarts from 'echarts'
 import dayjs from 'dayjs'
-import {
-  Color, UpOrDown, ArrowSvgName, getData, genPrice, monthPlus,
-  toFixedNumber, removeMilli, toFixedString, milliTimeToStringTime,
-  DataType1, DataType2, DataType3, DataType4, getFonts
-} from './Lib.ts'
-
 const { Column } = Table
-const { setState } = useStore
 
-const ArrowButtonStyle = createStyles({
-  arrowButton: css`
-    width: 40px;
-    height: 32px;
-    padding: 0;
-  `
-})
+import {
+  state, getFonts, getData, toFixedNumber, genPrice, removeMilli,
+  toFixedString, UpOrDown, Color, useConst, ArrowSvgName, monthPlus,
+  milliTimeToStringTime, getNowStringTime, stringTimeToMilliTime
+} from './Store.ts'
 
-const TimeAndPriceStyle = createStyles((_, props: {
-  isError: boolean; upOrDown: UpOrDown
-}) => {
+import type {
+  DataType1, DataType2, DataType3, DataType4
+} from './Store.ts'
+
+const ArrowButtonStyle = () => {
+  return {
+    arrowButton: css`
+      width: 40px;
+      height: 32px;
+      padding: 0;
+    `
+  }
+}
+
+const TimeAndPriceStyle = (props: { isError: boolean; upOrDown: UpOrDown }) => {
   let priceColor = 'inherit'
   if (props.upOrDown === UpOrDown.up) {
     priceColor = Color.green
@@ -39,17 +44,17 @@ const TimeAndPriceStyle = createStyles((_, props: {
       color: ${priceColor};
   `,
   }
-})
+}
 
-const FontFamilyStyle = createStyles(() => {
+const FontFamilyStyle = () => {
   return {
     fontFamily: css`
       font-family: TAHOMA, Tahoma, Helvetica, Arial, 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
     `,
   }
-})
+}
 
-const FlexStyle = createStyles(() => {
+const FlexStyle = () => {
   return {
     fsbc: css`
       display: flex;
@@ -72,9 +77,9 @@ const FlexStyle = createStyles(() => {
       height: 30px;
     `,
   }
-})
+}
 
-const AppStyle = createStyles((_, props: { isLight: boolean }) => {
+const AppStyle = (props: { isLight: boolean }) => {
   return {
     app: css`
       display: flex;
@@ -107,40 +112,10 @@ const AppStyle = createStyles((_, props: { isLight: boolean }) => {
       animation: load8 1.1s infinite linear;
     `,
   }
-})
-
-function setBodyColor(isLight: boolean) {
-  document.body.style.backgroundColor = isLight ? Color.white : Color.black
 }
 
-async function init(): Promise<void> {
-  const themeMedia = window.matchMedia("(prefers-color-scheme: light)")
-  const isLight = themeMedia.matches
-  setBodyColor(isLight)
-  setState({ isLight })
-  themeMedia.onchange = (e) => {
-    const isLight = e.matches
-    setBodyColor(isLight)
-    setState({ isLight })
-  }
-  const getPrice = async () => {
-    for await (const i of genPrice()) {
-      const price = toFixedNumber(i.price, 2)
-      document.title = toFixedString(i.price, 2)
-      setState((state) => ({ price, priceOld: state.price }))
-    }
-  }
-  getPrice()
-  const [resData] = await Promise.all([getData(), getFonts()])
-  setState((state) => ({
-    getData: resData,
-    price: toFixedNumber(state.price ?? resData.nowPrice, 2),
-    priceOld: toFixedNumber(state.priceOld ?? resData.shortPrice, 2),
-    isLoading: false,
-  }))
-}
-
-const ArrowSvg: FC<{ name: string }> = ({ name }) => {
+const ArrowSvg = (props: { name: string }) => {
+  const name = props.name
   if (name === ArrowSvgName.rightUpArrow) {
     return (
       <svg style={{ color: Color.green }} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -180,23 +155,23 @@ const ArrowSvg: FC<{ name: string }> = ({ name }) => {
   return <></>
 }
 
-const RightUpArrow: FC = () => {
-  const { styles: flexStyle } = FlexStyle()
+const RightUpArrow = () => {
+  const flexStyle = FlexStyle()
   return (<div className={flexStyle.fcc}>
     <ArrowSvg name={ArrowSvgName.rightUpArrow} />
   </div>)
 }
 
-const RightDownArrow: FC = () => {
-  const { styles: flexStyle } = FlexStyle()
+const RightDownArrow = () => {
+  const flexStyle = FlexStyle()
   return (<div className={flexStyle.fcc}>
     <ArrowSvg name={ArrowSvgName.rightDownArrow} />
   </div>)
 }
 
-const RightArrowButton: FC = () => {
-  const { styles: arrowButtonStyle } = ArrowButtonStyle()
-  const { styles: flexStyle } = FlexStyle()
+const RightArrowButton = () => {
+  const arrowButtonStyle = ArrowButtonStyle()
+  const flexStyle = FlexStyle()
   return (
     <Button className={arrowButtonStyle.arrowButton}>
       <div className={flexStyle.fcc}>
@@ -206,9 +181,9 @@ const RightArrowButton: FC = () => {
   )
 }
 
-const LeftArrowButton: FC = () => {
-  const { styles: arrowButtonStyle } = ArrowButtonStyle()
-  const { styles: flexStyle } = FlexStyle()
+const LeftArrowButton = () => {
+  const arrowButtonStyle = ArrowButtonStyle()
+  const flexStyle = FlexStyle()
   return (
     <Button className={arrowButtonStyle.arrowButton}>
       <div className={flexStyle.fcc}>
@@ -218,17 +193,21 @@ const LeftArrowButton: FC = () => {
   )
 }
 
-const TimeAndPrice: FC = () => {
-  const { upOrDown, getData, price } = useStore(useShallow((state) => ({
-    upOrDown: state.upOrDown, getData: state.getData, price: state.price,
-  })))
-  const isError = (getData?.errorLogArray?.length ?? 0) > 0
-  const { styles: flexStyle } = FlexStyle()
-  const { styles: timeAndPriceStyle } = TimeAndPriceStyle({ isError, upOrDown })
-  const { styles: fontFamilyStyle } = FontFamilyStyle({ isError, upOrDown })
+const TimeAndPrice = () => {
+  useSnapshot(state)
+  const { price, upOrDown, getData } = state
+  const nowStringTime = getNowStringTime()
+  const analyseTime = getData?.analyseTime ?? nowStringTime
+  const minutes = (stringTimeToMilliTime(nowStringTime) - stringTimeToMilliTime(analyseTime)) / (60 * 1000)
+  const isError = ((getData?.errorLogArray?.length ?? 0) > 0) || (minutes > 70)
+  const flexStyle = FlexStyle()
+  const timeAndPriceStyle = TimeAndPriceStyle({ isError, upOrDown })
+  const fontFamilyStyle = FontFamilyStyle()
   return (
     <div style={{ userSelect: 'none' }} className={cx(flexStyle.fsbc, flexStyle.container)}>
-      <Tooltip mouseEnterDelay={0} title={<div className={fontFamilyStyle.fontFamily}>{removeMilli(getData?.startTime)}</div>} >
+      <Tooltip mouseEnterDelay={0} title={<div className={cx(fontFamilyStyle.fontFamily)}>
+        <div>{removeMilli(getData?.startTime)}</div>
+      </div>} >
         <div className={timeAndPriceStyle.timeColor}>{removeMilli(getData?.analyseTime)}</div>
       </Tooltip>
       <Tooltip mouseEnterDelay={0} title={<div className={fontFamilyStyle.fontFamily}>
@@ -252,40 +231,22 @@ const TimeAndPrice: FC = () => {
   )
 }
 
-const MonthPicker: FC = () => {
-  const { styles: flexStyle } = FlexStyle()
-  const { yearMonth } = useStore(useShallow((state) => ({
-    yearMonth: state.yearMonth
-  })))
+const MonthPicker = () => {
+  useSnapshot(state)
+  const flexStyle = FlexStyle()
+  const { yearMonth } = state
   const getYearMonth = (data?: Date) => {
     return milliTimeToStringTime(data?.getTime() ?? new Date().getTime()).slice(0, 7)
   }
   const onChange = (e: any) => {
-    setState((state) => {
-      const date = e?.$d ?? null
-      if (date) {
-        state.yearMonth = getYearMonth(date)
-      } else {
-        state.yearMonth = ''
-      }
-    })
+    const date = e?.$d ?? null
+    state.yearMonth = date ? getYearMonth(date) : ''
   }
-  useEffect(() => {
-    setState((state) => {
-      if (!state.yearMonth) {
-        state.yearMonth = getYearMonth()
-      }
-    })
-  }, [yearMonth])
   const onClickLeft = () => {
-    setState((state) => {
-      state.yearMonth = monthPlus(yearMonth || getYearMonth(), -1)
-    })
+    state.yearMonth = monthPlus(yearMonth || getYearMonth(), -1)
   }
   const onClickRight = () => {
-    setState((state) => {
-      state.yearMonth = monthPlus(yearMonth || getYearMonth(), 1)
-    })
+    state.yearMonth = monthPlus(yearMonth || getYearMonth(), 1)
   }
   const yearMonthValue = useMemo(() => yearMonth ? dayjs(yearMonth) : '', [yearMonth])
   return (<div className={cx(flexStyle.container, flexStyle.fsbc)}>
@@ -308,16 +269,19 @@ const MonthPicker: FC = () => {
   </div>)
 }
 
-const Table1: FC = () => {
-  const { tableData1 } = useStore(useShallow((state) => ({ tableData1: state.tableData1 })))
-  const { styles: flexStyle } = FlexStyle()
-  const { styles: fontFamilyStyle } = FontFamilyStyle()
+const Table1 = () => {
+  useSnapshot(state)
+  const { tableData1 } = state
+  const flexStyle = FlexStyle()
+  const fontFamilyStyle = FontFamilyStyle()
   return (
     <div className={flexStyle.container}>
       <Table<DataType1> dataSource={tableData1} size="small" pagination={false} bordered>
         <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="month" key="month" dataIndex="month" />
         <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="leverage" key="leverage" dataIndex="leverage" />
-        <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="rate" key="rate" dataIndex="rate" render={(_, item) => (<>
+        <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (
+          <div style={{ userSelect: 'none' }} onDoubleClick={() => { state.isShowChart = !state.isShowChart }}>rate</div>
+        )} key="rate" dataIndex="rate" render={(_, item) => (<>
           <Tooltip mouseEnterDelay={0} placement="left" title={<div className={fontFamilyStyle.fontFamily}>
             <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto', justifyItems: 'center' }}>
               <div>rate2</div>
@@ -336,12 +300,11 @@ const Table1: FC = () => {
   )
 }
 
-const Table2: FC = () => {
-  const { styles: flexStyle } = FlexStyle()
-  const { styles: fontFamilyStyle } = FontFamilyStyle()
-  const { tableData2, getData } = useStore(useShallow((state) => ({
-    tableData2: state.tableData2, getData: state.getData
-  })))
+const Table2 = () => {
+  useSnapshot(state)
+  const { getData, tableData2 } = state
+  const flexStyle = FlexStyle()
+  const fontFamilyStyle = FontFamilyStyle()
   return (
     <div className={flexStyle.container}>
       <Table<DataType2> dataSource={tableData2} size="small" pagination={false} bordered>
@@ -381,17 +344,18 @@ const Table2: FC = () => {
         </>)} />
         <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="status" key="status" dataIndex="status" />
         <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (
-          <div style={{ userSelect: 'none' }} onDoubleClick={() => { setState((state) => { state.isShowAll = !state.isShowAll }) }}>rate</div>
+          <div style={{ userSelect: 'none' }} onDoubleClick={() => { state.isShowAll = !state.isShowAll }}>rate</div>
         )} key="rate" dataIndex="rate" />
       </Table>
     </div>
   )
 }
 
-const Table3: FC = () => {
-  const { styles: flexStyle } = FlexStyle()
-  const { styles: fontFamilyStyle } = FontFamilyStyle()
-  const { tableData3 } = useStore(useShallow((state) => ({ tableData3: state.tableData3 })))
+const Table3 = () => {
+  useSnapshot(state)
+  const { tableData3 } = state
+  const flexStyle = FlexStyle()
+  const fontFamilyStyle = FontFamilyStyle()
   return (<div className={flexStyle.container}>
     <Table<DataType3> dataSource={tableData3} size="small" pagination={false} bordered>
       <Column width={100} className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="lastNMonth" key="lastNMonth" dataIndex="lastNMonth" render={(_, item) => (<>
@@ -403,10 +367,11 @@ const Table3: FC = () => {
   </div>)
 }
 
-const Table4: FC = () => {
-  const { styles: flexStyle } = FlexStyle()
-  const { styles: fontFamilyStyle } = FontFamilyStyle()
-  const { tableData4 } = useStore(useShallow((state) => ({ tableData4: state.tableData4 })))
+const Table4 = () => {
+  useSnapshot(state)
+  const { tableData4 } = state
+  const flexStyle = FlexStyle()
+  const fontFamilyStyle = FontFamilyStyle()
   return (<div className={flexStyle.container}>
     <Table<DataType4> dataSource={tableData4} size="small" pagination={false} bordered>
       <Column width={118} className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="year" key="year" dataIndex="year" render={(_, item) => (<>
@@ -418,22 +383,111 @@ const Table4: FC = () => {
   </div>)
 }
 
-const App: FC = () => {
-  const {
-    isLight, price, priceOld, yearMonth, updateUpOrDown, updateShowData, isLoading, isShowAll
-  } = useStore(useShallow((state) => {
-    const {
-      isLight, price, priceOld, yearMonth, updateUpOrDown, updateShowData, isLoading, isShowAll
-    } = state
+const Chart = () => {
+  useSnapshot(state)
+  const flexStyle = FlexStyle()
+  const fontFamilyStyle = FontFamilyStyle()
+  const { getData, isLight } = state
+  const chartClass = {
+    chart: css`
+      height: 200px;
+      width: 342px;
+      position: absolute;
+      top: 32px;
+    `,
+    container: css`
+      width: 345px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    `,
+    marker: css`
+      display:inline-block;
+      margin-right:4px;
+      border-radius:10px;
+      width:10px;
+      height:10px;
+      background-color:#5070dd;
+    `
+  }
+  const dateValue = getData?.dateValue ?? []
+  const data = dateValue.map((item) => [
+    new Date(item.date.slice(0, 23) + item.date.slice(24, 27)), item.value,
+  ])
+  const getOption = (isLight: boolean) => {
     return {
-      isLight, price, priceOld, yearMonth, updateUpOrDown, updateShowData, isLoading, isShowAll
+      backgroundColor: isLight ? '#FFFFFF' : '#141414',
+      grid: { left: '5', right: '5', bottom: '5', top: '10', containLabel: true },
+      tooltip: {
+        trigger: 'axis',
+        formatter: (param: any) => {
+          const date = milliTimeToStringTime(param[0].data[0].getTime()).slice(0, 16)
+          const value = toFixedString(param[0].data[1], 4)
+          return ReactDOMServer.renderToString(<div className={fontFamilyStyle.fontFamily}>
+            <div>{date}</div>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <div><span className={chartClass.marker}></span></div>
+              <div style={{ fontWeight: 600, color: isLight ? 'black' : 'white' }} >{value}</div>
+            </div>
+          </div >)
+        }
+      },
+      xAxis: { type: 'time', }, yAxis: { name: 'value' }, dataset: { source: data },
+      series: [{ type: 'line', smooth: true, showSymbol: false, }]
     }
-  }))
+  }
+  const setOption = (myChart: any, isLight: boolean) => {
+    myChart.setTheme(isLight ? 'default' : 'dark')
+    myChart.setOption(getOption(isLight))
+  }
+  const myChartEle = useRef(null)
+  useEffect(() => {
+    if (!myChartEle.current) { return }
+    const myChart = echarts.init(myChartEle.current)
+    setOption(myChart, isLight)
+    subscribeKey(state, 'isLight', (isLight) => {
+      setOption(myChart, isLight)
+    })
+  }, [])
+  return (<div className={cx(chartClass.container)}>
+    <Table dataSource={[]} size="small" pagination={false} bordered
+      style={{ width: '454px' }}
+      locale={{ emptyText: <div style={{ height: '202px' }}></div> }}>
+      <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)}
+        align="center" title={() => (<>
+          <div>{removeMilli(state.getData?.dateValue?.at(-1)?.date)}</div>
+        </>)} />
+      <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)}
+        align="center" title={() => (<>
+          <div>{toFixedString(state.getData?.dateValue?.at(-1)?.value ?? 0, 4)}</div>
+        </>)} />
+    </Table>
+    <div className={cx(chartClass.chart)} ref={myChartEle}></div>
+  </div>)
+}
+
+async function init(): Promise<void> {
+  const getPrice = async () => {
+    for await (const i of genPrice()) {
+      document.title = toFixedString(i.price, 2)
+      const price = toFixedNumber(i.price, 2)
+      const priceOld = toFixedNumber(state.price ?? i.price, 2)
+      state.price = price
+      state.priceOld = priceOld
+    }
+  }
+  getPrice()
+  await Promise.all([getData(), getFonts()])
+}
+
+const App = () => {
+  useSnapshot(state)
+  const { isLight, isLoading, isShowChart } = state
   useEffect(() => { init() }, [])
-  useEffect(() => { updateUpOrDown() }, [price, priceOld])
-  useEffect(() => { if (!isLoading || yearMonth) { updateShowData() } }, [isLoading, yearMonth, isShowAll])
-  const { styles: appStyle } = AppStyle({ isLight })
-  const { styles: fontFamilyStyle } = FontFamilyStyle()
+  const appStyle = AppStyle({ isLight })
+  const fontFamilyStyle = FontFamilyStyle()
   return (
     <div className={cx(appStyle.app, fontFamilyStyle.fontFamily)}>
       {isLoading ? <div className={appStyle.loading}>
@@ -445,6 +499,10 @@ const App: FC = () => {
         <MonthPicker />
         <div style={{ height: '20px' }}></div>
         <div><Table1 /></div>
+        {isShowChart ? <>
+          <div style={{ height: '20px' }}></div>
+          <div><Chart /></div>
+        </> : <></>}
         <div style={{ height: '20px' }}></div>
         <div><Table2 /></div>
         <div style={{ height: '20px' }}></div>
