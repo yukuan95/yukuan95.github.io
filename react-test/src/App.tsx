@@ -470,13 +470,19 @@ const Chart = () => {
 }
 
 async function init(): Promise<void> {
+  let time = ''
   const getPrice = async () => {
     for await (const i of genPrice()) {
-      document.title = toFixedString(i.price, 2)
+      const dateValue = toFixedString(state.getData?.dateValue?.at(-1)?.value ?? 0, 4)
+      document.title = toFixedString(i.price, 2) + ' | ' + dateValue
       const price = toFixedNumber(i.price, 2)
       const priceOld = toFixedNumber(state.price ?? i.price, 2)
       state.price = price
       state.priceOld = priceOld
+      if (time !== i.time && i.time.slice(0, 16).slice(-1) === '1') {
+        time = i.time
+        getData()
+      }
     }
   }
   getPrice()
