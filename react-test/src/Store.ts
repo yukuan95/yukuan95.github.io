@@ -313,12 +313,10 @@ function getPrice(callback: (item: { time: string, price: number }) => void) {
 }
 
 export async function getFonts(): Promise<void> {
-  /*
   const font = new FontFace("TAHOMA", "url(https://bucket-20250629.oss-cn-shanghai.aliyuncs.com/TAHOMA.ttf)")
   document.fonts.add(font)
   font.load()
   await font.loaded
-  */
 }
 
 export async function getData() {
@@ -377,6 +375,7 @@ export async function getData() {
   state.getData = resData
   state.price = toFixedNumber(state.price ?? resData.nowPrice, 2)
   state.priceOld = toFixedNumber(state.priceOld ?? resData.shortPrice, 2)
+  updateUpOrDown()
   updateShowData()
   state.isLoading = false
   return resData

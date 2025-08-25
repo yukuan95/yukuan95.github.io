@@ -49,7 +49,7 @@ const TimeAndPriceStyle = (props: { isError: boolean; upOrDown: UpOrDown }) => {
 const FontFamilyStyle = () => {
   return {
     fontFamily: css`
-      font-family: "Roboto", "Arial", "sans-serif";
+      font-family: "TAHOMA", "Roboto", "Arial", "sans-serif";
     `,
   }
 }
