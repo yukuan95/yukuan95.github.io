@@ -248,14 +248,15 @@ const MonthPicker = () => {
   const onClickRight = () => {
     state.yearMonth = monthPlus(yearMonth || getYearMonth(), 1)
   }
-  const yearMonthValue = useMemo(() => yearMonth ? dayjs(yearMonth) : '', [yearMonth])
   return (<div className={cx(flexStyle.container, flexStyle.fsbc)}>
     <div>
       <DatePicker
         inputReadOnly={true}
         style={{ width: '220px' }}
-        value={yearMonthValue}
-        onChange={onChange} picker="month" />
+        value={useMemo(() => yearMonth ? dayjs(yearMonth) : '', [yearMonth])}
+        onChange={onChange}
+        picker="month"
+      />
     </div>
     <div className={cx(flexStyle.fsbc)}>
       <div onClick={onClickLeft}>
@@ -277,10 +278,12 @@ const Table1 = () => {
   return (
     <div className={flexStyle.container}>
       <Table<DataType1> dataSource={tableData1} size="small" pagination={false} bordered>
-        <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="month" key="month" dataIndex="month" />
-        <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="leverage" key="leverage" dataIndex="leverage" />
+        <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (<>
+          <div style={{ fontWeight: 100 }}>month</div></>)} key="month" dataIndex="month" />
+        <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (<>
+          <div style={{ fontWeight: 100 }}>leverage</div></>)} key="leverage" dataIndex="leverage" />
         <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (
-          <div style={{ userSelect: 'none' }} onDoubleClick={() => { state.isShowChart = !state.isShowChart }}>rate</div>
+          <div style={{ userSelect: 'none', fontWeight: 100 }} onDoubleClick={() => { state.isShowChart = !state.isShowChart }}>rate</div>
         )} key="rate" dataIndex="rate" render={(_, item) => (<>
           <Tooltip mouseEnterDelay={0} placement="left" title={<div className={fontFamilyStyle.fontFamily}>
             <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto', justifyItems: 'center' }}>
@@ -308,43 +311,46 @@ const Table2 = () => {
   return (
     <div className={flexStyle.container}>
       <Table<DataType2> dataSource={tableData2} size="small" pagination={false} bordered>
-        <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={`time(${getData?.analyseTime?.slice(24, 27) ?? ''})`} key="time" dataIndex="time" />
-        <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="price" key="price" dataIndex="price" render={(_, item) => (<>
-          <Tooltip mouseEnterDelay={0} placement="left" title={<div className={fontFamilyStyle.fontFamily}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto', justifyItems: 'center' }}>
-              {item.avg ? <>
-                <div>avgPrice</div>
-                <div style={{ whiteSpace: 'pre' }}> : </div>
-                <div>{toFixedString(item.avg, 0)}</div>
-              </> : ''}
-              {item.avgChg ? <>
-                <div>avgChg</div>
-                <div style={{ whiteSpace: 'pre' }}> : </div>
-                <div>{item.avgChg}</div>
-              </> : ''}
-              {item.maxMinChg ? <>
-                <div>maxChg</div>
-                <div style={{ whiteSpace: 'pre' }}> : </div>
-                <div>{item.maxMinChg}</div>
-              </> : ''}
-              {item.status2 ? <>
-                <div>status2</div>
-                <div style={{ whiteSpace: 'pre' }}> : </div>
-                <div>{item.status2}</div>
-              </> : ''}
-              {item.rate2 ? <>
-                <div>rate2</div>
-                <div style={{ whiteSpace: 'pre' }}> : </div>
-                <div>{item.rate2}</div>
-              </> : ''}
-            </div>
-          </div>}>
-            <div>{item.price}</div>
-          </Tooltip>
-        </>)} />
-        <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="status" key="status" dataIndex="status" />
+        <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (<>
+          <div style={{ fontWeight: 100 }}>{`time(${getData?.analyseTime?.slice(24, 27) ?? ''})`}</div></>)} key="time" dataIndex="time" />
+        <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (<>
+          <div style={{ fontWeight: 100 }}>price</div></>)} key="price" dataIndex="price" render={(_, item) => (<>
+            <Tooltip mouseEnterDelay={0} placement="left" title={<div className={fontFamilyStyle.fontFamily}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto', justifyItems: 'center' }}>
+                {item.avg ? <>
+                  <div>avgPrice</div>
+                  <div style={{ whiteSpace: 'pre' }}> : </div>
+                  <div>{toFixedString(item.avg, 0)}</div>
+                </> : ''}
+                {item.avgChg ? <>
+                  <div>avgChg</div>
+                  <div style={{ whiteSpace: 'pre' }}> : </div>
+                  <div>{item.avgChg}</div>
+                </> : ''}
+                {item.maxMinChg ? <>
+                  <div>maxChg</div>
+                  <div style={{ whiteSpace: 'pre' }}> : </div>
+                  <div>{item.maxMinChg}</div>
+                </> : ''}
+                {item.status2 ? <>
+                  <div>status2</div>
+                  <div style={{ whiteSpace: 'pre' }}> : </div>
+                  <div>{item.status2}</div>
+                </> : ''}
+                {item.rate2 ? <>
+                  <div>rate2</div>
+                  <div style={{ whiteSpace: 'pre' }}> : </div>
+                  <div>{item.rate2}</div>
+                </> : ''}
+              </div>
+            </div>}>
+              <div>{item.price}</div>
+            </Tooltip>
+          </>)} />
+        <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (<>
+          <div style={{ fontWeight: 100 }}>status</div></>)} key="status" dataIndex="status" />
         <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (
-          <div style={{ userSelect: 'none' }} onDoubleClick={() => { state.isShowAll = !state.isShowAll }}>rate</div>
+          <div style={{ userSelect: 'none', fontWeight: 100 }} onDoubleClick={() => { state.isShowAll = !state.isShowAll }}>rate</div>
         )} key="rate" dataIndex="rate" />
       </Table>
     </div>
@@ -358,11 +364,14 @@ const Table3 = () => {
   const fontFamilyStyle = FontFamilyStyle()
   return (<div className={flexStyle.container}>
     <Table<DataType3> dataSource={tableData3} size="small" pagination={false} bordered>
-      <Column width={100} className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="lastNMonth" key="lastNMonth" dataIndex="lastNMonth" render={(_, item) => (<>
-        <div>{item.lastNMonth}</div>
-      </>)} />
-      <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="rate" key="rate" dataIndex="rate" />
-      <Column width={100} className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="avgMonth" key="avgMonth" dataIndex="avgMonth" />
+      <Column width={100} className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (<>
+        <div style={{ fontWeight: 100 }}>lastNMonth</div></>)} key="lastNMonth" dataIndex="lastNMonth" render={(_, item) => (<>
+          <div>{item.lastNMonth}</div>
+        </>)} />
+      <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (<>
+        <div style={{ fontWeight: 100 }}>rate</div></>)} key="rate" dataIndex="rate" />
+      <Column width={100} className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (<>
+        <div style={{ fontWeight: 100 }}>avgMonth</div></>)} key="avgMonth" dataIndex="avgMonth" />
     </Table>
   </div>)
 }
@@ -374,11 +383,14 @@ const Table4 = () => {
   const fontFamilyStyle = FontFamilyStyle()
   return (<div className={flexStyle.container}>
     <Table<DataType4> dataSource={tableData4} size="small" pagination={false} bordered>
-      <Column width={118} className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="year" key="year" dataIndex="year" render={(_, item) => (<>
-        <div>{item.year}</div>
-      </>)} />
-      <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="rate" key="rate" dataIndex="rate" />
-      <Column width={118} className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title="avgMonth" key="avgMonth" dataIndex="avgMonth" />
+      <Column width={118} className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (<>
+        <div style={{ fontWeight: 100 }}>year</div></>)} key="year" dataIndex="year" render={(_, item) => (<>
+          <div>{item.year}</div>
+        </>)} />
+      <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (<>
+        <div style={{ fontWeight: 100 }}>rate</div></>)} key="rate" dataIndex="rate" />
+      <Column width={118} className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (<>
+        <div style={{ fontWeight: 100 }}>avgMonth</div></>)} key="avgMonth" dataIndex="avgMonth" />
     </Table>
   </div>)
 }
@@ -458,11 +470,11 @@ const Chart = () => {
       locale={{ emptyText: <div style={{ height: '202px' }}></div> }}>
       <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)}
         align="center" title={() => (<>
-          <div>{removeMilli(state.getData?.dateValue?.at(-1)?.date)}</div>
+          <div style={{ fontWeight: 100 }}>{removeMilli(state.getData?.dateValue?.at(-1)?.date)}</div>
         </>)} />
       <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)}
         align="center" title={() => (<>
-          <div>{toFixedString(state.getData?.dateValue?.at(-1)?.value ?? 0, 4)}</div>
+          <div style={{ fontWeight: 100 }}>{toFixedString(state.getData?.dateValue?.at(-1)?.value ?? 0, 4)}</div>
         </>)} />
     </Table>
     <div className={cx(chartClass.chart)} ref={myChartEle}></div>
@@ -473,8 +485,9 @@ async function init(): Promise<void> {
   let time = ''
   const getPrice = async () => {
     for await (const i of genPrice()) {
-      const dateValue = toFixedString(state.getData?.dateValue?.at(-1)?.value ?? 0, 4)
-      document.title = toFixedString(i.price, 2) + ' | ' + dateValue
+      const dateValue = state.getData?.dateValue?.at(-1)?.value ?? 0
+      const dateValueString = dateValue === 0 ? '' : (' | ' + toFixedString(dateValue, 4))
+      document.title = toFixedString(i.price, 2) + dateValueString
       const price = toFixedNumber(i.price, 2)
       const priceOld = toFixedNumber(state.price ?? i.price, 2)
       state.price = price
