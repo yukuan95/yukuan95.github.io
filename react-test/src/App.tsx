@@ -493,7 +493,7 @@ async function init(): Promise<void> {
       const priceOld = toFixedNumber(state.price ?? i.price, 2)
       state.price = price
       state.priceOld = priceOld
-      if (time !== i.time && i.time.slice(0, 16).slice(-1) === '1') {
+      if (time.slice(0, 16) !== i.time.slice(0, 16) && i.time.slice(0, 16).slice(-1) === '1') {
         time = i.time
         getData()
       }
