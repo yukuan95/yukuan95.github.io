@@ -530,7 +530,7 @@ const App = () => {
         <div><Table3 /></div>
         <div style={{ height: '20px' }}></div>
         <div><Table4 /></div>
-        <div style={{ height: '300px' }}></div>
+        <div style={{ height: '400px' }}></div>
       </>)
       }
     </div>
