@@ -282,7 +282,11 @@ const Table1 = () => {
         <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (<>
           <div style={{ fontWeight: 100 }}>month</div></>)} key="month" dataIndex="month" />
         <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (<>
-          <div style={{ fontWeight: 100 }}>leverage</div></>)} key="leverage" dataIndex="leverage" />
+          <div style={{ fontWeight: 100 }}>value</div></>)} render={() => (<>
+            <div className={fontFamilyStyle.fontFamily}>
+              {toFixedString(state.getData?.dateValue?.at(-1)?.value ?? 0, 4)}
+            </div>
+          </>)} />
         <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (
           <div style={{ userSelect: 'none', fontWeight: 100 }} onDoubleClick={() => { state.isShowChart = !state.isShowChart }}>rate</div>
         )} key="rate" dataIndex="rate" render={(_, item) => (<>
@@ -417,12 +421,12 @@ const Chart = () => {
       align-items: center;
     `,
     marker: css`
-      display:inline-block;
-      margin-right:4px;
-      border-radius:10px;
-      width:10px;
-      height:10px;
-      background-color:#5070dd;
+      display: inline-block;
+      margin-right: 4px;
+      border-radius: 10px;
+      width: 10px;
+      height: 10px;
+      background-color: #5070dd;
     `
   }
   const dateValue = getData?.dateValue ?? []
