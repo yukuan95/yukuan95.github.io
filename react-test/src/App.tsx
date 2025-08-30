@@ -432,7 +432,8 @@ const Chart = () => {
   const getOption = (isLight: boolean) => {
     return {
       backgroundColor: isLight ? '#FFFFFF' : '#141414',
-      grid: { left: '5', right: '5', bottom: '5', top: '10', containLabel: true },
+      grid: { left: '5', right: '5', bottom: '35', top: '10', containLabel: true },
+      dataZoom: [{ type: 'slider', orient: 'horizontal', bottom: '2%', height: '25px', }],
       tooltip: {
         trigger: 'axis',
         formatter: (param: any) => {
