@@ -180,20 +180,24 @@ const setTable1 = () => {
     return
   }
   const rate = state.getData?.orderFormMonth?.get(yearMonth)?.perMonthS
-  const rate2 = state.getData?.orderFormMonth?.get(yearMonth)?.array?.map((item) => item.preS2)?.reduce((a, b) => a * b) ?? 0
+  const rate2 = state.getData?.orderFormMonth?.get(yearMonth)?.array?.map((item) => item.preS2)?.reduce((a, b) => a * b)
   const maxMonthN = Array.from(state.getData?.lastNMonth?.keys() ?? []).at(-1)
   const rateAvg = state.getData?.lastNMonth?.get(maxMonthN ?? '')?.avgMonth
   const leverage = String(state.getData?.lever)
-  if (!(rate && rateAvg && leverage)) {
-    return
+  if (!(rate && rateAvg && leverage && yearMonth)) {
+    const nowStringTime = getNowStringTime()
+    const yearMonthTime = yearMonth + (nowStringTime).slice(yearMonth.length, nowStringTime.length)
+    if (stringTimeToMilliTime(yearMonthTime) > stringTimeToMilliTime(nowStringTime)) {
+      return
+    }
   }
   state.tableData1 = [{
     key: getNowStringTime(),
     month: yearMonth,
     leverage,
-    rate: toFixedString(rate, 4),
-    rate2: toFixedString(rate2, 4),
-    rateAvg: toFixedString(rateAvg, 4),
+    rate: toFixedString(rate ?? 1, 4),
+    rate2: toFixedString(rate2 ?? 1, 4),
+    rateAvg: toFixedString(rateAvg ?? 1, 4),
   }]
 }
 
