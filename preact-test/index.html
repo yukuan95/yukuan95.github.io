@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>yukuan95.github.io</title>
+</head>
+
+<body>
+  <div style="height: 100%;" id="app"></div>
+  <script>
+    const isLight = window.matchMedia("(prefers-color-scheme: light)").matches
+    document.body.style.backgroundColor = isLight ? '#FFFFFFFF' : '#292929FF'
+  </script>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>
