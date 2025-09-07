@@ -9,7 +9,6 @@ import 'antd/dist/reset.css'
 import 'dayjs/locale/zh-cn'
 import App from './App.tsx'
 import dayjs from 'dayjs'
-import './index.css'
 
 dayjs.locale('zh-cn')
 

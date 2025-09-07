@@ -1,12 +1,12 @@
 import { DatePicker, Button, Tooltip, Table } from 'antd'
 import { useEffect, useMemo, useRef } from 'preact/hooks'
-import { render } from 'preact-render-to-string';
+import { render } from 'preact-render-to-string'
+import { injectGlobal } from '@emotion/css'
 import { subscribeKey } from 'valtio/utils'
 import { cx, css } from '@emotion/css'
 import { useSnapshot } from 'valtio'
 import * as echarts from 'echarts'
 import dayjs from 'dayjs'
-const { Column } = Table
 
 import {
   state, getFonts, getData, toFixedNumber, genPrice, removeMilli,
@@ -17,6 +17,14 @@ import {
 import type {
   DataType1, DataType2, DataType3, DataType4
 } from './Store.ts'
+
+const { Column } = Table
+
+injectGlobal`
+  * {
+    border-color: transparent;
+  }
+`
 
 const ArrowButtonStyle = () => {
   return {
