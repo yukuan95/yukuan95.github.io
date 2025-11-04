@@ -360,7 +360,7 @@ export async function getData() {
   }
   const resAnalyseData = analyseData
   const resErrorLog: Array<string> = (errorLog as string)
-    .trim().split('=====').filter(item => !!item)
+    .trim().split('=====').map((item) => item.trim()).filter(item => !!item)
   const resPriceLog: {
     nowPrice: number, shortPrice: number,
     longPrice: number, nowTime: string

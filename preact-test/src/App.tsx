@@ -516,6 +516,22 @@ async function init(): Promise<void> {
   await Promise.all([getData(), getFonts()])
 }
 
+const ErrorLog = () => {
+  useSnapshot(state)
+  const { getData } = state
+  const errorLogArray = getData?.errorLogArray ?? []
+  const flexStyle = FlexStyle()
+  const errorLogCss = css`
+    white-space: pre-line;
+    margin-top: 40px;
+  `
+  return (<>
+    {errorLogArray.map((errorItem) => (
+      <div className={cx(flexStyle.container, errorLogCss)}>{errorItem}</div>
+    ))}
+  </>)
+}
+
 const App = () => {
   useSnapshot(state)
   const { isLight, isLoading, isShowChart } = state
@@ -543,7 +559,9 @@ const App = () => {
         <div><Table3 /></div>
         <div style={{ height: '20px' }}></div>
         <div><Table4 /></div>
-        <div style={{ height: '400px' }}></div>
+        <div style={{ height: '100px' }}></div>
+        <div><ErrorLog /></div>
+        <div style={{ height: '300px' }}></div>
       </>)
       }
     </div>
