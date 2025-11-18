@@ -1,0 +1,42 @@
+time: 2025-11-19 04:40:19.512 +08, from: Crontab.ts
+pull project ERROR: user:125431142:yukuan95
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+=====
+time: 2025-11-19 04:40:32.479 +08, from: Crontab.ts
+pull data ERROR: user:125431142:yukuan95
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+=====
+time: 2025-11-19 04:50:16.723 +08, from: Crontab.ts
+pull project ERROR: user:125431142:yukuan95
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+=====
+time: 2025-11-19 04:50:27.711 +08, from: Crontab.ts
+pull data ERROR: user:125431142:yukuan95
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+=====
+time: 2025-11-19 05:00:18.995 +08, from: Crontab.ts
+pull project ERROR: user:125431142:yukuan95
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+=====
+time: 2025-11-19 05:00:32.127 +08, from: Crontab.ts
+pull data ERROR: user:125431142:yukuan95
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+=====
