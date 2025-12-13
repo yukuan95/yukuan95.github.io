@@ -1,0 +1,29 @@
+{
+  "name": "preact-test",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build && bun run ./build.js",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emotion/css": "^11.13.5",
+    "@types/fs-extra": "^11.0.4",
+    "antd": "^5.27.3",
+    "dayjs": "^1.11.18",
+    "echarts": "^6.0.0",
+    "fs-extra": "^11.3.1",
+    "jszip": "^3.10.1",
+    "preact": "^10.27.0",
+    "preact-render-to-string": "^6.6.1",
+    "valtio": "^2.1.7",
+    "vite-plugin-compression": "^0.5.1"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.2",
+    "typescript": "~5.8.3",
+    "vite": "^7.1.2"
+  }
+}
