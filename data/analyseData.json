@@ -1,6 +1,6 @@
 {
   "startTime": "2025-11-28 00:15:00.000 +08",
-  "analyseTime": "2025-12-08 18:00:18.379 +08",
+  "analyseTime": "2025-12-13 12:31:52.690 +08",
   "lever": 6,
   "orderFormMonth": {
     "2017-08": {
@@ -77329,9 +77329,234 @@
           "status2": "LONG",
           "preStatus2": "SHORT",
           "preS2": 0.9536357894243823
+        },
+        {
+          "time": "2025-12-09 11:21:00.000 +08",
+          "nowPrice": 89800,
+          "shortPrice": 90129.15750000297,
+          "longPrice": 90130.74263889286,
+          "isStart": true,
+          "startTime": "2025-11-28 00:15:00.000 +08",
+          "reason": "DeathCross",
+          "status": "SHORT",
+          "type": "Normal",
+          "preNowPrice": 90279.2,
+          "preStatus": "LONG",
+          "preS": 0.9623432197006621,
+          "maxPrice": 92013.25333333647,
+          "maxPriceTime": "2025-12-08 19:31:00.000 +08",
+          "minPrice": 89988.05166666965,
+          "minPriceTime": "2025-12-09 01:25:00.000 +08",
+          "maxMinChg": 0.022132347344831868,
+          "preLongPrice": 90014.41270833698,
+          "preLongPriceTime": "2025-12-08 08:47:00.000 +08",
+          "longChg": 0.0012923478258176923,
+          "status2": "SHORT",
+          "preStatus2": "LONG",
+          "preS2": 0.9623432197006621
+        },
+        {
+          "time": "2025-12-09 11:53:00.000 +08",
+          "nowPrice": 90296.6,
+          "shortPrice": 90134.94083333628,
+          "longPrice": 90134.84898148547,
+          "isStart": true,
+          "startTime": "2025-11-28 00:15:00.000 +08",
+          "reason": "GoldenCross",
+          "status": "LONG",
+          "type": "Normal",
+          "preNowPrice": 89800,
+          "preStatus": "SHORT",
+          "preS": 0.9610186815144762,
+          "maxPrice": 90134.94083333628,
+          "maxPriceTime": "2025-12-09 11:53:00.000 +08",
+          "minPrice": 90094.90500000295,
+          "minPriceTime": "2025-12-09 11:33:00.000 +08",
+          "maxMinChg": 0.0004443246441125645,
+          "preLongPrice": 90130.74263889286,
+          "preLongPriceTime": "2025-12-09 11:21:00.000 +08",
+          "longChg": 0.000045559844203917325,
+          "status2": "LONG",
+          "preStatus2": "SHORT",
+          "preS2": 0.9610186815144762
+        },
+        {
+          "time": "2025-12-09 13:08:00.000 +08",
+          "nowPrice": 89861.5,
+          "shortPrice": 90144.19666666967,
+          "longPrice": 90144.41268518918,
+          "isStart": true,
+          "startTime": "2025-11-28 00:15:00.000 +08",
+          "reason": "DeathCross",
+          "status": "SHORT",
+          "type": "Normal",
+          "preNowPrice": 90296.6,
+          "preStatus": "LONG",
+          "preS": 0.9652620807427962,
+          "maxPrice": 90218.09666666965,
+          "maxPriceTime": "2025-12-09 12:31:00.000 +08",
+          "minPrice": 90134.94083333628,
+          "minPriceTime": "2025-12-09 11:53:00.000 +08",
+          "maxMinChg": 0.000922357768574903,
+          "preLongPrice": 90134.84898148547,
+          "preLongPriceTime": "2025-12-09 11:53:00.000 +08",
+          "longChg": 0.00010610439593317642,
+          "status2": "SHORT",
+          "preStatus2": "LONG",
+          "preS2": 0.9652620807427962
+        },
+        {
+          "time": "2025-12-09 16:08:00.000 +08",
+          "nowPrice": 90482.6,
+          "shortPrice": 90165.56666666965,
+          "longPrice": 90164.42659722624,
+          "isStart": true,
+          "startTime": "2025-11-28 00:15:00.000 +08",
+          "reason": "GoldenCross",
+          "status": "LONG",
+          "type": "Normal",
+          "preNowPrice": 89861.5,
+          "preStatus": "SHORT",
+          "preS": 0.9527783377753539,
+          "maxPrice": 90165.56666666965,
+          "maxPriceTime": "2025-12-09 16:08:00.000 +08",
+          "minPrice": 89912.94083333635,
+          "minPriceTime": "2025-12-09 14:44:00.000 +08",
+          "maxMinChg": 0.0028077007717149847,
+          "preLongPrice": 90144.41268518918,
+          "preLongPriceTime": "2025-12-09 13:08:00.000 +08",
+          "longChg": 0.00022202054948156452,
+          "status2": "LONG",
+          "preStatus2": "SHORT",
+          "preS2": 0.9527783377753539
+        },
+        {
+          "time": "2025-12-09 19:01:00.000 +08",
+          "nowPrice": 90204.1,
+          "shortPrice": 90195.75750000296,
+          "longPrice": 90197.17509259659,
+          "isStart": true,
+          "startTime": "2025-11-28 00:15:00.000 +08",
+          "reason": "DeathCross",
+          "status": "SHORT",
+          "type": "Normal",
+          "preNowPrice": 90482.6,
+          "preStatus": "LONG",
+          "preS": 0.9756431667525027,
+          "maxPrice": 90439.30750000304,
+          "maxPriceTime": "2025-12-09 17:24:00.000 +08",
+          "minPrice": 90165.56666666965,
+          "minPriceTime": "2025-12-09 16:08:00.000 +08",
+          "maxMinChg": 0.003033678935888938,
+          "preLongPrice": 90164.42659722624,
+          "preLongPriceTime": "2025-12-09 16:08:00.000 +08",
+          "longChg": 0.0003632086023975313,
+          "status2": "SHORT",
+          "preStatus2": "LONG",
+          "preS2": 0.9756431667525027
+        },
+        {
+          "time": "2025-12-09 20:11:00.000 +08",
+          "nowPrice": 90336,
+          "shortPrice": 90209.31833333637,
+          "longPrice": 90208.41479167074,
+          "isStart": true,
+          "startTime": "2025-11-28 00:15:00.000 +08",
+          "reason": "GoldenCross",
+          "status": "LONG",
+          "type": "Normal",
+          "preNowPrice": 90204.1,
+          "preStatus": "SHORT",
+          "preS": 0.9852792034951852,
+          "maxPrice": 90209.31833333637,
+          "maxPriceTime": "2025-12-09 20:11:00.000 +08",
+          "minPrice": 90163.62416666964,
+          "minPriceTime": "2025-12-09 19:37:00.000 +08",
+          "maxMinChg": 0.0005067273992228258,
+          "preLongPrice": 90197.17509259659,
+          "preLongPriceTime": "2025-12-09 19:01:00.000 +08",
+          "longChg": 0.00012461253983415545,
+          "status2": "LONG",
+          "preStatus2": "SHORT",
+          "preS2": 0.9852792034951852
+        },
+        {
+          "time": "2025-12-11 09:29:00.000 +08",
+          "nowPrice": 91049.9,
+          "shortPrice": 91599.3666666697,
+          "longPrice": 91606.39907407836,
+          "isStart": true,
+          "startTime": "2025-11-28 00:15:00.000 +08",
+          "reason": "DeathCross",
+          "status": "SHORT",
+          "type": "Normal",
+          "preNowPrice": 90336,
+          "preStatus": "LONG",
+          "preS": 1.0411318145589794,
+          "maxPrice": 93987.79833333642,
+          "maxPriceTime": "2025-12-10 02:40:00.000 +08",
+          "minPrice": 90209.31833333637,
+          "minPriceTime": "2025-12-09 20:11:00.000 +08",
+          "maxMinChg": 0.041456089371739585,
+          "preLongPrice": 90208.41479167074,
+          "preLongPriceTime": "2025-12-09 20:11:00.000 +08",
+          "longChg": 0.01549727135363318,
+          "status2": "SHORT",
+          "preStatus2": "LONG",
+          "preS2": 1.0411318145589794
+        },
+        {
+          "time": "2025-12-12 05:18:00.000 +08",
+          "nowPrice": 92980,
+          "shortPrice": 91388.4775000031,
+          "longPrice": 91377.75692130071,
+          "isStart": true,
+          "startTime": "2025-11-28 00:15:00.000 +08",
+          "reason": "GoldenCross",
+          "status": "LONG",
+          "type": "Normal",
+          "preNowPrice": 91049.9,
+          "preStatus": "SHORT",
+          "preS": 0.8675735415415059,
+          "maxPrice": 91599.3666666697,
+          "maxPriceTime": "2025-12-11 09:29:00.000 +08",
+          "minPrice": 89764.86666666972,
+          "minPriceTime": "2025-12-12 01:37:00.000 +08",
+          "maxMinChg": 0.020128719824051747,
+          "preLongPrice": 91606.39907407836,
+          "preLongPriceTime": "2025-12-11 09:29:00.000 +08",
+          "longChg": 0.002495919008810303,
+          "status2": "LONG",
+          "preStatus2": "SHORT",
+          "preS2": 0.8675735415415059
+        },
+        {
+          "time": "2025-12-12 23:51:00.000 +08",
+          "nowPrice": 90468.6,
+          "shortPrice": 91875.73166666974,
+          "longPrice": 91876.71671296722,
+          "isStart": true,
+          "startTime": "2025-11-28 00:15:00.000 +08",
+          "reason": "DeathCross",
+          "status": "SHORT",
+          "type": "Normal",
+          "preNowPrice": 92980,
+          "preStatus": "LONG",
+          "preS": 0.832911705743171,
+          "maxPrice": 92711.49083333646,
+          "maxPriceTime": "2025-12-12 07:16:00.000 +08",
+          "minPrice": 91388.4775000031,
+          "minPriceTime": "2025-12-12 05:18:00.000 +08",
+          "maxMinChg": 0.014424788852079302,
+          "preLongPrice": 91377.75692130071,
+          "preLongPriceTime": "2025-12-12 05:18:00.000 +08",
+          "longChg": 0.005460407526705193,
+          "status2": "SHORT",
+          "preStatus2": "LONG",
+          "preS2": 0.832911705743171
         }
       ],
-      "perMonthS": 0.8980192065157019
+      "perMonthS": 0.5523900816076317
     }
   },
   "orderFormYear": {
@@ -77368,78 +77593,78 @@
       "avgMonth": 1.3797993790713177
     },
     "2025": {
-      "perYearS": 10.672308428490329,
-      "avgMonth": 1.2181147367432303
+      "perYearS": 6.564756389375184,
+      "avgMonth": 1.1697728873977213
     }
   },
   "lastNMonth": {
     "6": {
-      "lastNMonthS": 1.5043468978481915,
-      "avgMonth": 1.0704293269972405
+      "lastNMonthS": 0.9253547136177207,
+      "avgMonth": 0.9871535392147678
     },
     "12": {
-      "lastNMonthS": 10.672308428490316,
-      "avgMonth": 1.2181147367432301
+      "lastNMonthS": 6.5647563893751775,
+      "avgMonth": 1.1697728873977213
     },
     "18": {
-      "lastNMonthS": 187.18919505382573,
-      "avgMonth": 1.3373276406056975
+      "lastNMonthS": 115.14392340565347,
+      "avgMonth": 1.3017074492837917
     },
     "24": {
-      "lastNMonthS": 508.21761044387137,
-      "avgMonth": 1.2964389524369941
+      "lastNMonthS": 312.6151036309902,
+      "avgMonth": 1.2704534244457126
     },
     "30": {
-      "lastNMonthS": 418.9191985220561,
-      "avgMonth": 1.2229377246543416
+      "lastNMonthS": 257.6858140445086,
+      "avgMonth": 1.2032882716505084
     },
     "36": {
-      "lastNMonthS": 790.4798912609596,
-      "avgMonth": 1.2036409849652012
+      "lastNMonthS": 486.2404372586195,
+      "avgMonth": 1.1875031000082021
     },
     "42": {
-      "lastNMonthS": 2109.9739498978843,
-      "avgMonth": 1.1999121602158807
+      "lastNMonthS": 1297.8883679963812,
+      "avgMonth": 1.1861092657435235
     },
     "48": {
-      "lastNMonthS": 19294.39963163192,
-      "avgMonth": 1.2282303312449843
+      "lastNMonthS": 11868.382000915548,
+      "avgMonth": 1.2158588396697496
     },
     "54": {
-      "lastNMonthS": 27259.564391037384,
-      "avgMonth": 1.2082011342390429
+      "lastNMonthS": 16767.918647283797,
+      "avgMonth": 1.1973775068738113
     },
     "60": {
-      "lastNMonthS": 325550.6733829769,
-      "avgMonth": 1.2355973740103783
+      "lastNMonthS": 200252.91411659552,
+      "avgMonth": 1.2256307469508938
     },
     "66": {
-      "lastNMonthS": 2560326.832796177,
-      "avgMonth": 1.2505336572667614
+      "lastNMonthS": 1574909.6877314514,
+      "avgMonth": 1.2413601881437497
     },
     "72": {
-      "lastNMonthS": 15002900.82865677,
-      "avgMonth": 1.2579665714164308
+      "lastNMonthS": 9228592.832939608,
+      "avgMonth": 1.2495049842301593
     },
     "78": {
-      "lastNMonthS": 73659237.92728187,
-      "avgMonth": 1.2614263171831677
+      "lastNMonthS": 45309312.04431402,
+      "avgMonth": 1.2535921086540696
     },
     "84": {
-      "lastNMonthS": 88677929.56696986,
-      "avgMonth": 1.2434171459461296
+      "lastNMonthS": 54547618.12985546,
+      "avgMonth": 1.2362447882327612
     },
     "90": {
-      "lastNMonthS": 151473060.2887215,
-      "avgMonth": 1.2327999711673594
+      "lastNMonthS": 93174194.4127134,
+      "avgMonth": 1.226161651687219
     },
     "96": {
-      "lastNMonthS": 1063715324.4777322,
-      "avgMonth": 1.2417364551602528
+      "lastNMonthS": 654313171.2910299,
+      "avgMonth": 1.235466860616694
     },
     "101": {
-      "lastNMonthS": 2527062086.0702205,
-      "avgMonth": 1.2390681881777472
+      "lastNMonthS": 1554447857.933952,
+      "avgMonth": 1.2331210304057296
     }
   }
 }
