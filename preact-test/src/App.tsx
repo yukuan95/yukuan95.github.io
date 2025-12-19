@@ -256,7 +256,7 @@ const MonthPicker = () => {
   const onClickRight = () => {
     state.yearMonth = monthPlus(yearMonth || getYearMonth(), 1)
   }
-  const datePickerValue = useMemo(() => yearMonth ? dayjs(yearMonth) : '', [yearMonth])
+  const datePickerValue: any = useMemo(() => yearMonth ? dayjs(yearMonth) : '', [yearMonth])
   return (<div className={cx(flexStyle.container, flexStyle.fsbc)}>
     <div>
       <DatePicker
