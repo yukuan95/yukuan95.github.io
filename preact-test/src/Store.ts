@@ -288,7 +288,6 @@ export const updateShowData = () => {
 }
 
 subscribeKey(state, 'price', () => { updateUpOrDown() })
-subscribeKey(state, 'priceOld', () => { updateUpOrDown() })
 subscribeKey(state, 'yearMonth', () => { updateShowData() })
 subscribeKey(state, 'isShowAll', () => { updateShowData() })
 
@@ -377,7 +376,6 @@ export async function getData() {
   if (state.price && !state.priceOld) {
     state.priceOld = toFixedNumber(resData.nowPrice, 2)
   }
-  updateUpOrDown()
   updateShowData()
   state.isLoading = false
   return resData
