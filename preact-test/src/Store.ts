@@ -358,21 +358,10 @@ export async function getData() {
       dateValue = JSON.parse(await zipEntry.async('text'))
     }
   }
-  const resAnalyseData = analyseData
-  const resErrorLog: Array<string> = (errorLog as string)
+  const errorLogArray: Array<string> = (errorLog as string)
     .trim().split('=====').map((item) => item.trim()).filter(item => !!item)
-  const resPriceLog: {
-    nowPrice: number, shortPrice: number,
-    longPrice: number, nowTime: string
-  } = priceLog
-  const {
-    startTime, analyseTime, lever,
-    orderFormMonth, orderFormYear, lastNMonth,
-  } = resAnalyseData
-  const errorLogArray = resErrorLog
-  const {
-    nowPrice, shortPrice, longPrice, nowTime
-  } = resPriceLog
+  const { nowPrice, shortPrice, longPrice, nowTime } = priceLog
+  const { startTime, analyseTime, lever, orderFormMonth, orderFormYear, lastNMonth } = analyseData
   const resData: GetData = {
     startTime, analyseTime, lever, dateValue,
     orderFormMonth: new Map(Object.entries(orderFormMonth)),
@@ -381,8 +370,13 @@ export async function getData() {
     errorLogArray, nowPrice, shortPrice, longPrice, nowTime,
   }
   state.getData = resData
-  state.price = toFixedNumber(state.price ?? resData.nowPrice, 2)
-  state.priceOld = toFixedNumber(state.priceOld ?? resData.shortPrice, 2)
+  if (!state.price && !state.priceOld) {
+    state.price = toFixedNumber(state.price ?? resData.nowPrice, 2)
+    state.priceOld = toFixedNumber(state.priceOld ?? resData.shortPrice, 2)
+  }
+  if (state.price && !state.priceOld) {
+    state.priceOld = toFixedNumber(resData.nowPrice, 2)
+  }
   updateUpOrDown()
   updateShowData()
   state.isLoading = false

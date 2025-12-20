@@ -503,7 +503,7 @@ async function init(): Promise<void> {
       const dateValueString = dateValue === 0 ? '' : (' | ' + toFixedString(dateValue, 4))
       document.title = toFixedString(i.price, 2) + dateValueString
       const price = toFixedNumber(i.price, 2)
-      const priceOld = toFixedNumber(state.price ?? i.price, 2)
+      const priceOld = state.price
       state.price = price
       state.priceOld = priceOld
       if (time.slice(0, 16) !== i.time.slice(0, 16) && i.time.slice(0, 16).slice(-1) === '1') {
