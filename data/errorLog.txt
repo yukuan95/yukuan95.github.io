@@ -1,6 +1,0 @@
-time: 2025-12-20 08:40:28.717 +08, from: Crontab.ts
-ConnectTimeoutError: Connect Timeout Error (attempted addresses: 3.166.244.30:443, timeout: 10000ms)
-    at onConnectTimeout (/root/work/ts-test/node_modules/.pnpm/undici@7.16.0/node_modules/undici/lib/core/util.js:876:19)
-    at Immediate._onImmediate (/root/work/ts-test/node_modules/.pnpm/undici@7.16.0/node_modules/undici/lib/core/util.js:845:11)
-    at process.processImmediate (node:internal/timers:491:21)
-=====
