@@ -496,7 +496,7 @@ const Chart = () => {
 }
 
 async function init(): Promise<void> {
-  let time = ''
+  let getDataTime = getNowStringTime()
   const getPrice = async () => {
     for await (const i of genPrice()) {
       const dateValue = state.getData?.dateValue?.at(-1)?.value ?? 0
@@ -506,9 +506,11 @@ async function init(): Promise<void> {
       const priceOld = state.price
       state.price = price
       state.priceOld = priceOld
-      if (time.slice(0, 16) !== i.time.slice(0, 16) && i.time.slice(0, 16).slice(-1) === '1') {
-        time = i.time
-        getData()
+      if (i.time.slice(0, 16).slice(-1) === '1') {
+        if (getDataTime.slice(0, 16) !== i.time.slice(0, 16)) {
+          getDataTime = i.time
+          getData()
+        }
       }
     }
   }
