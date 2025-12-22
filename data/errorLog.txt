@@ -1,0 +1,8 @@
+time: 2025-12-22 20:32:24.033 +08, from: Crontab.ts
+put files ResponseTimeoutError: Response timeout for 60000ms, please increase the timeout, see more details at https://github.com/ali-sdk/ali-oss#responsetimeouterror
+    at Client.requestError (/root/work/ts-test/node_modules/.pnpm/ali-oss@6.23.0/node_modules/ali-oss/lib/client.js:390:11)
+    at Client.request (/root/work/ts-test/node_modules/.pnpm/ali-oss@6.23.0/node_modules/ali-oss/lib/client.js:248:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async proto.request (/root/work/ts-test/node_modules/.pnpm/ali-oss@6.23.0/node_modules/ali-oss/lib/client.js:226:12)
+    at async Client.putStream (/root/work/ts-test/node_modules/.pnpm/ali-oss@6.23.0/node_modules/ali-oss/lib/object.js:154:18)
+=====
