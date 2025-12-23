@@ -506,7 +506,7 @@ async function init(): Promise<void> {
       const priceOld = state.price
       state.price = price
       state.priceOld = priceOld
-      if (i.time.slice(0, 16).slice(-1) === '1') {
+      if (i.time.slice(0, 16).slice(-1) === '5') {
         if (getDataTime.slice(0, 16) !== i.time.slice(0, 16)) {
           getDataTime = i.time
           getData()
