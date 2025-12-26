@@ -415,12 +415,18 @@ const Table5 = () => {
   const fontFamilyStyle = FontFamilyStyle()
   return (<div className={flexStyle.container}>
     <Table<DataType5> dataSource={tableData5} size="small" pagination={false} bordered>
-      <Column width={90} className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (<>
+      <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (<>
         <div style={{ fontWeight: 100 }}>nMonth</div></>)} key="nMonth" dataIndex="nMonth" />
       <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (<>
         <div style={{ fontWeight: 100 }}>timeN</div></>)} key="timeN" dataIndex="timeN" />
-      <Column width={90} className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (<>
-        <div style={{ fontWeight: 100 }}>valueN</div></>)} key="valueN" dataIndex="valueN" />
+      <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (<>
+        <div style={{ fontWeight: 100 }}>valueN</div></>)} key="valueN" render={(_, item) => (
+          <><div>{toFixedString(item.valueN, 2)}</div></>
+        )} />
+      <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (<>
+        <div style={{ fontWeight: 100 }}>Avg</div></>)} key="valueN" render={(_, item) => (
+          <><div>{toFixedString(Math.pow(item.valueN, 1 / item.nMonth), 2)}</div></>
+        )} />
     </Table>
   </div>)
 }
