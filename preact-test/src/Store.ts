@@ -57,6 +57,7 @@ export type GetData = {
   }>,
   orderFormYear: Map<string, { perYearS: number, avgMonth: number, }>,
   lastNMonth: Map<string, { lastNMonthS: number, avgMonth: number, }>,
+  minNMonth: Array<{ nMonth: number, timeN: string, valueN: number }>,
   errorLogArray: Array<string>,
   dateValue: Array<{ date: string; value: number }>,
 }
@@ -98,6 +99,13 @@ export type DataType4 = {
   avgMonth: string;
 }
 
+export type DataType5 = {
+  key: React.Key;
+  nMonth: number;
+  timeN: string;
+  valueN: number;
+}
+
 export type StateType = {
   isLoading: boolean;
   isLight: boolean;
@@ -112,6 +120,7 @@ export type StateType = {
   tableData2: Array<DataType2>;
   tableData3: Array<DataType3>;
   tableData4: Array<DataType4>;
+  tableData5: Array<DataType5>;
 }
 
 export class Stream<T> {
@@ -163,6 +172,7 @@ export const state: StateType = proxy({
   tableData2: [],
   tableData3: [],
   tableData4: [],
+  tableData5: [],
 })
 
 const updateUpOrDown = () => {
@@ -280,11 +290,26 @@ const setTable4 = () => {
   state.tableData4 = table4.reverse()
 }
 
+const setTable5 = () => {
+  state.tableData5 = []
+  const minNMonth = state?.getData?.minNMonth
+  if (!minNMonth) {
+    return
+  }
+  const table5 = []
+  for (let item of minNMonth) {
+    const { nMonth, timeN, valueN } = item
+    table5.push({ key: `${nMonth}`, nMonth, timeN, valueN })
+  }
+  state.tableData5 = table5
+}
+
 export const updateShowData = () => {
   setTable1()
   setTable2()
   setTable3()
   setTable4()
+  setTable5()
 }
 
 subscribeKey(state, 'price', () => { updateUpOrDown() })
@@ -360,13 +385,13 @@ export async function getData() {
   const errorLogArray: Array<string> = (errorLog as string)
     .trim().split('=====').map((item) => item.trim()).filter(item => !!item)
   const { nowPrice, shortPrice, longPrice, nowTime } = priceLog
-  const { startTime, analyseTime, lever, orderFormMonth, orderFormYear, lastNMonth } = analyseData
+  const { startTime, analyseTime, lever, orderFormMonth, orderFormYear, lastNMonth, minNMonth } = analyseData
   const resData: GetData = {
     startTime, analyseTime, lever, dateValue,
     orderFormMonth: new Map(Object.entries(orderFormMonth)),
     orderFormYear: new Map(Object.entries(orderFormYear)),
     lastNMonth: new Map(Object.entries(lastNMonth)),
-    errorLogArray, nowPrice, shortPrice, longPrice, nowTime,
+    minNMonth, errorLogArray, nowPrice, shortPrice, longPrice, nowTime,
   }
   state.getData = resData
   if (!state.price && !state.priceOld) {
