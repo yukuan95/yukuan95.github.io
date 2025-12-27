@@ -421,7 +421,7 @@ const Table5 = () => {
         )} />
       <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (<>
         <div style={{ fontWeight: 100 }}>valueN</div></>)} key="nMonth" render={(_, item) => (
-          <><div>{toFixedString(item.valueN, 2) + '/' + toFixedString(Math.pow(item.valueN, 1 / item.nMonth), 2)}</div></>
+          <><div>{toFixedString(item.valueN, 2) + ' / ' + toFixedString(Math.pow(item.valueN, 1 / item.nMonth), 2)}</div></>
         )} />
     </Table>
   </div>)
