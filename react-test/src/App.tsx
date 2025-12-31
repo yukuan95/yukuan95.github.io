@@ -1,12 +1,12 @@
 import { DatePicker, Button, Tooltip, Table } from 'antd'
 import { useEffect, useMemo, useRef } from 'react'
+import ReactDOMServer from 'react-dom/server'
 import { injectGlobal } from '@emotion/css'
 import { cx, css } from '@emotion/css'
 import { useSnapshot } from 'valtio'
 import * as echarts from 'echarts'
-import dayjs from 'dayjs'
 import { watch } from 'vue'
-import ReactDOMServer from 'react-dom/server'
+import dayjs from 'dayjs'
 
 import {
   _state, state, getFonts, getData, toFixedNumber, genPrice, removeMilli,
@@ -492,7 +492,8 @@ const Chart = () => {
     if (!myChartEle.current) { return }
     const myChart = echarts.init(myChartEle.current)
     myChart.setOption(getOption(isLight))
-    watch(() => state.isLight, (isLight) => { setOption(myChart, isLight) }, { immediate: true })
+    const unwatch = watch(() => state.isLight, (isLight) => setOption(myChart, isLight), { immediate: true })
+    return () => unwatch()
   }, [])
   return (<div className={cx(chartClass.container)}>
     <Table dataSource={[]} size="small" pagination={false} bordered
