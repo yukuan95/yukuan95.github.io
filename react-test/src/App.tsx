@@ -296,7 +296,7 @@ const Table1 = () => {
             </div>
           </>)} />
         <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (
-          <div style={{ userSelect: 'none', fontWeight: 100 }} onDoubleClick={() => { state.isShowChart = !state.isShowChart }}>rate</div>
+          <div style={{ userSelect: 'none', fontWeight: 100 }} onDoubleClick={() => { state.isShowChart = !state.isShowChart }}>{'rate' + (state.isShowChart ? '\'' : '')}</div>
         )} key="rate" dataIndex="rate" render={(_, item) => (<>
           <Tooltip mouseEnterDelay={0} placement="left" title={<div className={fontFamilyStyle.fontFamily}>
             <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto', justifyItems: 'center' }}>
@@ -363,7 +363,7 @@ const Table2 = () => {
         <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (<>
           <div style={{ fontWeight: 100 }}>status</div></>)} key="status" dataIndex="status" />
         <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (
-          <div style={{ userSelect: 'none', fontWeight: 100 }} onDoubleClick={() => { state.isShowAll = !state.isShowAll }}>rate</div>
+          <div style={{ userSelect: 'none', fontWeight: 100 }} onDoubleClick={() => { state.isShowAll = !state.isShowAll }}>{'rate' + (state.isShowAll ? '' : '\'')}</div>
         )} key="rate" dataIndex="rate" />
       </Table>
     </div>
