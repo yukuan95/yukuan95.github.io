@@ -5,11 +5,11 @@ import { injectGlobal } from '@emotion/css'
 import { cx, css } from '@emotion/css'
 import { useSnapshot } from 'valtio'
 import * as echarts from 'echarts'
+import { watch } from 'vue'
 import dayjs from 'dayjs'
-import { watch } from 'valtio/utils'
 
 import {
-  state, getFonts, getData, toFixedNumber, genPrice, removeMilli,
+  _state, state, getFonts, getData, toFixedNumber, genPrice, removeMilli,
   toFixedString, UpOrDown, Color, useConst, ArrowSvgName, monthPlus,
   milliTimeToStringTime, getNowStringTime, stringTimeToMilliTime
 } from './Store.ts'
@@ -202,7 +202,7 @@ const LeftArrowButton = () => {
 }
 
 const TimeAndPrice = () => {
-  useSnapshot(state)
+  useSnapshot(_state)
   const { price, upOrDown, getData } = state
   const nowStringTime = getNowStringTime()
   const analyseTime = getData?.analyseTime ?? nowStringTime
@@ -240,7 +240,7 @@ const TimeAndPrice = () => {
 }
 
 const MonthPicker = () => {
-  useSnapshot(state)
+  useSnapshot(_state)
   const flexStyle = FlexStyle()
   const { yearMonth } = state
   const getYearMonth = (data?: Date) => {
@@ -280,7 +280,7 @@ const MonthPicker = () => {
 }
 
 const Table1 = () => {
-  useSnapshot(state)
+  useSnapshot(_state)
   const { tableData1 } = state
   const flexStyle = FlexStyle()
   const fontFamilyStyle = FontFamilyStyle()
@@ -317,7 +317,7 @@ const Table1 = () => {
 }
 
 const Table2 = () => {
-  useSnapshot(state)
+  useSnapshot(_state)
   const { getData, tableData2 } = state
   const flexStyle = FlexStyle()
   const fontFamilyStyle = FontFamilyStyle()
@@ -371,7 +371,7 @@ const Table2 = () => {
 }
 
 const Table3 = () => {
-  useSnapshot(state)
+  useSnapshot(_state)
   const { tableData3 } = state
   const flexStyle = FlexStyle()
   const fontFamilyStyle = FontFamilyStyle()
@@ -390,7 +390,7 @@ const Table3 = () => {
 }
 
 const Table4 = () => {
-  useSnapshot(state)
+  useSnapshot(_state)
   const { tableData4 } = state
   const flexStyle = FlexStyle()
   const fontFamilyStyle = FontFamilyStyle()
@@ -409,7 +409,7 @@ const Table4 = () => {
 }
 
 const Table5 = () => {
-  useSnapshot(state)
+  useSnapshot(_state)
   const { tableData5 } = state
   const flexStyle = FlexStyle()
   const fontFamilyStyle = FontFamilyStyle()
@@ -428,7 +428,7 @@ const Table5 = () => {
 }
 
 const Chart = () => {
-  useSnapshot(state)
+  useSnapshot(_state)
   const flexStyle = FlexStyle()
   const fontFamilyStyle = FontFamilyStyle()
   const { getData, isLight } = state
@@ -492,10 +492,7 @@ const Chart = () => {
     if (!myChartEle.current) { return }
     const myChart = echarts.init(myChartEle.current)
     myChart.setOption(getOption(isLight))
-    const unwatch = watch((get) => {
-      const isLight = get(state).isLight
-      setOption(myChart, isLight)
-    })
+    const unwatch = watch(() => state.isLight, (isLight) => setOption(myChart, isLight), { immediate: true })
     return () => unwatch()
   }, [])
   return (<div className={cx(chartClass.container)}>
@@ -516,7 +513,7 @@ const Chart = () => {
 }
 
 const ErrorLog = () => {
-  useSnapshot(state)
+  useSnapshot(_state)
   const { getData } = state
   const errorLogArray = getData?.errorLogArray ?? []
   const flexStyle = FlexStyle()
@@ -555,7 +552,7 @@ async function init(): Promise<void> {
 }
 
 const App = () => {
-  useSnapshot(state)
+  useSnapshot(_state)
   useEffect(() => { init() }, [])
   const { isLight, isLoading, isShowChart } = state
   const appStyle = AppStyle({ isLight })
