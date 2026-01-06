@@ -202,8 +202,8 @@ const LeftArrowButton = () => {
 }
 
 const TimeAndPrice = () => {
-  useSnapshot(state)
-  const { price, upOrDown, getData } = state
+  const snap = useSnapshot(state)
+  const { price, upOrDown, getData } = snap
   const nowStringTime = getNowStringTime()
   const analyseTime = getData?.analyseTime ?? nowStringTime
   const minutes = (stringTimeToMilliTime(nowStringTime) - stringTimeToMilliTime(analyseTime)) / (60 * 1000)
@@ -240,9 +240,9 @@ const TimeAndPrice = () => {
 }
 
 const MonthPicker = () => {
-  useSnapshot(state)
+  const snap = useSnapshot(state)
   const flexStyle = FlexStyle()
-  const { yearMonth } = state
+  const { yearMonth } = snap
   const getYearMonth = (data?: Date) => {
     return milliTimeToStringTime(data?.getTime() ?? new Date().getTime()).slice(0, 7)
   }
@@ -280,8 +280,8 @@ const MonthPicker = () => {
 }
 
 const Table1 = () => {
-  useSnapshot(state)
-  const { tableData1 } = state
+  const snap = useSnapshot(state)
+  const { tableData1 } = snap
   const flexStyle = FlexStyle()
   const fontFamilyStyle = FontFamilyStyle()
   return (
@@ -317,8 +317,8 @@ const Table1 = () => {
 }
 
 const Table2 = () => {
-  useSnapshot(state)
-  const { getData, tableData2 } = state
+  const snap = useSnapshot(state)
+  const { getData, tableData2 } = snap
   const flexStyle = FlexStyle()
   const fontFamilyStyle = FontFamilyStyle()
   return (
@@ -371,8 +371,8 @@ const Table2 = () => {
 }
 
 const Table3 = () => {
-  useSnapshot(state)
-  const { tableData3 } = state
+  const snap = useSnapshot(state)
+  const { tableData3 } = snap
   const flexStyle = FlexStyle()
   const fontFamilyStyle = FontFamilyStyle()
   return (<div className={flexStyle.container}>
@@ -390,8 +390,8 @@ const Table3 = () => {
 }
 
 const Table4 = () => {
-  useSnapshot(state)
-  const { tableData4 } = state
+  const snap = useSnapshot(state)
+  const { tableData4 } = snap
   const flexStyle = FlexStyle()
   const fontFamilyStyle = FontFamilyStyle()
   return (<div className={flexStyle.container}>
@@ -409,8 +409,8 @@ const Table4 = () => {
 }
 
 const Table5 = () => {
-  useSnapshot(state)
-  const { tableData5 } = state
+  const snap = useSnapshot(state)
+  const { tableData5 } = snap
   const flexStyle = FlexStyle()
   const fontFamilyStyle = FontFamilyStyle()
   return (<div className={flexStyle.container}>
@@ -428,10 +428,10 @@ const Table5 = () => {
 }
 
 const Chart = () => {
-  useSnapshot(state)
+  const snap = useSnapshot(state)
   const flexStyle = FlexStyle()
   const fontFamilyStyle = FontFamilyStyle()
-  const { getData, isLight } = state
+  const { getData, isLight } = snap
   const chartClass = {
     chart: css`
       height: 200px;
@@ -516,8 +516,8 @@ const Chart = () => {
 }
 
 const ErrorLog = () => {
-  useSnapshot(state)
-  const { getData } = state
+  const snap = useSnapshot(state)
+  const { getData } = snap
   const errorLogArray = getData?.errorLogArray ?? []
   const flexStyle = FlexStyle()
   const errorLogCss = css`
@@ -555,9 +555,9 @@ async function init(): Promise<void> {
 }
 
 const App = () => {
-  useSnapshot(state)
+  const snap = useSnapshot(state)
   useEffect(() => { init() }, [])
-  const { isLight, isLoading, isShowChart } = state
+  const { isLight, isLoading, isShowChart } = snap
   const appStyle = AppStyle({ isLight })
   const fontFamilyStyle = FontFamilyStyle()
   return (
