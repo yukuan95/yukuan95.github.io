@@ -281,7 +281,7 @@ const MonthPicker = () => {
 
 const Table1 = () => {
   const snap = useSnapshot(state)
-  const { tableData1 } = snap
+  const { tableData1, isShowChart } = snap
   const flexStyle = FlexStyle()
   const fontFamilyStyle = FontFamilyStyle()
   return (
@@ -292,11 +292,11 @@ const Table1 = () => {
         <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (<>
           <div style={{ fontWeight: 100 }}>value</div></>)} render={() => (<>
             <div className={fontFamilyStyle.fontFamily}>
-              {toFixedString(state.getData?.dateValue?.at(-1)?.value ?? 0, 4)}
+              {toFixedString(snap.getData?.dateValue?.at(-1)?.value ?? 0, 4)}
             </div>
           </>)} />
         <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (
-          <div style={{ userSelect: 'none', fontWeight: 100 }} onDoubleClick={() => { state.isShowChart = !state.isShowChart }}>{'rate' + (state.isShowChart ? '\'' : '')}</div>
+          <div style={{ userSelect: 'none', fontWeight: 100 }} onDoubleClick={() => { state.isShowChart = !isShowChart }}>{'rate' + (isShowChart ? '\'' : '')}</div>
         )} key="rate" dataIndex="rate" render={(_, item) => (<>
           <Tooltip mouseEnterDelay={0} placement="left" title={<div className={fontFamilyStyle.fontFamily}>
             <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto', justifyItems: 'center' }}>
@@ -318,7 +318,7 @@ const Table1 = () => {
 
 const Table2 = () => {
   const snap = useSnapshot(state)
-  const { getData, tableData2 } = snap
+  const { getData, tableData2, isShowAll } = snap
   const flexStyle = FlexStyle()
   const fontFamilyStyle = FontFamilyStyle()
   return (
@@ -363,7 +363,7 @@ const Table2 = () => {
         <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (<>
           <div style={{ fontWeight: 100 }}>status</div></>)} key="status" dataIndex="status" />
         <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)} align="center" title={() => (
-          <div style={{ userSelect: 'none', fontWeight: 100 }} onDoubleClick={() => { state.isShowAll = !state.isShowAll }}>{'rate' + (state.isShowAll ? '' : '\'')}</div>
+          <div style={{ userSelect: 'none', fontWeight: 100 }} onDoubleClick={() => { state.isShowAll = !isShowAll }}>{'rate' + (isShowAll ? '' : '\'')}</div>
         )} key="rate" dataIndex="rate" />
       </Table>
     </div>
@@ -493,9 +493,9 @@ const Chart = () => {
     const myChart = echarts.init(myChartEle.current)
     myChart.setOption(getOption(isLight))
     const unwatch = subscribeKey(state, 'isLight', () => {
-      setOption(myChart, state.isLight)
+      setOption(myChart, snap.isLight)
     })
-    setOption(myChart, state.isLight)
+    setOption(myChart, snap.isLight)
     return () => unwatch()
   }, [])
   return (<div className={cx(chartClass.container)}>
@@ -504,11 +504,11 @@ const Chart = () => {
       locale={{ emptyText: <div style={{ height: '202px' }}></div> }}>
       <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)}
         align="center" title={() => (<>
-          <div style={{ fontWeight: 100 }}>{removeMilli(state.getData?.dateValue?.at(-1)?.date)}</div>
+          <div style={{ fontWeight: 100 }}>{removeMilli(snap.getData?.dateValue?.at(-1)?.date)}</div>
         </>)} />
       <Column className={cx(flexStyle.columnHeight, fontFamilyStyle.fontFamily)}
         align="center" title={() => (<>
-          <div style={{ fontWeight: 100 }}>{toFixedString(state.getData?.dateValue?.at(-1)?.value ?? 0, 4)}</div>
+          <div style={{ fontWeight: 100 }}>{toFixedString(snap.getData?.dateValue?.at(-1)?.value ?? 0, 4)}</div>
         </>)} />
     </Table>
     <div className={cx(chartClass.chart)} ref={myChartEle}></div>
@@ -531,15 +531,15 @@ const ErrorLog = () => {
   </>)
 }
 
-async function init(): Promise<void> {
+async function init(snap: Readonly<typeof state>): Promise<void> {
   let getDataTime = getNowStringTime()
   const getPrice = async () => {
     for await (const i of genPrice()) {
-      const dateValue = state.getData?.dateValue?.at(-1)?.value ?? 0
+      const dateValue = snap.getData?.dateValue?.at(-1)?.value ?? 0
       const dateValueString = dateValue === 0 ? '' : (' | ' + toFixedString(dateValue, 4))
       document.title = toFixedString(i.price, 2) + dateValueString
       const price = toFixedNumber(i.price, 2)
-      const priceOld = state.price
+      const priceOld = snap.price
       state.price = price
       state.priceOld = priceOld
       if (i.time.slice(0, 16).slice(-1) === '5') {
@@ -556,7 +556,7 @@ async function init(): Promise<void> {
 
 const App = () => {
   const snap = useSnapshot(state)
-  useEffect(() => { init() }, [])
+  useEffect(() => { init(snap as any) }, [])
   const { isLight, isLoading, isShowChart } = snap
   const appStyle = AppStyle({ isLight })
   const fontFamilyStyle = FontFamilyStyle()
