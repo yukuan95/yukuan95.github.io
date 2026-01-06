@@ -1,4 +1,4 @@
-import { _state, state, Color } from './Store.ts'
+import { state, Color } from './Store.ts'
 import { createRoot } from 'react-dom/client'
 import { ConfigProvider, theme } from 'antd'
 import locale from 'antd/locale/zh_CN'
@@ -12,7 +12,7 @@ import dayjs from 'dayjs'
 dayjs.locale('zh-cn')
 
 const AppTop = () => {
-  useSnapshot(_state)
+  useSnapshot(state)
   useEffect(() => {
     const setIsLight = (isLight: boolean) => state.isLight = isLight
     const themeMedia = window.matchMedia("(prefers-color-scheme: light)")

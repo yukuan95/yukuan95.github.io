@@ -1,4 +1,4 @@
-import { reactive, watch } from 'vue'
+import { subscribeKey } from 'valtio/utils'
 import { proxy } from 'valtio'
 import JSZip from 'jszip'
 
@@ -156,7 +156,7 @@ export class Stream<T> {
   }
 }
 
-export const _state: StateType = proxy({
+export const state: StateType = proxy({
   isLoading: true,
   isLight: window.matchMedia("(prefers-color-scheme: light)").matches,
   analyseTime: null,
@@ -174,8 +174,6 @@ export const _state: StateType = proxy({
   tableData4: [],
   tableData5: [],
 })
-
-export const state: StateType = reactive(_state)
 
 const updateUpOrDown = () => {
   const { price, priceOld } = state
@@ -308,12 +306,22 @@ export const updateShowData = () => {
   setTable5()
 }
 
-watch(() => state.price, () => updateUpOrDown(), { immediate: true })
-watch(() => state.yearMonth, () => updateShowData(), { immediate: true })
-watch(() => state.isShowAll, () => updateShowData(), { immediate: true })
-watch(() => state.isLight, (isLight) => {
-  document.body.style.backgroundColor = isLight ? Color.white : Color.black
-}, { immediate: true })
+export const updateBackgroundColor = () => {
+  document.body.style.backgroundColor = state.isLight ? Color.white : Color.black
+}
+
+subscribeKey(state, 'price', () => {
+  updateUpOrDown()
+})
+subscribeKey(state, 'yearMonth', () => {
+  updateShowData()
+})
+subscribeKey(state, 'isShowAll', () => {
+  updateShowData()
+})
+subscribeKey(state, 'isLight', () => {
+  updateBackgroundColor()
+})
 
 export async function* genPrice(): AsyncGenerator<{ time: string, price: number }> {
   const s = new Stream<{ time: string, price: number }>()
