@@ -531,15 +531,15 @@ const ErrorLog = () => {
   </>)
 }
 
-async function init(snap: Readonly<typeof state>): Promise<void> {
+async function init(): Promise<void> {
   let getDataTime = getNowStringTime()
   const getPrice = async () => {
     for await (const i of genPrice()) {
-      const dateValue = snap.getData?.dateValue?.at(-1)?.value ?? 0
+      const dateValue = state.getData?.dateValue?.at(-1)?.value ?? 0
       const dateValueString = dateValue === 0 ? '' : (' | ' + toFixedString(dateValue, 4))
       document.title = toFixedString(i.price, 2) + dateValueString
       const price = toFixedNumber(i.price, 2)
-      const priceOld = snap.price
+      const priceOld = state.price
       state.price = price
       state.priceOld = priceOld
       if (i.time.slice(0, 16).slice(-1) === '5') {
@@ -556,7 +556,7 @@ async function init(snap: Readonly<typeof state>): Promise<void> {
 
 const App = () => {
   const snap = useSnapshot(state)
-  useEffect(() => { init(snap as any) }, [])
+  useEffect(() => { init() }, [])
   const { isLight, isLoading, isShowChart } = snap
   const appStyle = AppStyle({ isLight })
   const fontFamilyStyle = FontFamilyStyle()
