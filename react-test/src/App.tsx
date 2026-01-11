@@ -1,5 +1,5 @@
+import { useEffect, useMemo, useCallback, useRef } from 'react'
 import { DatePicker, Button, Tooltip, Table } from 'antd'
-import { useEffect, useMemo, useRef } from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { subscribeKey } from 'valtio/utils'
 import { injectGlobal } from '@emotion/css'
@@ -246,22 +246,23 @@ const MonthPicker = () => {
   const getYearMonth = (data?: Date) => {
     return milliTimeToStringTime(data?.getTime() ?? new Date().getTime()).slice(0, 7)
   }
-  const onChange = (e: any) => {
-    const date = e?.$d ?? null
-    state.yearMonth = date ? getYearMonth(date) : ''
-  }
   const onClickLeft = () => {
     state.yearMonth = monthPlus(yearMonth || getYearMonth(), -1)
   }
   const onClickRight = () => {
     state.yearMonth = monthPlus(yearMonth || getYearMonth(), 1)
   }
+  const style = useMemo(() => ({ width: '220px' }), [])
   const datePickerValue: any = useMemo(() => yearMonth ? dayjs(yearMonth) : '', [yearMonth])
+  const onChange = useCallback((e: any) => {
+    const date = e?.$d ?? null
+    state.yearMonth = date ? getYearMonth(date) : ''
+  }, [])
   return (<div className={cx(flexStyle.container, flexStyle.fsbc)}>
     <div>
       <DatePicker
         inputReadOnly={true}
-        style={{ width: '220px' }}
+        style={style}
         value={datePickerValue}
         onChange={onChange}
         picker="month"
